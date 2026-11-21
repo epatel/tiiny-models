@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Models in the Tiiny store: descriptions, benchmarks and samples.">
+<title>Tiiny Model Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a store shelf. Sticky aisle signs (type chips) over sections of cards; generators get wider cards with their samples. */
+:root {
+  --bg: #f3f4f1; --surface: #ffffff; --ink: #1b1f1d; --muted: #5d6662; --line: #dde1dc;
+  --accent: #0f6b5c; --accent-soft: #e0efe9; --chip: #e9ece7;
+  --display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121614; --surface: #1a1f1d; --ink: #e6ebe8; --muted: #9aa5a0; --line: #2b3330;
+  --accent: #5cc6ae; --accent-soft: #1d3a33; --chip: #222a27; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121614; --surface: #1a1f1d; --ink: #e6ebe8; --muted: #9aa5a0; --line: #2b3330;
+  --accent: #5cc6ae; --accent-soft: #1d3a33; --chip: #222a27; color-scheme: dark }
+* { box-sizing: border-box }
+html { -webkit-text-size-adjust: 100% }
+img { max-width: 100% }
+[hidden] { display: none !important }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 var(--body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg) }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.top { padding-block: 40px 20px; display: grid; gap: 10px }
+.top h1 { font: 700 clamp(2rem, 5vw, 3.2rem)/1.05 var(--display); margin: 0; letter-spacing: -0.02em; text-wrap: balance }
+.top p { margin: 0; color: var(--muted); max-width: 68ch }
+.top p strong { color: var(--ink); font-weight: 500 }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; gap: 12px; align-items: center; padding-block: 10px; flex-wrap: wrap }
+.bar nav { display: flex; gap: 6px; flex-wrap: wrap; flex: 1 1 520px; min-width: 0 }
+.bar nav a { font-size: 13px; text-decoration: none; color: var(--ink); background: var(--chip); padding: 4px 10px; border-radius: 999px; white-space: nowrap }
+.bar nav a span { color: var(--muted); font-variant-numeric: tabular-nums; margin-left: 2px }
+.bar nav a:hover, .bar nav a:focus-visible { background: var(--accent-soft); color: var(--accent) }
+#q { flex: 0 1 240px; min-width: 0; width: 100%; font: inherit; font-size: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink) }
+#q:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px }
+section { padding-block: 28px 8px; scroll-margin-top: 64px }
+.sechead { display: flex; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; margin-bottom: 14px }
+.sechead h2 { font: 700 1.55rem/1.1 var(--display); margin: 0 }
+.sechead p { margin: 0; color: var(--muted); flex: 1 1 320px; min-width: 0 }
+.sechead code { font: 13px var(--mono); color: var(--ink) }
+.type { font: 12px var(--mono); color: var(--muted); letter-spacing: 0.02em }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 12px }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; scroll-margin-top: 72px }
+.card.gen { grid-column: span 2 }
+@media (max-width: 660px) { .card.gen { grid-column: auto } }
+.card header { display: flex; justify-content: space-between; align-items: start; gap: 8px }
+.card h3 { font: 600 1.02rem/1.25 var(--body); margin: 0; overflow-wrap: anywhere }
+.lic { font: 11px var(--mono); color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; white-space: nowrap }
+.id { font: 12px var(--mono); color: var(--muted); overflow-wrap: anywhere }
+.card p { margin: 0 }
+.note { font-size: 13px; color: var(--muted); font-style: italic }
+.nomedia { font-size: 13px; color: var(--muted) }
+.media.imgs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 8px }
+.media figure { margin: 0; display: grid; gap: 4px }
+.media img { width: 100%; max-width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; background: var(--chip); display: block }
+.media figcaption, .clip span { font-size: 12px; color: var(--muted) }
+.media.clips { display: grid; gap: 8px }
+.clip { display: grid; gap: 2px }
+.clip audio { width: 100%; height: 36px }
+.metrics { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 6px; margin: 2px 0 0 }
+.metrics div { background: var(--chip); border-radius: 6px; padding: 6px 8px; min-width: 0 }
+.metrics dt { font-size: 11px; color: var(--muted); line-height: 1.3; overflow-wrap: anywhere }
+.metrics dd { margin: 2px 0 0; font: 500 15px/1.2 var(--mono); font-variant-numeric: tabular-nums; color: var(--ink) }
+.metrics small { display: block; font: 11px var(--body); color: var(--muted); margin-top: 2px }
+.msrc { font-size: 12px; color: var(--muted) }
+.card footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 6px; border-top: 1px dashed var(--line) }
+.links { font-size: 13px }
+.links a { color: var(--accent) }
+.copy { font: 12px var(--mono); background: var(--chip); color: var(--ink); border: 0; border-radius: 6px; padding: 4px 8px; cursor: pointer; max-width: 100%; overflow-wrap: anywhere; text-align: left }
+.copy:hover, .copy:focus-visible { background: var(--accent-soft); color: var(--accent); outline: none }
+.copy.done::after { content: "  copied"; color: var(--accent) }
+.empty { color: var(--muted); padding-block: 30px }
+.foot { color: var(--muted); font-size: 13px; padding-block: 30px 40px; border-top: 1px solid var(--line); margin-top: 28px }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth } }
+</style>
+</head>
+<body>
+
+<div class="wrap top">
+  <h1>Tiiny Model Store</h1>
+  <p><strong>80 models</strong> you can download to the device and aren't on it yet, grouped by what they do. Descriptions, benchmark numbers and samples come from each model's Hugging Face card or its maker's pages; 62 show benchmark numbers and 14 have sample images or audio. Click a command to copy it.</p>
+</div>
+<div class="bar"><div class="wrap">
+  <nav aria-label="Model types"><a href="#images">Images <span>13</span></a><a href="#music">Music <span>5</span></a><a href="#speech">Speech <span>7</span></a><a href="#3d">3D <span>1</span></a><a href="#chat-with-vision">Chat with vision <span>13</span></a><a href="#chat">Chat <span>9</span></a><a href="#transcription">Transcription <span>5</span></a><a href="#ocr-and-layout">OCR and layout <span>6</span></a><a href="#embeddings">Embeddings <span>7</span></a><a href="#reranking">Reranking <span>6</span></a><a href="#classification">Classification <span>8</span></a></nav>
+  <input id="q" type="search" placeholder="Filter models" aria-label="Filter models">
+</div></div>
+<main class="wrap">
+<section id="images">
+  <div class="sechead"><h2>Images</h2><p>Pictures from a prompt, and edits of pictures you give. Use with <code>tai image</code>.</p><span class="type">Text-to-Image · 13</span></div>
+  <div class="grid"><article class="card gen" id="ernie-image-turbo" data-q="ernie-image-turbo baidu/ernie-image-turbo baidu&#x27;s distilled ernie-image text-to-image model: a single-stream diffusion transformer that is fast and good with text in images.">
+  <header><h3>ERNIE-Image-Turbo</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">baidu/ERNIE-Image-Turbo</code>
+  <p>Baidu&#x27;s distilled ERNIE-Image text-to-image model: a single-stream diffusion transformer that is fast and good with text in images.</p>
+  
+  <dl class="metrics"><div><dt>GenEval</dt><dd>0.8667</dd></div><div><dt>OneIG-EN</dt><dd>0.5656</dd></div><div><dt>LongText-Bench (avg EN/ZH)</dt><dd>0.9655</dd></div></dl><a class="msrc" href="https://huggingface.co/baidu/ERNIE-Image-Turbo">Benchmarks: huggingface.co</a>
+  <div class="media imgs"><figure><img src="media/ernie-image-turbo-0.jpg" alt="Sample from ERNIE-Image-Turbo" loading="lazy"></figure></div>
+  <footer><div class="links"><a href="https://huggingface.co/baidu/ERNIE-Image-Turbo">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download ERNIE-Image-Turbo" aria-label="Copy the download command for ERNIE-Image-Turbo">tai download ERNIE-Image-Turbo</button></footer>
+</article><article class="card gen" id="flux-2-klein-4b" data-q="flux.2-klein-4b black-forest-labs/flux.2-klein-4b black forest labs&#x27; fastest flux: generation and editing in one compact 4b model, under a second on a gpu.">
+  <header><h3>FLUX.2-klein-4B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">black-forest-labs/FLUX.2-klein-4B</code>
+  <p>Black Forest Labs&#x27; fastest FLUX: generation and editing in one compact 4B model, under a second on a GPU.</p>
+  
+  <dl class="metrics"><div><dt>LMArena text-to-image</dt><dd>1,030 (#75 of 87)</dd></div><div><dt>LMArena image edit (single image)</dt><dd>1,187 (#54 of 64)</dd></div></dl><a class="msrc" href="https://arena.ai/leaderboard/image/text-to-image/models/flux.2-klein-4b-goew">Benchmarks: arena.ai</a>
+  <div class="media imgs"><figure><img src="media/flux-2-klein-4b-0.jpg" alt="Sample from FLUX.2-klein-4B" loading="lazy"></figure><figure><img src="media/flux-2-klein-4b-1.jpg" alt="Sample from FLUX.2-klein-4B" loading="lazy"></figure></div>
+  <footer><div class="links"><a href="https://huggingface.co/black-forest-labs/FLUX.2-klein-4B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download FLUX.2-klein-4B" aria-label="Copy the download command for FLUX.2-klein-4B">tai download FLUX.2-klein-4B</button></footer>
+</article><article class="card gen" id="flux-2-klein-4b-background-remove" data-q="flux.2-klein-4b-background-remove fal/flux.2-klein-4b-background-remove flux.2 klein with fal&#x27;s lora that cuts the subject out of a photo onto a clean background.">
+  <header><h3>FLUX.2-klein-4B-Background-Remove</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">fal/FLUX.2-klein-4B-Background-Remove</code>
+  <p>FLUX.2 klein with fal&#x27;s LoRA that cuts the subject out of a photo onto a clean background.</p>
+  
+  
+  <div class="media imgs"><figure><img src="media/flux-2-klein-4b-background-remove-0.jpg" alt="Input" loading="lazy"><figcaption>Input</figcaption></figure><figure><img src="media/flux-2-klein-4b-background-remove-1.jpg" alt="Output" loading="lazy"><figcaption>Output</figcaption></figure></div>
+  <footer><div class="links"><a href="https://huggingface.co/fal/flux-2-klein-4B-background-remove-lora">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download FLUX.2-klein-4B-Background-Remove" aria-label="Copy the download command for FLUX.2-klein-4B-Background-Remove">tai download FLUX.2-klein-4B-Background-Remove</button></footer>
+</article><article class="card gen" id="flux-2-klein-4b-object-remove" data-q="flux.2-klein-4b-object-remove fal/flux.2-klein-4b-object-remove flux.2 klein with fal&#x27;s lora that erases a highlighted object and fills the gap naturally.">
+  <header><h3>FLUX.2-klein-4B-Object-Remove</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">fal/FLUX.2-klein-4B-Object-Remove</code>
+  <p>FLUX.2 klein with fal&#x27;s LoRA that erases a highlighted object and fills the gap naturally.</p>
+  
+  
+  <div class="media imgs"><figure><img src="media/flux-2-klein-4b-object-remove-0.jpg" alt="Input (object marked)" loading="lazy"><figcaption>Input (object marked)</figcaption></figure><figure><img src="media/flux-2-klein-4b-object-remove-1.jpg" alt="Output" loading="lazy"><figcaption>Output</figcaption></figure></div>
+  <footer><div class="links"><a href="https://huggingface.co/fal/flux-2-klein-4B-object-remove-lora">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download FLUX.2-klein-4B-Object-Remove" aria-label="Copy the download command for FLUX.2-klein-4B-Object-Remove">tai download FLUX.2-klein-4B-Object-Remove</button></footer>
+</article><article class="card gen" id="flux-2-klein-4b-outpaint" data-q="flux.2-klein-4b-outpaint fal/flux.2-klein-4b-outpaint flux.2 klein with fal&#x27;s lora that extends a picture into a pure-green (#00ff00) border you add around it.">
+  <header><h3>FLUX.2-klein-4B-Outpaint</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">fal/FLUX.2-klein-4B-Outpaint</code>
+  <p>FLUX.2 klein with fal&#x27;s LoRA that extends a picture into a pure-green (#00FF00) border you add around it.</p>
+  
+  
+  <div class="media imgs"><figure><img src="media/flux-2-klein-4b-outpaint-0.jpg" alt="Input (green border)" loading="lazy"><figcaption>Input (green border)</figcaption></figure><figure><img src="media/flux-2-klein-4b-outpaint-1.jpg" alt="Output" loading="lazy"><figcaption>Output</figcaption></figure></div>
+  <footer><div class="links"><a href="https://huggingface.co/fal/flux-2-klein-4B-outpaint-lora">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download FLUX.2-klein-4B-Outpaint" aria-label="Copy the download command for FLUX.2-klein-4B-Outpaint">tai download FLUX.2-klein-4B-Outpaint</button></footer>
+</article><article class="card gen" id="flux-2-klein-4b-zoom" data-q="flux.2-klein-4b-zoom fal/flux.2-klein-4b-zoom flux.2 klein with fal&#x27;s lora that zooms into a red-marked region and redraws it in detail.">
+  <header><h3>FLUX.2-klein-4B-Zoom</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">fal/FLUX.2-klein-4B-Zoom</code>
+  <p>FLUX.2 klein with fal&#x27;s LoRA that zooms into a red-marked region and redraws it in detail.</p>
+  
+  
+  <div class="media imgs"><figure><img src="media/flux-2-klein-4b-zoom-0.jpg" alt="Input (red mark)" loading="lazy"><figcaption>Input (red mark)</figcaption></figure><figure><img src="media/flux-2-klein-4b-zoom-1.jpg" alt="Output" loading="lazy"><figcaption>Output</figcaption></figure></div>
+  <footer><div class="links"><a href="https://huggingface.co/fal/flux-2-klein-4B-zoom-lora">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download FLUX.2-klein-4B-Zoom" aria-label="Copy the download command for FLUX.2-klein-4B-Zoom">tai download FLUX.2-klein-4B-Zoom</button></footer>
+</article><article class="card gen" id="krea-2-turbo" data-q="krea-2-turbo krea/krea-2-turbo krea 2 made several times faster: images in about 2 seconds, keeping style references, moodboards and loras.">
+  <header><h3>Krea-2-Turbo</h3><span class="lic">other</span></header>
+  <code class="id">krea/Krea-2-Turbo</code>
+  <p>Krea 2 made several times faster: images in about 2 seconds, keeping style references, moodboards and LoRAs.</p>
+  <p class="note">Gated on Hugging Face (request access there); description and sample from Krea&#x27;s blog.</p>
+  <dl class="metrics"><div><dt>LMArena text-to-image</dt><dd>1,115 (#53 of 87)</dd></div></dl><a class="msrc" href="https://arena.ai/leaderboard/image/text-to-image/models/krea-2-turbo-clty">Benchmarks: arena.ai</a>
+  <div class="media imgs"><figure><img src="media/krea-2-turbo-0.jpg" alt="“A rabbit riding a motocross bike”, from Krea&#x27;s blog" loading="lazy"><figcaption>“A rabbit riding a motocross bike”, from Krea&#x27;s blog</figcaption></figure></div>
+  <footer><div class="links"><a href="https://huggingface.co/krea/Krea-2-Turbo">Hugging Face</a> · <a href="https://www.krea.ai/blog/krea-2-turbo">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download Krea-2-Turbo" aria-label="Copy the download command for Krea-2-Turbo">tai download Krea-2-Turbo</button></footer>
+</article><article class="card gen" id="qwen-image-2-1" data-q="qwen-image-2.1 qwen/qwen-image-2.1 qwen&#x27;s unified generation and editing model (7b image transformer): strong at text in images and instruction edits.">
+  <header><h3>Qwen-Image-2.1</h3><span class="lic">other</span></header>
+  <code class="id">Qwen/Qwen-Image-2.1</code>
+  <p>Qwen&#x27;s unified generation and editing model (7B image transformer): strong at text in images and instruction edits.</p>
+  
+  <dl class="metrics"><div><dt>LMArena text-to-image</dt><dd>1,227 (#22 of 87)</dd></div></dl><a class="msrc" href="https://arena.ai/leaderboard/image/text-to-image/models/qwen-image-2.1-1g7p">Benchmarks: arena.ai</a>
+  <div class="media imgs"><figure><img src="media/qwen-image-2-1-0.jpg" alt="Sample from Qwen-Image-2.1" loading="lazy"></figure><figure><img src="media/qwen-image-2-1-1.jpg" alt="Sample from Qwen-Image-2.1" loading="lazy"></figure></div>
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen-Image-2.1">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen-Image-2.1" aria-label="Copy the download command for Qwen-Image-2.1">tai download Qwen-Image-2.1</button></footer>
+</article><article class="card gen" id="qwen-image-2-1-viggle-turbo" data-q="qwen-image-2.1-viggle-turbo viggle/qwen-image-2.1-viggle-turbo viggle&#x27;s distilled qwen-image-2.1: 6 steps instead of 40, about 5× faster, hard to tell apart on most prompts; edits with 1–3 reference images.">
+  <header><h3>Qwen-Image-2.1-viggle-turbo</h3><span class="lic">other</span></header>
+  <code class="id">Viggle/Qwen-Image-2.1-viggle-turbo</code>
+  <p>Viggle&#x27;s distilled Qwen-Image-2.1: 6 steps instead of 40, about 5× faster, hard to tell apart on most prompts; edits with 1–3 reference images.</p>
+  
+  
+  <p class="nomedia">No samples on the model card · see the demo page.</p>
+  <footer><div class="links"><a href="https://huggingface.co/Viggle/Qwen-Image-2.1-viggle-turbo">Hugging Face</a> · <a href="https://huggingface.co/spaces/Viggle/Qwen-Image-2.1-viggle-turbo">Hugging Face (MLX)</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen-Image-2.1-viggle-turbo" aria-label="Copy the download command for Qwen-Image-2.1-viggle-turbo">tai download Qwen-Image-2.1-viggle-turbo</button></footer>
+</article><article class="card gen" id="sensenova-u1-5-8b-mot" data-q="sensenova-u1.5-8b-mot sensetime/sensenova-u1.5-8b-mot sensetime&#x27;s any-to-any model: understands and generates images, with stable multi-turn editing.">
+  <header><h3>SenseNova-U1.5-8B-MoT</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">SenseTime/SenseNova-U1.5-8B-MoT</code>
+  <p>SenseTime&#x27;s any-to-any model: understands and generates images, with stable multi-turn editing.</p>
+  
+  <dl class="metrics"><div><dt>GenEval</dt><dd>0.92</dd></div><div><dt>DPG-Bench</dt><dd>88.11</dd></div><div><dt>ImgEdit</dt><dd>4.59</dd></div></dl><a class="msrc" href="https://arxiv.org/abs/2609.11929">Benchmarks: arxiv.org</a>
+  <div class="media imgs"><figure><img src="media/sensenova-u1-5-8b-mot-0.jpg" alt="Sample from SenseNova-U1.5-8B-MoT" loading="lazy"></figure></div>
+  <footer><div class="links"><a href="https://huggingface.co/sensenova/SenseNova-U1.5-8B-MoT">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download SenseNova-U1.5-8B-MoT" aria-label="Copy the download command for SenseNova-U1.5-8B-MoT">tai download SenseNova-U1.5-8B-MoT</button></footer>
+</article><article class="card gen" id="z-image-turbo-characterdesignsheet" data-q="z-image-turbo-characterdesignsheet yeiyeiart/z-image-turbo-characterdesignsheet z-image-turbo with a lora for character design sheets (front, side and back views with a colour palette).">
+  <header><h3>Z-Image-Turbo-CharacterDesignSheet</h3></header>
+  <code class="id">YeiYeiArt/Z-Image-Turbo-CharacterDesignSheet</code>
+  <p>Z-Image-Turbo with a LoRA for character design sheets (front, side and back views with a colour palette).</p>
+  <p class="note">No Hugging Face page found; described from its name.</p>
+  
+  <p class="nomedia">No samples on the model card.</p>
+  <footer><div class="links"></div>
+  <button class="copy" type="button" data-cmd="tai download Z-Image-Turbo-CharacterDesignSheet" aria-label="Copy the download command for Z-Image-Turbo-CharacterDesignSheet">tai download Z-Image-Turbo-CharacterDesignSheet</button></footer>
+</article><article class="card gen" id="z-image-turbo-children-drawing" data-q="z-image-turbo-children-drawing tongyi-mai/z-image-turbo-children-drawing z-image-turbo with ostris&#x27;s lora that turns any prompt into a child&#x27;s crayon drawing.">
+  <header><h3>Z-Image-Turbo-Children-Drawing</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Tongyi-MAI/Z-Image-Turbo-Children-Drawing</code>
+  <p>Z-Image-Turbo with ostris&#x27;s LoRA that turns any prompt into a child&#x27;s crayon drawing.</p>
+  
+  
+  <div class="media imgs"><figure><img src="media/z-image-turbo-children-drawing-0.jpg" alt="Sample from Z-Image-Turbo-Children-Drawing" loading="lazy"></figure><figure><img src="media/z-image-turbo-children-drawing-1.jpg" alt="Sample from Z-Image-Turbo-Children-Drawing" loading="lazy"></figure></div>
+  <footer><div class="links"><a href="https://huggingface.co/ostris/z_image_turbo_childrens_drawings">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Z-Image-Turbo-Children-Drawing" aria-label="Copy the download command for Z-Image-Turbo-Children-Drawing">tai download Z-Image-Turbo-Children-Drawing</button></footer>
+</article><article class="card gen" id="z-image-turbo-creating-realistic" data-q="z-image-turbo-creating-realistic taobaibai2025/z-image-turbo-creating-realistic z-image-turbo with a lora tuned for realistic, photographic images.">
+  <header><h3>Z-Image-Turbo-Creating-Realistic</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">TaoBaiBai2025/Z-Image-Turbo-Creating-Realistic</code>
+  <p>Z-Image-Turbo with a LoRA tuned for realistic, photographic images.</p>
+  <p class="note">Its model card is empty; described from its name.</p>
+  
+  <p class="nomedia">No samples on the model card.</p>
+  <footer><div class="links"><a href="https://huggingface.co/long12256/Z-image-turbo_Creating-Realistic">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Z-Image-Turbo-Creating-Realistic" aria-label="Copy the download command for Z-Image-Turbo-Creating-Realistic">tai download Z-Image-Turbo-Creating-Realistic</button></footer>
+</article></div>
+</section>
+<section id="music">
+  <div class="sechead"><h2>Music</h2><p>Songs, loops and instrument samples.</p><span class="type">Music Generation · 5</span></div>
+  <div class="grid"><article class="card gen" id="acestep-xl-base" data-q="acestep-xl-base ace-step/acestep-xl-base ace-step 1.5 xl (4b) base: full-quality text-to-music with lyrics, plus cover, repaint, extract and continue. trained on licensed data.">
+  <header><h3>AceStep-XL-Base</h3><span class="lic">mit</span></header>
+  <code class="id">ACE-Step/AceStep-XL-Base</code>
+  <p>ACE-Step 1.5 XL (4B) base: full-quality text-to-music with lyrics, plus cover, repaint, extract and continue. Trained on licensed data.</p>
+  
+  
+  <p class="nomedia">No samples on the model card · see the demo page.</p>
+  <footer><div class="links"><a href="https://huggingface.co/ACE-Step/acestep-v15-xl-base">Original on Hugging Face</a> · <a href="https://ace-step.github.io/ace-step-v1.5.github.io/">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download AceStep-XL-Base" aria-label="Copy the download command for AceStep-XL-Base">tai download AceStep-XL-Base</button></footer>
+</article><article class="card gen" id="acestep-xl-turbo" data-q="acestep-xl-turbo ace-step/acestep-xl-turbo ace-step 1.5 xl distilled to 8 steps: the 4b model&#x27;s quality, much faster.">
+  <header><h3>AceStep-XL-Turbo</h3><span class="lic">mit</span></header>
+  <code class="id">ACE-Step/AceStep-XL-Turbo</code>
+  <p>ACE-Step 1.5 XL distilled to 8 steps: the 4B model&#x27;s quality, much faster.</p>
+  
+  
+  <p class="nomedia">No samples on the model card · see the demo page.</p>
+  <footer><div class="links"><a href="https://huggingface.co/ACE-Step/acestep-v15-xl-turbo">Original on Hugging Face</a> · <a href="https://ace-step.github.io/ace-step-v1.5.github.io/">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download AceStep-XL-Turbo" aria-label="Copy the download command for AceStep-XL-Turbo">tai download AceStep-XL-Turbo</button></footer>
+</article><article class="card gen" id="foundation-1" data-q="foundation-1 royalcities/foundation-1 text-to-sample model for producers: tempo-synced loops, one-shots and playable instruments from structured tags (instrument, timbre, effects, key, bpm).">
+  <header><h3>Foundation-1</h3><span class="lic">other</span></header>
+  <code class="id">RoyalCities/Foundation-1</code>
+  <p>Text-to-sample model for producers: tempo-synced loops, one-shots and playable instruments from structured tags (instrument, timbre, effects, key, BPM).</p>
+  
+  
+  <div class="media clips"><div class="clip"><span>Example loop 1</span><audio controls preload="none" src="media/foundation-1-0.mp3"></audio></div><div class="clip"><span>Example loop 2</span><audio controls preload="none" src="media/foundation-1-1.mp3"></audio></div></div>
+  <footer><div class="links"><a href="https://huggingface.co/RoyalCities/Foundation-1">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Foundation-1" aria-label="Copy the download command for Foundation-1">tai download Foundation-1</button></footer>
+</article><article class="card gen" id="songgeneration-v2-large" data-q="songgeneration-v2-large tencent/songgeneration-v2-large tencent&#x27;s song generator: full songs with vocals and accompaniment from lyrics and a style prompt.">
+  <header><h3>SongGeneration-v2-large</h3></header>
+  <code class="id">tencent/SongGeneration-v2-large</code>
+  <p>Tencent&#x27;s song generator: full songs with vocals and accompaniment from lyrics and a style prompt.</p>
+  <p class="note">Tencent&#x27;s official repositories are gone; linked to an MLX conversion. No samples found.</p>
+  <dl class="metrics"><div><dt>Overall MOS (LeVo 2 listening test)</dt><dd>5.48</dd></div><div><dt>PER (lyrics, lower is better)</dt><dd>8.55%</dd></div><div><dt>Emotion control (Gemini, 1-10)</dt><dd>8.72</dd></div></dl><a class="msrc" href="https://arxiv.org/abs/2606.30642">Benchmarks: arxiv.org</a>
+  <p class="nomedia">No samples on the model card · see the demo page.</p>
+  <footer><div class="links"><a href="https://huggingface.co/mlx-community/SongGeneration-v2-large">Hugging Face (MLX)</a></div>
+  <button class="copy" type="button" data-cmd="tai download SongGeneration-v2-large" aria-label="Copy the download command for SongGeneration-v2-large">tai download SongGeneration-v2-large</button></footer>
+</article><article class="card gen" id="yue2-3b" data-q="yue2-3b m-a-p/yue2-3b m-a-p&#x27;s yue 2: full songs with vocals from lyrics, plus covers and edits of melody and chords. non-commercial licence.">
+  <header><h3>YuE2-3B</h3><span class="lic">cc-by-nc-4.0</span></header>
+  <code class="id">m-a-p/YuE2-3B</code>
+  <p>M-A-P&#x27;s YuE 2: full songs with vocals from lyrics, plus covers and edits of melody and chords. Non-commercial licence.</p>
+  
+  <dl class="metrics"><div><dt>WildSongBench SongBench Avg</dt><dd>6.7316</dd></div><div><dt>Musicality</dt><dd>5.9075</dd></div><div><dt>PER (lower is better)</dt><dd>8.44%</dd></div></dl><a class="msrc" href="https://huggingface.co/m-a-p/YuE2-3B">Benchmarks: huggingface.co</a>
+  <div class="media clips"><div class="clip"><span>“Tonight Awake”</span><audio controls preload="none" src="media/yue2-3b-0.mp3"></audio></div><div class="clip"><span>Cyber metal</span><audio controls preload="none" src="media/yue2-3b-1.mp3"></audio></div></div>
+  <footer><div class="links"><a href="https://huggingface.co/m-a-p/YuE2-3B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download YuE2-3B" aria-label="Copy the download command for YuE2-3B">tai download YuE2-3B</button></footer>
+</article></div>
+</section>
+<section id="speech">
+  <div class="sechead"><h2>Speech</h2><p>Text read aloud, voice cloning and voice design. Use with <code>tai tts</code>.</p><span class="type">Text-to-Speech · 7</span></div>
+  <div class="grid"><article class="card gen" id="fun-cosyvoice3-0-5b-2512" data-q="fun-cosyvoice3-0.5b-2512 funaudiollm/fun-cosyvoice3-0.5b-2512 tongyi lab&#x27;s cosyvoice 3: 9 languages and 18+ chinese dialects, zero-shot voice cloning across languages.">
+  <header><h3>Fun-CosyVoice3-0.5B-2512</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">FunAudioLLM/Fun-CosyVoice3-0.5B-2512</code>
+  <p>Tongyi Lab&#x27;s CosyVoice 3: 9 languages and 18+ Chinese dialects, zero-shot voice cloning across languages.</p>
+  
+  <dl class="metrics"><div><dt>Seed-TTS test-en WER (lower is better)</dt><dd>2.24%</dd></div><div><dt>Seed-TTS test-zh CER (lower is better)</dt><dd>1.21%</dd></div><div><dt>Seed-TTS test-en SIM</dt><dd>71.8%</dd></div></dl><a class="msrc" href="https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512">Benchmarks: huggingface.co</a>
+  <p class="nomedia">No samples on the model card · see the demo page.</p>
+  <footer><div class="links"><a href="https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512">Hugging Face</a> · <a href="https://funaudiollm.github.io/cosyvoice3/">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download Fun-CosyVoice3-0.5B-2512" aria-label="Copy the download command for Fun-CosyVoice3-0.5B-2512">tai download Fun-CosyVoice3-0.5B-2512</button></footer>
+</article><article class="card gen" id="moss-tts-local-transformer-v1-5" data-q="moss-tts-local-transformer-v1.5 openmoss-team/moss-tts-local-transformer-v1.5 openmoss&#x27;s tts with native 48 khz stereo output and voice cloning.">
+  <header><h3>MOSS-TTS-Local-Transformer-v1.5</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">OpenMOSS-Team/MOSS-TTS-Local-Transformer-v1.5</code>
+  <p>OpenMOSS&#x27;s TTS with native 48 kHz stereo output and voice cloning.</p>
+  
+  
+  <p class="nomedia">No samples on the model card · see the demo page.</p>
+  <footer><div class="links"><a href="https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Local-Transformer-v1.5">Hugging Face</a> · <a href="https://github.com/OpenMOSS/MOSS-TTS">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download MOSS-TTS-Local-Transformer-v1.5" aria-label="Copy the download command for MOSS-TTS-Local-Transformer-v1.5">tai download MOSS-TTS-Local-Transformer-v1.5</button></footer>
+</article><article class="card gen" id="moss-tts-nano-100m" data-q="moss-tts-nano-100m openmoss-team/moss-tts-nano-100m openmoss&#x27;s tiny 0.1b multilingual tts for realtime speech; light enough for a cpu.">
+  <header><h3>MOSS-TTS-Nano-100M</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">OpenMOSS-Team/MOSS-TTS-Nano-100M</code>
+  <p>OpenMOSS&#x27;s tiny 0.1B multilingual TTS for realtime speech; light enough for a CPU.</p>
+  
+  
+  <p class="nomedia">No samples on the model card · see the demo page.</p>
+  <footer><div class="links"><a href="https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Nano-100M">Hugging Face</a> · <a href="https://openmoss.github.io/MOSS-TTS-Nano-Demo/">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download MOSS-TTS-Nano-100M" aria-label="Copy the download command for MOSS-TTS-Nano-100M">tai download MOSS-TTS-Nano-100M</button></footer>
+</article><article class="card gen" id="qwen3-customvoice-1-7b" data-q="qwen3-customvoice-1.7b qwen/qwen3-tts-12hz-1.7b-customvoice qwen3-tts with preset voices you steer by instruction (tone, speed, emotion); 10 languages.">
+  <header><h3>Qwen3-CustomVoice-1.7B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice</code>
+  <p>Qwen3-TTS with preset voices you steer by instruction (tone, speed, emotion); 10 languages.</p>
+  
+  <dl class="metrics"><div><dt>WER English, multilingual test set (lower is better)</dt><dd>0.899</dd></div><div><dt>WER Chinese, multilingual test set (lower is better)</dt><dd>0.903</dd></div><div><dt>InstructTTSEval-EN APS</dt><dd>77.3</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice">Benchmarks: huggingface.co</a>
+  <p class="nomedia">No samples on the model card · see the demo page.</p>
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice">Hugging Face</a> · <a href="https://qwen.ai/blog?id=qwen3tts-0115">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-CustomVoice-1.7B" aria-label="Copy the download command for Qwen3-CustomVoice-1.7B">tai download Qwen3-CustomVoice-1.7B</button></footer>
+</article><article class="card gen" id="qwen3-voicedesign-1-7b" data-q="qwen3-voicedesign-1.7b qwen/qwen3-tts-12hz-1.7b-voicedesign qwen3-tts that creates a new voice from a written description, e.g. &quot;a calm older man with a slight rasp&quot;.">
+  <header><h3>Qwen3-VoiceDesign-1.7B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign</code>
+  <p>Qwen3-TTS that creates a new voice from a written description, e.g. &quot;a calm older man with a slight rasp&quot;.</p>
+  
+  <dl class="metrics"><div><dt>InstructTTSEval-EN APS</dt><dd>82.9</dd></div><div><dt>InstructTTSEval-ZH APS</dt><dd>85.2</dd></div><div><dt>InstructTTSEval-EN DSD</dt><dd>82.4</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice">Benchmarks: huggingface.co</a>
+  <p class="nomedia">No samples on the model card · see the demo page.</p>
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign">Hugging Face</a> · <a href="https://qwen.ai/blog?id=qwen3tts-0115">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-VoiceDesign-1.7B" aria-label="Copy the download command for Qwen3-VoiceDesign-1.7B">tai download Qwen3-VoiceDesign-1.7B</button></footer>
+</article><article class="card gen" id="vibevoice-realtime-0-5b" data-q="vibevoice-realtime-0.5b microsoft/vibevoice-realtime-0.5b microsoft&#x27;s streaming tts: starts speaking in ~300 ms while text is still arriving, so a chat model can talk as it writes.">
+  <header><h3>VibeVoice-Realtime-0.5B</h3><span class="lic">mit</span></header>
+  <code class="id">microsoft/VibeVoice-Realtime-0.5B</code>
+  <p>Microsoft&#x27;s streaming TTS: starts speaking in ~300 ms while text is still arriving, so a chat model can talk as it writes.</p>
+  
+  <dl class="metrics"><div><dt>Seed-TTS test-en WER (lower is better)</dt><dd>2.05%</dd></div><div><dt>Seed-TTS test-en SIM</dt><dd>0.633</dd></div><div><dt>LibriSpeech test-clean WER (lower is better)</dt><dd>2.00%</dd></div></dl><a class="msrc" href="https://huggingface.co/microsoft/VibeVoice-Realtime-0.5B">Benchmarks: huggingface.co</a>
+  <p class="nomedia">No samples on the model card · see the demo page.</p>
+  <footer><div class="links"><a href="https://huggingface.co/microsoft/VibeVoice-Realtime-0.5B">Hugging Face</a> · <a href="https://microsoft.github.io/VibeVoice">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download VibeVoice-Realtime-0.5B" aria-label="Copy the download command for VibeVoice-Realtime-0.5B">tai download VibeVoice-Realtime-0.5B</button></footer>
+</article><article class="card gen" id="supertonic-3" data-q="supertonic-3 supertone/supertonic-3 supertone&#x27;s fast on-device tts: 31 languages, expressive, runs in real time on a cpu.">
+  <header><h3>supertonic-3</h3><span class="lic">openrail</span></header>
+  <code class="id">Supertone/supertonic-3</code>
+  <p>Supertone&#x27;s fast on-device TTS: 31 languages, expressive, runs in real time on a CPU.</p>
+  
+  <dl class="metrics"><div><dt>MiniMax-MLS-test WER English (lower is better)</dt><dd>2.06</dd></div><div><dt>WER German</dt><dd>0.86</dd></div><div><dt>WER Spanish</dt><dd>1.13</dd></div></dl><a class="msrc" href="https://github.com/supertone-inc/supertonic">Benchmarks: github.com</a>
+  <div class="media clips"><div class="clip"><span>Voice “Nora”</span><audio controls preload="none" src="media/supertonic-3-0.mp3"></audio></div><div class="clip"><span>Voice “Luna”</span><audio controls preload="none" src="media/supertonic-3-1.mp3"></audio></div></div>
+  <footer><div class="links"><a href="https://huggingface.co/Supertone/supertonic-3">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download supertonic-3" aria-label="Copy the download command for supertonic-3">tai download supertonic-3</button></footer>
+</article></div>
+</section>
+<section id="3d">
+  <div class="sechead"><h2>3D</h2><p>A textured 3D model from one picture. Use with <code>tai 3d</code>.</p><span class="type">Image-to-3D · 1</span></div>
+  <div class="grid"><article class="card gen" id="hunyuan3d-2-1" data-q="hunyuan3d-2.1 tencent/hunyuan3d-2.1 tencent&#x27;s image-to-3d model: turns one picture into a textured 3d mesh with physically based materials.">
+  <header><h3>Hunyuan3D-2.1</h3><span class="lic">other</span></header>
+  <code class="id">Tencent/Hunyuan3d-2.1</code>
+  <p>Tencent&#x27;s image-to-3D model: turns one picture into a textured 3D mesh with physically based materials.</p>
+  
+  <dl class="metrics"><div><dt>ULIP-I (shape)</dt><dd>0.1395<small>higher is better</small></dd></div><div><dt>Uni3D-I (shape)</dt><dd>0.3213<small>higher is better</small></dd></div><div><dt>CLIP-FiD (texture)</dt><dd>24.78<small>lower is better</small></dd></div><div><dt>CLIP-I (texture)</dt><dd>0.9207<small>higher is better</small></dd></div></dl><a class="msrc" href="https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1">Benchmarks: github.com</a>
+  <div class="media imgs"><figure><img src="media/hunyuan3d-2-1-0.jpg" alt="Sample from Hunyuan3D-2.1" loading="lazy"></figure></div>
+  <footer><div class="links"><a href="https://huggingface.co/tencent/Hunyuan3D-2.1">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Hunyuan3D-2.1" aria-label="Copy the download command for Hunyuan3D-2.1">tai download Hunyuan3D-2.1</button></footer>
+</article></div>
+</section>
+<section id="chat-with-vision">
+  <div class="sechead"><h2>Chat with vision</h2><p>Chat models that also read images. Use with <code>tai ask · tai chat · tai agent</code>.</p><span class="type">Image-Text-to-Text · 13</span></div>
+  <div class="grid"><article class="card" id="bigbang-v1-turbo" data-q="bigbang-v1-turbo endless-frontier/bigbang-v1-turbo tiiny&#x27;s turbo build of bigbang-v1 (endless frontier), a model trained on verifiable frontier tasks in maths, science and code.">
+  <header><h3>BigBang-v1-Turbo</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">endless-frontier/BigBang-v1-Turbo</code>
+  <p>Tiiny&#x27;s Turbo build of BigBang-v1 (Endless Frontier), a model trained on verifiable frontier tasks in maths, science and code.</p>
+  
+  <dl class="metrics"><div><dt>SWE-bench Pro</dt><dd>54.2</dd></div><div><dt>BrowseComp</dt><dd>76.5</dd></div><div><dt>Humanity&#x27;s Last Exam</dt><dd>50.3</dd></div></dl><a class="msrc" href="https://huggingface.co/endless-frontier/BigBang-v1">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/endless-frontier/BigBang-v1">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download BigBang-v1-Turbo" aria-label="Copy the download command for BigBang-v1-Turbo">tai download BigBang-v1-Turbo</button></footer>
+</article><article class="card" id="huihui-ornith-1-5-35b-a3b-abliterated-turbo" data-q="huihui-ornith-1.5-35b-a3b-abliterated-turbo huihui-ai/huihui-ornith-1.5-35b-a3b-abliterated-turbo ornith-1.5 with its refusals removed (abliterated) by huihui-ai. uncensored: it will answer what the original declines.">
+  <header><h3>Huihui-Ornith-1.5-35B-A3B-abliterated-Turbo</h3><span class="lic">mit</span></header>
+  <code class="id">huihui-ai/Huihui-Ornith-1.5-35B-A3B-abliterated-Turbo</code>
+  <p>Ornith-1.5 with its refusals removed (abliterated) by huihui-ai. Uncensored: it will answer what the original declines.</p>
+  
+  
+  
+  <footer><div class="links"><a href="https://huggingface.co/huihui-ai/Huihui-Ornith-1.5-35B-A3B-abliterated">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Huihui-Ornith-1.5-35B-A3B-abliterated-Turbo" aria-label="Copy the download command for Huihui-Ornith-1.5-35B-A3B-abliterated-Turbo">tai download Huihui-Ornith-1.5-35B-A3B-abliterated-Turbo</button></footer>
+</article><article class="card" id="ornith-1-0-35b" data-q="ornith-1.0-35b deepreinforce-ai/ornith-1.0-35b ornith-1.0, a self-improving open model family for agentic coding, post-trained on gemma 4 and qwen 3.5.">
+  <header><h3>Ornith-1.0-35B</h3><span class="lic">mit</span></header>
+  <code class="id">deepreinforce-ai/Ornith-1.0-35B</code>
+  <p>Ornith-1.0, a self-improving open model family for agentic coding, post-trained on Gemma 4 and Qwen 3.5.</p>
+  
+  <dl class="metrics"><div><dt>SWE-bench Verified</dt><dd>75.6<small>OpenHands</small></dd></div><div><dt>Terminal-Bench 2.1</dt><dd>64.2<small>Terminus-2</small></dd></div><div><dt>SWE-bench Pro</dt><dd>50.4</dd></div></dl><a class="msrc" href="https://huggingface.co/ornith-ai/Ornith-1.0-35B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/ornith-ai/Ornith-1.0-35B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Ornith-1.0-35B" aria-label="Copy the download command for Ornith-1.0-35B">tai download Ornith-1.0-35B</button></footer>
+</article><article class="card" id="ornith-1-5-35b-a3b-turbo" data-q="ornith-1.5-35b-a3b-turbo ornith-ai/ornith-1.5-35b-a3b-turbo tiiny&#x27;s turbo build of ornith-1.5, a 35b mixture-of-experts (3b active) agentic coding model trained with end-to-end self-improvement.">
+  <header><h3>Ornith-1.5-35B-A3B-Turbo</h3><span class="lic">mit</span></header>
+  <code class="id">ornith-ai/Ornith-1.5-35B-A3B-Turbo</code>
+  <p>Tiiny&#x27;s Turbo build of Ornith-1.5, a 35B mixture-of-experts (3B active) agentic coding model trained with end-to-end self-improvement.</p>
+  
+  <dl class="metrics"><div><dt>SWE-bench Verified</dt><dd>79<small>OpenHands</small></dd></div><div><dt>Terminal-Bench 2.1</dt><dd>67.8<small>Terminus-2</small></dd></div><div><dt>GPQA Diamond</dt><dd>89.2</dd></div></dl><a class="msrc" href="https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Ornith-1.5-35B-A3B-Turbo" aria-label="Copy the download command for Ornith-1.5-35B-A3B-Turbo">tai download Ornith-1.5-35B-A3B-Turbo</button></footer>
+</article><article class="card" id="qwen-image-2-1-pe-i2i" data-q="qwen-image-2.1-pe-i2i qwen/qwen-image-2.1-pe-i2i prompt enhancer for qwen-image-2.1 editing: rewrites a short edit instruction (with the image in view) into the detailed prompt the image model works best with.">
+  <header><h3>Qwen-Image-2.1-PE-I2I</h3><span class="lic">other</span></header>
+  <code class="id">Qwen/Qwen-Image-2.1-PE-I2I</code>
+  <p>Prompt enhancer for Qwen-Image-2.1 editing: rewrites a short edit instruction (with the image in view) into the detailed prompt the image model works best with.</p>
+  
+  
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen-Image-2.1-PE-I2I">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen-Image-2.1-PE-I2I" aria-label="Copy the download command for Qwen-Image-2.1-PE-I2I">tai download Qwen-Image-2.1-PE-I2I</button></footer>
+</article><article class="card" id="qwen3-5-35b-a3b" data-q="qwen3.5-35b-a3b qwen/qwen3.5-35b-a3b qwen 3.5 mixture-of-experts (35b, 3b active) with built-in vision: chat, reasoning, tools and image understanding.">
+  <header><h3>Qwen3.5-35B-A3B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3.5-35B-A3B</code>
+  <p>Qwen 3.5 mixture-of-experts (35B, 3B active) with built-in vision: chat, reasoning, tools and image understanding.</p>
+  
+  <dl class="metrics"><div><dt>MMLU-Pro</dt><dd>85.3</dd></div><div><dt>GPQA Diamond</dt><dd>84.2</dd></div><div><dt>SWE-bench Verified</dt><dd>69.2</dd></div><div><dt>MMMU</dt><dd>81.4</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3.5-35B-A3B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3.5-35B-A3B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3.5-35B-A3B" aria-label="Copy the download command for Qwen3.5-35B-A3B">tai download Qwen3.5-35B-A3B</button></footer>
+</article><article class="card" id="qwen3-5-9b" data-q="qwen3.5-9b qwen/qwen3.5-9b qwen 3.5 dense 9b with vision: a small all-rounder for chat, tools and images.">
+  <header><h3>Qwen3.5-9B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3.5-9B</code>
+  <p>Qwen 3.5 dense 9B with vision: a small all-rounder for chat, tools and images.</p>
+  
+  <dl class="metrics"><div><dt>MMLU-Pro</dt><dd>82.5</dd></div><div><dt>GPQA Diamond</dt><dd>81.7</dd></div><div><dt>IFEval</dt><dd>91.5</dd></div><div><dt>MMMU</dt><dd>78.4</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3.5-9B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3.5-9B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3.5-9B" aria-label="Copy the download command for Qwen3.5-9B">tai download Qwen3.5-9B</button></footer>
+</article><article class="card" id="qwen3-5-9b-turbo" data-q="qwen3.5-9b-turbo qwen/qwen3.5-9b-turbo tiiny&#x27;s turbo build of qwen3.5-9b: the same model, faster on the device.">
+  <header><h3>Qwen3.5-9B-Turbo</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3.5-9B-Turbo</code>
+  <p>Tiiny&#x27;s Turbo build of Qwen3.5-9B: the same model, faster on the device.</p>
+  
+  <dl class="metrics"><div><dt>MMLU-Pro</dt><dd>82.5</dd></div><div><dt>GPQA Diamond</dt><dd>81.7</dd></div><div><dt>IFEval</dt><dd>91.5</dd></div><div><dt>MMMU</dt><dd>78.4</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3.5-9B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3.5-9B">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3.5-9B-Turbo" aria-label="Copy the download command for Qwen3.5-9B-Turbo">tai download Qwen3.5-9B-Turbo</button></footer>
+</article><article class="card" id="qwen3-6-27b" data-q="qwen3.6-27b qwen/qwen3.6-27b qwen 3.6 dense 27b with vision, tuned for agentic coding, frontend work and repository-level reasoning.">
+  <header><h3>Qwen3.6-27B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3.6-27B</code>
+  <p>Qwen 3.6 dense 27B with vision, tuned for agentic coding, frontend work and repository-level reasoning.</p>
+  
+  <dl class="metrics"><div><dt>SWE-bench Verified</dt><dd>77.2</dd></div><div><dt>Terminal-Bench 2.0</dt><dd>59.3</dd></div><div><dt>GPQA Diamond</dt><dd>87.8</dd></div><div><dt>MMMU</dt><dd>82.9</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3.6-27B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3.6-27B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3.6-27B" aria-label="Copy the download command for Qwen3.6-27B">tai download Qwen3.6-27B</button></footer>
+</article><article class="card" id="qwen3-6-27b-turbo" data-q="qwen3.6-27b-turbo qwen/qwen3.6-27b-turbo tiiny&#x27;s turbo build of qwen3.6-27b: the same model, faster on the device.">
+  <header><h3>Qwen3.6-27B-Turbo</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3.6-27B-Turbo</code>
+  <p>Tiiny&#x27;s Turbo build of Qwen3.6-27B: the same model, faster on the device.</p>
+  
+  <dl class="metrics"><div><dt>SWE-bench Verified</dt><dd>77.2</dd></div><div><dt>Terminal-Bench 2.0</dt><dd>59.3</dd></div><div><dt>GPQA Diamond</dt><dd>87.8</dd></div><div><dt>MMMU</dt><dd>82.9</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3.6-27B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3.6-27B">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3.6-27B-Turbo" aria-label="Copy the download command for Qwen3.6-27B-Turbo">tai download Qwen3.6-27B-Turbo</button></footer>
+</article><article class="card" id="sage-a1-5-turbo" data-q="sage-a1.5-turbo internscience/sage-a1.5-turbo tiiny&#x27;s turbo build of internscience&#x27;s sage-a1.5, an agent model that delegates to subagents and checks its own progress on long tasks.">
+  <header><h3>Sage-A1.5-Turbo</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">InternScience/Sage-A1.5-Turbo</code>
+  <p>Tiiny&#x27;s Turbo build of InternScience&#x27;s Sage-A1.5, an agent model that delegates to subagents and checks its own progress on long tasks.</p>
+  
+  <dl class="metrics"><div><dt>SWE-bench Pro</dt><dd>61.2</dd></div><div><dt>BrowseComp</dt><dd>81.7<small>without agentic orchestration</small></dd></div><div><dt>HLE</dt><dd>55.1<small>with tools</small></dd></div><div><dt>IFBench</dt><dd>81.6</dd></div></dl><a class="msrc" href="https://huggingface.co/InternScience/Sage-A1.5">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/InternScience/Sage-A1.5">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Sage-A1.5-Turbo" aria-label="Copy the download command for Sage-A1.5-Turbo">tai download Sage-A1.5-Turbo</button></footer>
+</article><article class="card" id="gemma-4-26b-a4b-it" data-q="gemma-4-26b-a4b-it google/gemma-4-26b-a4b-it google deepmind&#x27;s gemma 4 mixture-of-experts (26b, 4b active), instruction-tuned; text and image input, 256k context.">
+  <header><h3>gemma-4-26B-A4B-it</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">google/gemma-4-26B-A4B-it</code>
+  <p>Google DeepMind&#x27;s Gemma 4 mixture-of-experts (26B, 4B active), instruction-tuned; text and image input, 256K context.</p>
+  
+  <dl class="metrics"><div><dt>MMLU Pro</dt><dd>82.6%</dd></div><div><dt>GPQA Diamond</dt><dd>82.3%</dd></div><div><dt>LiveCodeBench v6</dt><dd>77.1%</dd></div><div><dt>MMMU Pro</dt><dd>73.8%</dd></div></dl><a class="msrc" href="https://huggingface.co/google/gemma-4-26B-A4B-it">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/google/gemma-4-26B-A4B-it">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download gemma-4-26B-A4B-it" aria-label="Copy the download command for gemma-4-26B-A4B-it">tai download gemma-4-26B-A4B-it</button></footer>
+</article><article class="card" id="gemma-4-31b-it" data-q="gemma-4-31b-it google/gemma-4-31b-it google deepmind&#x27;s dense gemma 4 31b, instruction-tuned; text and image input, 256k context.">
+  <header><h3>gemma-4-31B-it</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">google/gemma-4-31B-it</code>
+  <p>Google DeepMind&#x27;s dense Gemma 4 31B, instruction-tuned; text and image input, 256K context.</p>
+  
+  <dl class="metrics"><div><dt>MMLU Pro</dt><dd>85.2%</dd></div><div><dt>GPQA Diamond</dt><dd>84.3%</dd></div><div><dt>LiveCodeBench v6</dt><dd>80.0%</dd></div><div><dt>MMMU Pro</dt><dd>76.9%</dd></div></dl><a class="msrc" href="https://huggingface.co/google/gemma-4-31B-it">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/google/gemma-4-31B-it">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download gemma-4-31B-it" aria-label="Copy the download command for gemma-4-31B-it">tai download gemma-4-31B-it</button></footer>
+</article></div>
+</section>
+<section id="chat">
+  <div class="sechead"><h2>Chat</h2><p>Text-only chat, reasoning and coding models. Use with <code>tai ask · tai chat · tai agent</code>.</p><span class="type">Text Generation · 9</span></div>
+  <div class="grid"><article class="card" id="glm-4-7-flash" data-q="glm-4.7-flash zai-org/glm-4.7-flash zhipu&#x27;s 30b mixture-of-experts (3b active), the strongest of its class; good at agentic tasks and coding.">
+  <header><h3>GLM-4.7-Flash</h3><span class="lic">mit</span></header>
+  <code class="id">zai-org/GLM-4.7-Flash</code>
+  <p>Zhipu&#x27;s 30B mixture-of-experts (3B active), the strongest of its class; good at agentic tasks and coding.</p>
+  
+  <dl class="metrics"><div><dt>AIME 25</dt><dd>91.6</dd></div><div><dt>GPQA</dt><dd>75.2</dd></div><div><dt>SWE-bench Verified</dt><dd>59.2</dd></div><div><dt>τ²-Bench</dt><dd>79.5</dd></div></dl><a class="msrc" href="https://huggingface.co/zai-org/GLM-4.7-Flash">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/zai-org/GLM-4.7-Flash">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download GLM-4.7-Flash" aria-label="Copy the download command for GLM-4.7-Flash">tai download GLM-4.7-Flash</button></footer>
+</article><article class="card" id="qwen-image-2-1-pe-t2i" data-q="qwen-image-2.1-pe-t2i qwen/qwen-image-2.1-pe-t2i prompt enhancer for qwen-image-2.1: expands a short idea into the detailed prompt the image model works best with.">
+  <header><h3>Qwen-Image-2.1-PE-T2I</h3><span class="lic">other</span></header>
+  <code class="id">Qwen/Qwen-Image-2.1-PE-T2I</code>
+  <p>Prompt enhancer for Qwen-Image-2.1: expands a short idea into the detailed prompt the image model works best with.</p>
+  
+  
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen-Image-2.1-PE-T2I">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen-Image-2.1-PE-T2I" aria-label="Copy the download command for Qwen-Image-2.1-PE-T2I">tai download Qwen-Image-2.1-PE-T2I</button></footer>
+</article><article class="card" id="qwen3-30b-a3b-instruct" data-q="qwen3-30b-a3b-instruct qwen/qwen3-30b-a3b-instruct qwen3 30b mixture-of-experts (3b active), 2507 update, no thinking: quick, capable everyday chat.">
+  <header><h3>Qwen3-30B-A3B-Instruct</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-30B-A3B-Instruct</code>
+  <p>Qwen3 30B mixture-of-experts (3B active), 2507 update, no thinking: quick, capable everyday chat.</p>
+  
+  <dl class="metrics"><div><dt>MMLU-Pro</dt><dd>78.4</dd></div><div><dt>GPQA</dt><dd>70.4</dd></div><div><dt>AIME25</dt><dd>61.3</dd></div><div><dt>LiveCodeBench v6</dt><dd>43.2</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-30B-A3B-Instruct" aria-label="Copy the download command for Qwen3-30B-A3B-Instruct">tai download Qwen3-30B-A3B-Instruct</button></footer>
+</article><article class="card" id="qwen3-30b-a3b-thinking" data-q="qwen3-30b-a3b-thinking qwen/qwen3-30b-a3b-thinking qwen3 30b mixture-of-experts, 2507 update, always reasons first: better at maths, science and code.">
+  <header><h3>Qwen3-30B-A3B-Thinking</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-30B-A3B-Thinking</code>
+  <p>Qwen3 30B mixture-of-experts, 2507 update, always reasons first: better at maths, science and code.</p>
+  
+  <dl class="metrics"><div><dt>MMLU-Pro</dt><dd>80.9</dd></div><div><dt>GPQA</dt><dd>73.4</dd></div><div><dt>AIME25</dt><dd>85.0</dd></div><div><dt>LiveCodeBench v6</dt><dd>66.0</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-30B-A3B-Thinking-2507">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-30B-A3B-Thinking-2507">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-30B-A3B-Thinking" aria-label="Copy the download command for Qwen3-30B-A3B-Thinking">tai download Qwen3-30B-A3B-Thinking</button></footer>
+</article><article class="card" id="qwen3-4b-instruct-2507" data-q="qwen3-4b-instruct-2507 qwen/qwen3-4b-instruct-2507 qwen3 4b, 2507 update: a small, fast chat model.">
+  <header><h3>Qwen3-4B-Instruct-2507</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-4B-Instruct-2507</code>
+  <p>Qwen3 4B, 2507 update: a small, fast chat model.</p>
+  
+  <dl class="metrics"><div><dt>MMLU-Pro</dt><dd>69.6</dd></div><div><dt>GPQA</dt><dd>62.0</dd></div><div><dt>AIME25</dt><dd>47.4</dd></div><div><dt>IFEval</dt><dd>83.4</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-4B-Instruct-2507" aria-label="Copy the download command for Qwen3-4B-Instruct-2507">tai download Qwen3-4B-Instruct-2507</button></footer>
+</article><article class="card" id="qwen3-8b" data-q="qwen3-8b qwen/qwen3-8b qwen3 dense 8b with switchable thinking.">
+  <header><h3>Qwen3-8B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-8B</code>
+  <p>Qwen3 dense 8B with switchable thinking.</p>
+  
+  <dl class="metrics"><div><dt>MMLU-Redux</dt><dd>87.5<small>thinking</small></dd></div><div><dt>GPQA Diamond</dt><dd>62.0<small>thinking</small></dd></div><div><dt>AIME&#x27;25</dt><dd>67.3<small>thinking</small></dd></div><div><dt>LiveCodeBench v5</dt><dd>57.5<small>thinking</small></dd></div></dl><a class="msrc" href="https://arxiv.org/abs/2505.09388">Benchmarks: arxiv.org</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-8B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-8B" aria-label="Copy the download command for Qwen3-8B">tai download Qwen3-8B</button></footer>
+</article><article class="card" id="qwen3-coder-30b" data-q="qwen3-coder-30b qwen/qwen3-coder-30b-a3b-instruct qwen3-coder 30b mixture-of-experts (3b active): agentic coding with 256k context.">
+  <header><h3>Qwen3-Coder-30B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-Coder-30B-A3B-Instruct</code>
+  <p>Qwen3-Coder 30B mixture-of-experts (3B active): agentic coding with 256K context.</p>
+  
+  <dl class="metrics"><div><dt>SWE-bench Verified</dt><dd>51.6<small>OpenHands, 500 turns</small></dd></div><div><dt>Terminal-Bench</dt><dd>31.3</dd></div><div><dt>Aider-Polyglot</dt><dd>33.3</dd></div><div><dt>BFCL-v3</dt><dd>62.2</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-Coder-30B" aria-label="Copy the download command for Qwen3-Coder-30B">tai download Qwen3-Coder-30B</button></footer>
+</article><article class="card" id="qwen3-coder-30b-a3b-instruct-turbo" data-q="qwen3-coder-30b-a3b-instruct-turbo qwen/qwen3-coder-30b-a3b-instruct-turbo tiiny&#x27;s turbo build of qwen3-coder-30b: the same model, faster on the device.">
+  <header><h3>Qwen3-Coder-30B-A3B-Instruct-Turbo</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-Coder-30B-A3B-Instruct-Turbo</code>
+  <p>Tiiny&#x27;s Turbo build of Qwen3-Coder-30B: the same model, faster on the device.</p>
+  
+  <dl class="metrics"><div><dt>SWE-bench Verified</dt><dd>51.6<small>OpenHands, 500 turns</small></dd></div><div><dt>Terminal-Bench</dt><dd>31.3</dd></div><div><dt>Aider-Polyglot</dt><dd>33.3</dd></div><div><dt>BFCL-v3</dt><dd>62.2</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-Coder-30B-A3B-Instruct-Turbo" aria-label="Copy the download command for Qwen3-Coder-30B-A3B-Instruct-Turbo">tai download Qwen3-Coder-30B-A3B-Instruct-Turbo</button></footer>
+</article><article class="card" id="gpt-oss-20b" data-q="gpt-oss-20b openai/gpt-oss-20b openai&#x27;s open-weight 21b mixture-of-experts (3.6b active) reasoning model with adjustable reasoning effort.">
+  <header><h3>gpt-oss-20b</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">openai/gpt-oss-20b</code>
+  <p>OpenAI&#x27;s open-weight 21B mixture-of-experts (3.6B active) reasoning model with adjustable reasoning effort.</p>
+  
+  <dl class="metrics"><div><dt>MMLU</dt><dd>85.3<small>high reasoning</small></dd></div><div><dt>GPQA Diamond</dt><dd>71.5<small>high, no tools</small></dd></div><div><dt>AIME 2025</dt><dd>91.7<small>high, no tools</small></dd></div><div><dt>SWE-bench Verified</dt><dd>60.7<small>high</small></dd></div></dl><a class="msrc" href="https://arxiv.org/abs/2508.10925">Benchmarks: arxiv.org</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/openai/gpt-oss-20b">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download gpt-oss-20b" aria-label="Copy the download command for gpt-oss-20b">tai download gpt-oss-20b</button></footer>
+</article></div>
+</section>
+<section id="transcription">
+  <div class="sechead"><h2>Transcription</h2><p>Speech to text. Use with <code>tai asr</code>.</p><span class="type">ASR · 5</span></div>
+  <div class="grid"><article class="card" id="fun-asr-mlt-nano" data-q="fun-asr-mlt-nano funaudiollm/fun-asr-mlt-nano tongyi lab&#x27;s 800m multilingual speech recognizer: 31 languages, trained on hundreds of thousands of hours of speech.">
+  <header><h3>Fun-ASR-MLT-Nano</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">FunAudioLLM/Fun-ASR-MLT-Nano</code>
+  <p>Tongyi Lab&#x27;s 800M multilingual speech recognizer: 31 languages, trained on hundreds of thousands of hours of speech.</p>
+  
+  
+  
+  <footer><div class="links"><a href="https://huggingface.co/FunAudioLLM/Fun-ASR-MLT-Nano-2512">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Fun-ASR-MLT-Nano" aria-label="Copy the download command for Fun-ASR-MLT-Nano">tai download Fun-ASR-MLT-Nano</button></footer>
+</article><article class="card" id="fun-asr-nano" data-q="fun-asr-nano funaudiollm/fun-asr-nano tongyi lab&#x27;s end-to-end speech recognizer, trained on tens of millions of hours of real speech; strong on chinese, its dialects and english.">
+  <header><h3>Fun-ASR-Nano</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">FunAudioLLM/Fun-ASR-Nano</code>
+  <p>Tongyi Lab&#x27;s end-to-end speech recognizer, trained on tens of millions of hours of real speech; strong on Chinese, its dialects and English.</p>
+  
+  <dl class="metrics"><div><dt>LibriSpeech test-clean WER</dt><dd>1.76<small>%, lower is better</small></dd></div><div><dt>LibriSpeech test-other WER</dt><dd>4.33<small>%, lower is better</small></dd></div><div><dt>FLEURS-en WER</dt><dd>5.96<small>%, lower is better</small></dd></div><div><dt>FLEURS-zh WER</dt><dd>2.56<small>%, lower is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/FunAudioLLM/Fun-ASR-Nano-2512">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/FunAudioLLM/Fun-ASR-Nano-2512">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Fun-ASR-Nano" aria-label="Copy the download command for Fun-ASR-Nano">tai download Fun-ASR-Nano</button></footer>
+</article><article class="card" id="moss-transcribe-diarize" data-q="moss-transcribe-diarize openmoss-team/moss-transcribe-diarize 0.9b model that transcribes long multi-speaker recordings (up to 90 minutes, 50+ languages) and labels who spoke when, with timestamps and sound events.">
+  <header><h3>MOSS-Transcribe-Diarize</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">OpenMOSS-Team/MOSS-Transcribe-Diarize</code>
+  <p>0.9B model that transcribes long multi-speaker recordings (up to 90 minutes, 50+ languages) and labels who spoke when, with timestamps and sound events.</p>
+  
+  <dl class="metrics"><div><dt>AISHELL-4 cpCER</dt><dd>15.83<small>speaker-attributed CER %, lower is better</small></dd></div><div><dt>AliMeeting cpCER</dt><dd>22.17<small>speaker-attributed CER %, lower is better</small></dd></div><div><dt>Podcast CER</dt><dd>5.97<small>%, lower is better</small></dd></div><div><dt>Movies cpCER</dt><dd>12.76<small>speaker-attributed CER %, lower is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/OpenMOSS-Team/MOSS-Transcribe-Diarize">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/OpenMOSS-Team/MOSS-Transcribe-Diarize">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download MOSS-Transcribe-Diarize" aria-label="Copy the download command for MOSS-Transcribe-Diarize">tai download MOSS-Transcribe-Diarize</button></footer>
+</article><article class="card" id="parakeet-tdt-0-6b-v3" data-q="parakeet-tdt-0.6b-v3 nvidia/parakeet-tdt-0.6b-v3 nvidia&#x27;s fast 600m transcriber for 25 european languages; detects the language by itself.">
+  <header><h3>Parakeet-TDT-0.6B-V3</h3><span class="lic">cc-by-4.0</span></header>
+  <code class="id">nvidia/Parakeet-TDT-0.6B-V3</code>
+  <p>NVIDIA&#x27;s fast 600M transcriber for 25 European languages; detects the language by itself.</p>
+  
+  <dl class="metrics"><div><dt>Open ASR Leaderboard avg WER (English)</dt><dd>6.34%<small>lower is better</small></dd></div><div><dt>LibriSpeech test-clean WER</dt><dd>1.93%<small>lower is better</small></dd></div><div><dt>LibriSpeech test-other WER</dt><dd>3.59%<small>lower is better</small></dd></div><div><dt>FLEURS avg WER (25 EU languages)</dt><dd>11.97%<small>lower is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Parakeet-TDT-0.6B-V3" aria-label="Copy the download command for Parakeet-TDT-0.6B-V3">tai download Parakeet-TDT-0.6B-V3</button></footer>
+</article><article class="card" id="whisper-large-v3-turbo" data-q="whisper-large-v3-turbo openai/whisper-large-v3-turbo openai&#x27;s whisper large-v3, pruned to 4 decoder layers: much faster, nearly the same accuracy, ~100 languages and translation to english.">
+  <header><h3>Whisper-large-v3-turbo</h3><span class="lic">mit</span></header>
+  <code class="id">openai/Whisper-large-v3-turbo</code>
+  <p>OpenAI&#x27;s Whisper large-v3, pruned to 4 decoder layers: much faster, nearly the same accuracy, ~100 languages and translation to English.</p>
+  
+  <dl class="metrics"><div><dt>Open ASR Leaderboard avg WER (English)</dt><dd>8.75<small>lower is better; leaderboard v1.16.2, 2026-11-20</small></dd></div><div><dt>Open ASR Leaderboard avg error rate (multilingual, 8 languages)</dt><dd>9.94<small>lower is better</small></dd></div><div><dt>RTFx (English)</dt><dd>808.92<small>speed, higher is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/spaces/hf-audio/open_asr_leaderboard">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/openai/whisper-large-v3-turbo">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Whisper-large-v3-turbo" aria-label="Copy the download command for Whisper-large-v3-turbo">tai download Whisper-large-v3-turbo</button></footer>
+</article></div>
+</section>
+<section id="ocr-and-layout">
+  <div class="sechead"><h2>OCR and layout</h2><p>Text and structure out of scanned pages and photos.</p><span class="type">Image-to-Text · 6</span></div>
+  <div class="grid"><article class="card" id="glm-ocr" data-q="glm-ocr zai-org/glm-ocr zhipu&#x27;s ocr model for complex documents (tables, formulas, layouts), built on the glm-v vision encoder.">
+  <header><h3>GLM-OCR</h3><span class="lic">mit</span></header>
+  <code class="id">zai-org/GLM-OCR</code>
+  <p>Zhipu&#x27;s OCR model for complex documents (tables, formulas, layouts), built on the GLM-V vision encoder.</p>
+  
+  <dl class="metrics"><div><dt>OmniDocBench v1.5 overall</dt><dd>94.62<small>higher is better</small></dd></div><div><dt>OCRBench (Text)</dt><dd>94.0<small>higher is better</small></dd></div><div><dt>UniMERNet (formulas)</dt><dd>96.5<small>higher is better</small></dd></div><div><dt>PubTabNet (tables)</dt><dd>85.2<small>higher is better</small></dd></div></dl><a class="msrc" href="https://arxiv.org/abs/2603.10910">Benchmarks: arxiv.org</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/zai-org/GLM-OCR">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download GLM-OCR" aria-label="Copy the download command for GLM-OCR">tai download GLM-OCR</button></footer>
+</article><article class="card" id="minicpm-ocr-1-0" data-q="minicpm-ocr-1.0 openbmb/minicpm-ocr-1.0 openbmb&#x27;s document parser: turns pages into structured text and markdown; small enough to run on phones.">
+  <header><h3>MiniCPM-OCR-1.0</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">openbmb/MiniCPM-OCR-1.0</code>
+  <p>OpenBMB&#x27;s document parser: turns pages into structured text and Markdown; small enough to run on phones.</p>
+  
+  <dl class="metrics"><div><dt>Real5-OmniDocBench</dt><dd>93.68<small>higher is better</small></dd></div><div><dt>OCRBench v2</dt><dd>54.7<small>higher is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/openbmb/MiniCPM-OCR-1.0">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/openbmb/MiniCPM-OCR-1.0">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download MiniCPM-OCR-1.0" aria-label="Copy the download command for MiniCPM-OCR-1.0">tai download MiniCPM-OCR-1.0</button></footer>
+</article><article class="card" id="pp-ocrv6-medium" data-q="pp-ocrv6-medium paddlepaddle/pp-ocrv6-medium paddleocr&#x27;s v6 text recognizer, medium tier: a few dozen million parameters that rival billion-parameter vision models on ocr.">
+  <header><h3>PP-OCRv6-Medium</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">PaddlePaddle/PP-OCRv6-Medium</code>
+  <p>PaddleOCR&#x27;s v6 text recognizer, medium tier: a few dozen million parameters that rival billion-parameter vision models on OCR.</p>
+  
+  <dl class="metrics"><div><dt>Recognition accuracy, weighted avg</dt><dd>83.2<small>%, Paddle&#x27;s multi-scenario benchmark, higher is better</small></dd></div><div><dt>Printed Chinese accuracy</dt><dd>91.5<small>%, higher is better</small></dd></div><div><dt>Printed English accuracy</dt><dd>94.1<small>%, higher is better</small></dd></div><div><dt>Handwritten English accuracy</dt><dd>67.8<small>%, higher is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/PaddlePaddle/PP-OCRv6_medium_rec">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/PaddlePaddle/PP-OCRv6_medium_rec">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download PP-OCRv6-Medium" aria-label="Copy the download command for PP-OCRv6-Medium">tai download PP-OCRv6-Medium</button></footer>
+</article><article class="card" id="pp-ocrv6-small" data-q="pp-ocrv6-small paddlepaddle/pp-ocrv6-small paddleocr&#x27;s v6 text recognizer, small tier: faster and lighter than medium.">
+  <header><h3>PP-OCRv6-Small</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">PaddlePaddle/PP-OCRv6-Small</code>
+  <p>PaddleOCR&#x27;s v6 text recognizer, small tier: faster and lighter than Medium.</p>
+  
+  <dl class="metrics"><div><dt>Recognition accuracy, weighted avg</dt><dd>81.3<small>%, Paddle&#x27;s multi-scenario benchmark, higher is better</small></dd></div><div><dt>Printed Chinese accuracy</dt><dd>90.5<small>%, higher is better</small></dd></div><div><dt>Printed English accuracy</dt><dd>93.3<small>%, higher is better</small></dd></div><div><dt>Handwritten English accuracy</dt><dd>61.1<small>%, higher is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/PaddlePaddle/PP-OCRv6_small_rec">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/PaddlePaddle/PP-OCRv6_small_rec">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download PP-OCRv6-Small" aria-label="Copy the download command for PP-OCRv6-Small">tai download PP-OCRv6-Small</button></footer>
+</article><article class="card" id="pp-doc-layout" data-q="pp-doc-layout paddlepaddle/pp-doclayoutv3 paddlepaddle&#x27;s layout detector (pp-doclayoutv3): finds titles, paragraphs, tables and figures on a page before ocr.">
+  <header><h3>Pp-Doc-Layout</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">PaddlePaddle/PP-DocLayoutV3</code>
+  <p>PaddlePaddle&#x27;s layout detector (PP-DocLayoutV3): finds titles, paragraphs, tables and figures on a page before OCR.</p>
+  
+  
+  
+  <footer><div class="links"><a href="https://huggingface.co/PaddlePaddle/PP-DocLayoutV3">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Pp-Doc-Layout" aria-label="Copy the download command for Pp-Doc-Layout">tai download Pp-Doc-Layout</button></footer>
+</article><article class="card" id="unlimited-ocr" data-q="unlimited-ocr baidu/unlimited-ocr baidu&#x27;s ocr model for long, many-page documents in one pass.">
+  <header><h3>Unlimited-Ocr</h3><span class="lic">mit</span></header>
+  <code class="id">baidu/Unlimited-Ocr</code>
+  <p>Baidu&#x27;s OCR model for long, many-page documents in one pass.</p>
+  
+  <dl class="metrics"><div><dt>OmniDocBench v1.5 overall</dt><dd>93.23<small>higher is better</small></dd></div><div><dt>OmniDocBench v1.6 overall</dt><dd>93.92<small>higher is better</small></dd></div><div><dt>OmniDocBench v1.5 text edit distance</dt><dd>0.038<small>lower is better</small></dd></div></dl><a class="msrc" href="https://arxiv.org/abs/2606.23050">Benchmarks: arxiv.org</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/baidu/Unlimited-OCR">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Unlimited-Ocr" aria-label="Copy the download command for Unlimited-Ocr">tai download Unlimited-Ocr</button></footer>
+</article></div>
+</section>
+<section id="embeddings">
+  <div class="sechead"><h2>Embeddings</h2><p>Vectors for search and RAG. Use with <code>tai embed</code>.</p><span class="type">Text Embedding · 7</span></div>
+  <div class="grid"><article class="card" id="nemotron-3-embed-1b" data-q="nemotron-3-embed-1b nvidia/nemotron-3-embed-1b-bf16 nvidia&#x27;s multilingual 1b text embedder for search and rag.">
+  <header><h3>Nemotron-3-Embed-1B</h3><span class="lic">other</span></header>
+  <code class="id">nvidia/Nemotron-3-Embed-1B-BF16</code>
+  <p>NVIDIA&#x27;s multilingual 1B text embedder for search and RAG.</p>
+  
+  <dl class="metrics"><div><dt>RTEB (NDCG@10)</dt><dd>72.38</dd></div><div><dt>MMTEB Retrieval (NDCG@10)</dt><dd>71.04</dd></div><div><dt>ViDoRe-V3 text (NDCG@10)</dt><dd>57.74</dd></div></dl><a class="msrc" href="https://huggingface.co/nvidia/Nemotron-3-Embed-1B-BF16">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/nvidia/Nemotron-3-Embed-1B-BF16">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Nemotron-3-Embed-1B" aria-label="Copy the download command for Nemotron-3-Embed-1B">tai download Nemotron-3-Embed-1B</button></footer>
+</article><article class="card" id="nemotron-3-embed-8b" data-q="nemotron-3-embed-8b nvidia/nemotron-3-embed-8b-bf16 nvidia&#x27;s multilingual 8b text embedder: more accurate retrieval than the 1b.">
+  <header><h3>Nemotron-3-Embed-8B</h3><span class="lic">other</span></header>
+  <code class="id">nvidia/Nemotron-3-Embed-8b-Bf16</code>
+  <p>NVIDIA&#x27;s multilingual 8B text embedder: more accurate retrieval than the 1B.</p>
+  
+  <dl class="metrics"><div><dt>RTEB (NDCG@10)</dt><dd>78.46</dd></div><div><dt>MMTEB Retrieval (NDCG@10)</dt><dd>75.45</dd></div><div><dt>ViDoRe-V3 text (NDCG@10)</dt><dd>60.60</dd></div></dl><a class="msrc" href="https://huggingface.co/nvidia/Nemotron-3-Embed-8B-BF16">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/nvidia/Nemotron-3-Embed-8B-BF16">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Nemotron-3-Embed-8B" aria-label="Copy the download command for Nemotron-3-Embed-8B">tai download Nemotron-3-Embed-8B</button></footer>
+</article><article class="card" id="qwen3-embedding-4b" data-q="qwen3-embedding-4b qwen/qwen3-embedding-4b qwen3 text embedder (4b): multilingual, long texts, strong on retrieval benchmarks.">
+  <header><h3>Qwen3-Embedding-4B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-Embedding-4b</code>
+  <p>Qwen3 text embedder (4B): multilingual, long texts, strong on retrieval benchmarks.</p>
+  
+  <dl class="metrics"><div><dt>MTEB Multilingual (mean)</dt><dd>69.45</dd></div><div><dt>MTEB English v2 (mean)</dt><dd>74.60</dd></div><div><dt>C-MTEB (mean)</dt><dd>72.27</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-Embedding-4B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-Embedding-4B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-Embedding-4B" aria-label="Copy the download command for Qwen3-Embedding-4B">tai download Qwen3-Embedding-4B</button></footer>
+</article><article class="card" id="qwen3-embedding-8b" data-q="qwen3-embedding-8b qwen/qwen3-embedding-8b qwen3 text embedder (8b), the largest of the series.">
+  <header><h3>Qwen3-Embedding-8B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-Embedding-8b</code>
+  <p>Qwen3 text embedder (8B), the largest of the series.</p>
+  
+  <dl class="metrics"><div><dt>MTEB Multilingual (mean)</dt><dd>70.58</dd></div><div><dt>MTEB English v2 (mean)</dt><dd>75.22</dd></div><div><dt>C-MTEB (mean)</dt><dd>73.84</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-Embedding-8B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-Embedding-8B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-Embedding-8B" aria-label="Copy the download command for Qwen3-Embedding-8B">tai download Qwen3-Embedding-8B</button></footer>
+</article><article class="card" id="qwen3-vl-embedding-2b" data-q="qwen3-vl-embedding-2b qwen/qwen3-vl-embedding-2b multimodal embedder on qwen3-vl: puts text, images, screenshots and video in one search space.">
+  <header><h3>Qwen3-VL-Embedding-2B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-Vl-Embedding-2b</code>
+  <p>Multimodal embedder on Qwen3-VL: puts text, images, screenshots and video in one search space.</p>
+  
+  <dl class="metrics"><div><dt>MMEB-V2 (overall)</dt><dd>73.2</dd></div><div><dt>MMTEB (mean)</dt><dd>63.87</dd></div><div><dt>MMTEB Retrieval</dt><dd>67.12</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-VL-Embedding-2B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-VL-Embedding-2B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-VL-Embedding-2B" aria-label="Copy the download command for Qwen3-VL-Embedding-2B">tai download Qwen3-VL-Embedding-2B</button></footer>
+</article><article class="card" id="qwen3-vl-embedding-8b" data-q="qwen3-vl-embedding-8b qwen/qwen3-vl-embedding-8b the 8b multimodal embedder: text, images and video in one search space.">
+  <header><h3>Qwen3-VL-Embedding-8B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-Vl-Embedding-8b</code>
+  <p>The 8B multimodal embedder: text, images and video in one search space.</p>
+  
+  <dl class="metrics"><div><dt>MMEB-V2 (overall)</dt><dd>77.9</dd></div><div><dt>MMTEB (mean)</dt><dd>67.88</dd></div><div><dt>MMTEB Retrieval</dt><dd>69.41</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-VL-Embedding-8B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-VL-Embedding-8B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-VL-Embedding-8B" aria-label="Copy the download command for Qwen3-VL-Embedding-8B">tai download Qwen3-VL-Embedding-8B</button></footer>
+</article><article class="card" id="r3-embedding-0-6b" data-q="r3-embedding-0.6b tencent/r3-embedding-0.6b tencent&#x27;s small embedder for picking the right agent skill for a request (recall stage; pairs with r3-reranker).">
+  <header><h3>R3-Embedding-0.6B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">tencent/R3-embedding-0.6b</code>
+  <p>Tencent&#x27;s small embedder for picking the right agent skill for a request (recall stage; pairs with R3-reranker).</p>
+  
+  <dl class="metrics"><div><dt>R3-Skill NDCG@10</dt><dd>81.60</dd></div><div><dt>R3-Skill Hit@1</dt><dd>72.07</dd></div></dl><a class="msrc" href="https://arxiv.org/html/2606.03565">Benchmarks: arxiv.org</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/tencent/R3-embedding-0.6b">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download R3-Embedding-0.6B" aria-label="Copy the download command for R3-Embedding-0.6B">tai download R3-Embedding-0.6B</button></footer>
+</article></div>
+</section>
+<section id="reranking">
+  <div class="sechead"><h2>Reranking</h2><p>Re-order search results by relevance.</p><span class="type">Text Reranking · 6</span></div>
+  <div class="grid"><article class="card" id="qwen3-reranker-0-6b" data-q="qwen3-reranker-0.6b qwen/qwen3-reranker-0.6b qwen3 reranker (0.6b): re-orders search results by relevance to the question.">
+  <header><h3>Qwen3-Reranker-0.6B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-Reranker-0.6B</code>
+  <p>Qwen3 reranker (0.6B): re-orders search results by relevance to the question.</p>
+  
+  <dl class="metrics"><div><dt>MTEB-R</dt><dd>65.80</dd></div><div><dt>CMTEB-R</dt><dd>71.31</dd></div><div><dt>MMTEB-R</dt><dd>66.36</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-Reranker-0.6B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-Reranker-0.6B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-Reranker-0.6B" aria-label="Copy the download command for Qwen3-Reranker-0.6B">tai download Qwen3-Reranker-0.6B</button></footer>
+</article><article class="card" id="qwen3-reranker-4b" data-q="qwen3-reranker-4b qwen/qwen3-reranker-4b qwen3 reranker (4b).">
+  <header><h3>Qwen3-Reranker-4B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-Reranker-4b</code>
+  <p>Qwen3 reranker (4B).</p>
+  
+  <dl class="metrics"><div><dt>MTEB-R</dt><dd>69.76</dd></div><div><dt>CMTEB-R</dt><dd>75.94</dd></div><div><dt>MMTEB-R</dt><dd>72.74</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-Reranker-4B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-Reranker-4B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-Reranker-4B" aria-label="Copy the download command for Qwen3-Reranker-4B">tai download Qwen3-Reranker-4B</button></footer>
+</article><article class="card" id="qwen3-reranker-8b" data-q="qwen3-reranker-8b qwen/qwen3-reranker-8b qwen3 reranker (8b), the most accurate of the series.">
+  <header><h3>Qwen3-Reranker-8B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-Reranker-8b</code>
+  <p>Qwen3 reranker (8B), the most accurate of the series.</p>
+  
+  <dl class="metrics"><div><dt>MTEB-R</dt><dd>69.02</dd></div><div><dt>CMTEB-R</dt><dd>77.45</dd></div><div><dt>MMTEB-R</dt><dd>72.94</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-Reranker-8B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-Reranker-8B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-Reranker-8B" aria-label="Copy the download command for Qwen3-Reranker-8B">tai download Qwen3-Reranker-8B</button></footer>
+</article><article class="card" id="qwen3-vl-reranker-2b" data-q="qwen3-vl-reranker-2b qwen/qwen3-vl-reranker-2b multimodal reranker on qwen3-vl: ranks text, image and video results.">
+  <header><h3>Qwen3-VL-Reranker-2B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-Vl-Reranker-2b</code>
+  <p>Multimodal reranker on Qwen3-VL: ranks text, image and video results.</p>
+  
+  <dl class="metrics"><div><dt>MMEB-v2 Retrieval (avg)</dt><dd>75.1</dd></div><div><dt>MMTEB Retrieval</dt><dd>70.0</dd></div><div><dt>JinaVDR</dt><dd>80.9</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-VL-Reranker-2B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-VL-Reranker-2B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-VL-Reranker-2B" aria-label="Copy the download command for Qwen3-VL-Reranker-2B">tai download Qwen3-VL-Reranker-2B</button></footer>
+</article><article class="card" id="qwen3-vl-reranker-8b" data-q="qwen3-vl-reranker-8b qwen/qwen3-vl-reranker-8b multimodal reranker (8b).">
+  <header><h3>Qwen3-VL-Reranker-8B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-Vl-Reranker-8b</code>
+  <p>Multimodal reranker (8B).</p>
+  
+  <dl class="metrics"><div><dt>MMEB-v2 Retrieval (avg)</dt><dd>79.2</dd></div><div><dt>MMTEB Retrieval</dt><dd>74.9</dd></div><div><dt>JinaVDR</dt><dd>83.6</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-VL-Reranker-8B" aria-label="Copy the download command for Qwen3-VL-Reranker-8B">tai download Qwen3-VL-Reranker-8B</button></footer>
+</article><article class="card" id="r3-reranker-0-6b" data-q="r3-reranker-0.6b tencent/r3-rerank-0.6b tencent&#x27;s reranker for agent-skill routing (rerank stage; pairs with r3-embedding).">
+  <header><h3>R3-reranker-0.6b</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">tencent/R3-rerank-0.6b</code>
+  <p>Tencent&#x27;s reranker for agent-skill routing (rerank stage; pairs with R3-Embedding).</p>
+  
+  <dl class="metrics"><div><dt>R3-Skill NDCG@10</dt><dd>81.97</dd></div><div><dt>R3-Skill Hit@1</dt><dd>75.39</dd></div><div><dt>SkillRet NDCG@10</dt><dd>83.87</dd></div></dl><a class="msrc" href="https://arxiv.org/html/2606.03565">Benchmarks: arxiv.org</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/tencent/R3-rerank-0.6b">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download R3-reranker-0.6b" aria-label="Copy the download command for R3-reranker-0.6b">tai download R3-reranker-0.6b</button></footer>
+</article></div>
+</section>
+<section id="classification">
+  <div class="sechead"><h2>Classification</h2><p>Yes/no, choice and score answers about a text, as probabilities.</p><span class="type">Text Classification · 8</span></div>
+  <div class="grid"><article class="card" id="knowline-35b-a3b-gen1-5" data-q="knowline-35b-a3b-gen1.5 pelaai/knowline-35b-a3b-gen1.5 pelaai&#x27;s 35b mixture-of-experts yes/no and multiple-choice classifier: answers questions about a text as probabilities, without writing text.">
+  <header><h3>KnowLine-35B-A3B-Gen1.5</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">PelaAI/KnowLine-35B-A3B-Gen1.5</code>
+  <p>PelaAI&#x27;s 35B mixture-of-experts yes/no and multiple-choice classifier: answers questions about a text as probabilities, without writing text.</p>
+  
+  <dl class="metrics"><div><dt>Jev Decision Index 0.3 public</dt><dd>70.72<small>self-run with the official kit, higher is better</small></dd></div><div><dt>C-Eval (4 categories, macro)</dt><dd>88.1<small>higher is better</small></dd></div><div><dt>JevBench / JevBench-hard</dt><dd>87.0 / 73.0<small>higher is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/PelaAI/KnowLine-35B-A3B-Gen1.5">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/PelaAI/KnowLine-35B-A3B-Gen1.5">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download KnowLine-35B-A3B-Gen1.5" aria-label="Copy the download command for KnowLine-35B-A3B-Gen1.5">tai download KnowLine-35B-A3B-Gen1.5</button></footer>
+</article><article class="card" id="knowline-4b-gen5-5" data-q="knowline-4b-gen5.5 pelaai/knowline-4b-gen5.5 pelaai&#x27;s 4b classifier, the small sibling of knowline-35b.">
+  <header><h3>KnowLine-4B-Gen5.5</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">PelaAI/KnowLine-4B-Gen5.5</code>
+  <p>PelaAI&#x27;s 4B classifier, the small sibling of KnowLine-35B.</p>
+  
+  <dl class="metrics"><div><dt>Jev Decision Index 0.3 public</dt><dd>66.75<small>self-run with the official kit, higher is better</small></dd></div><div><dt>C-Eval (4 categories, macro)</dt><dd>80.5<small>higher is better</small></dd></div><div><dt>JevBench / JevBench-hard</dt><dd>85.3 / 70.3<small>higher is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/PelaAI/KnowLine-4B-Gen5.5">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/PelaAI/KnowLine-4B-Gen5.5">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download KnowLine-4B-Gen5.5" aria-label="Copy the download command for KnowLine-4B-Gen5.5">tai download KnowLine-4B-Gen5.5</button></footer>
+</article><article class="card" id="d3" data-q="d3 vllm-sr/d3 vllm-sr&#x27;s largest d3 decision model (27b class): tops the jev decision index text board.">
+  <header><h3>d3</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">vllm-sr/d3</code>
+  <p>vllm-sr&#x27;s largest d3 decision model (27B class): tops the Jev Decision Index text board.</p>
+  
+  <dl class="metrics"><div><dt>Jev Decision Index 0.3.2 (text)</dt><dd>66.3<small>higher is better</small></dd></div><div><dt>Jev Decision Index vision board 0.3.2</dt><dd>71.3<small>higher is better</small></dd></div><div><dt>Perception Test (video QA, validation)</dt><dd>77.4<small>higher is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/vllm-sr/d3">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/vllm-sr/d3">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download d3" aria-label="Copy the download command for d3">tai download d3</button></footer>
+</article><article class="card" id="d3-edge" data-q="d3-edge vllm-sr/d3-edge smallest d3 decision model (0.6b class), for the lowest latency.">
+  <header><h3>d3-edge</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">vllm-sr/d3-edge</code>
+  <p>Smallest d3 decision model (0.6B class), for the lowest latency.</p>
+  
+  <dl class="metrics"><div><dt>Jev Decision Index 0.3.2 (text)</dt><dd>20.2<small>higher is better</small></dd></div><div><dt>Jev Decision Index vision board 0.3.2</dt><dd>31.7<small>higher is better</small></dd></div><div><dt>Perception Test (video QA, validation)</dt><dd>46.6<small>higher is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/vllm-sr/d3-edge">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/vllm-sr/d3-edge">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download d3-edge" aria-label="Copy the download command for d3-edge">tai download d3-edge</button></footer>
+</article><article class="card" id="d3-flash" data-q="d3-flash vllm-sr/d3-flash d3 decision model in the 9b class: close to d3&#x27;s accuracy, much faster.">
+  <header><h3>d3-flash</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">vllm-sr/d3-flash</code>
+  <p>d3 decision model in the 9B class: close to d3&#x27;s accuracy, much faster.</p>
+  
+  <dl class="metrics"><div><dt>Jev Decision Index 0.3.2 (text)</dt><dd>55.8<small>higher is better</small></dd></div><div><dt>Jev Decision Index vision board 0.3.2</dt><dd>66.9<small>higher is better</small></dd></div><div><dt>Perception Test (video QA, validation)</dt><dd>73.3<small>higher is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/vllm-sr/d3-flash">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/vllm-sr/d3-flash">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download d3-flash" aria-label="Copy the download command for d3-flash">tai download d3-flash</button></footer>
+</article><article class="card" id="d3-lite" data-q="d3-lite vllm-sr/d3-lite d3 decision model in the 0.8b class.">
+  <header><h3>d3-lite</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">vllm-sr/d3-lite</code>
+  <p>d3 decision model in the 0.8B class.</p>
+  
+  <dl class="metrics"><div><dt>Jev Decision Index 0.3.2 (text)</dt><dd>32.3<small>higher is better</small></dd></div><div><dt>Jev Decision Index vision board 0.3.2</dt><dd>42.1<small>higher is better</small></dd></div><div><dt>Perception Test (video QA, validation)</dt><dd>59.3<small>higher is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/vllm-sr/d3-lite">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/vllm-sr/d3-lite">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download d3-lite" aria-label="Copy the download command for d3-lite">tai download d3-lite</button></footer>
+</article><article class="card" id="d3-mini" data-q="d3-mini vllm-sr/d3-mini d3 decision model in the 4b class.">
+  <header><h3>d3-mini</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">vllm-sr/d3-mini</code>
+  <p>d3 decision model in the 4B class.</p>
+  
+  <dl class="metrics"><div><dt>Jev Decision Index 0.3.2 (text)</dt><dd>52.6<small>higher is better</small></dd></div><div><dt>Jev Decision Index vision board 0.3.2</dt><dd>63.2<small>higher is better</small></dd></div><div><dt>Perception Test (video QA, validation)</dt><dd>70.3<small>higher is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/vllm-sr/d3-mini">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/vllm-sr/d3-mini">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download d3-mini" aria-label="Copy the download command for d3-mini">tai download d3-mini</button></footer>
+</article><article class="card" id="d3-nano" data-q="d3-nano vllm-sr/d3-nano d3 decision model in the 2b class.">
+  <header><h3>d3-nano</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">vllm-sr/d3-nano</code>
+  <p>d3 decision model in the 2B class.</p>
+  
+  <dl class="metrics"><div><dt>Jev Decision Index 0.3.2 (text)</dt><dd>38.9<small>higher is better</small></dd></div><div><dt>Jev Decision Index vision board 0.3.2</dt><dd>54.7<small>higher is better</small></dd></div><div><dt>Perception Test (video QA, validation)</dt><dd>63.5<small>higher is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/vllm-sr/d3-nano">Benchmarks: huggingface.co</a>
+  
+  <footer><div class="links"><a href="https://huggingface.co/vllm-sr/d3-nano">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download d3-nano" aria-label="Copy the download command for d3-nano">tai download d3-nano</button></footer>
+</article></div>
+</section>
+<p class="empty" id="none" hidden>No model matches that filter.</p>
+<p class="foot">Store list from <code>tai download</code>, 2026-11-21. “Turbo” entries are Tiiny's faster builds of the model linked as the original. Samples are the model makers' own, from their cards, shortened. Source and update notes: <a href="https://github.com/epatel/tiiny-models">github.com/epatel/tiiny-models</a>.</p>
+</main>
+<script>
+const q = document.getElementById("q"), none = document.getElementById("none");
+q.addEventListener("input", () => {
+  const t = q.value.trim().toLowerCase(); let shown = 0;
+  document.querySelectorAll("section").forEach(s => {
+    let n = 0;
+    s.querySelectorAll(".card").forEach(c => { const ok = !t || c.dataset.q.includes(t); c.hidden = !ok; n += ok; });
+    s.hidden = n === 0; shown += n;
+  });
+  none.hidden = shown > 0;
+});
+document.addEventListener("click", e => {
+  const b = e.target.closest(".copy"); if (!b) return;
+  const done = () => { b.classList.add("done"); setTimeout(() => b.classList.remove("done"), 1400); };
+  const pick = () => { const r = document.createRange(); r.selectNodeContents(b); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+  try { navigator.clipboard.writeText(b.dataset.cmd).then(done, pick); } catch { pick(); }
+});
+document.addEventListener("play", e => document.querySelectorAll("audio").forEach(a => a !== e.target && a.pause()), true);
+</script>
+</body>
+</html>

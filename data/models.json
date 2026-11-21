@@ -1,0 +1,288 @@
+{
+ "Fun-ASR-MLT-Nano": {
+  "desc": "Tongyi Lab's 800M multilingual speech recognizer: 31 languages, trained on hundreds of thousands of hours of speech."
+ },
+ "Fun-ASR-Nano": {
+  "desc": "Tongyi Lab's end-to-end speech recognizer, trained on tens of millions of hours of real speech; strong on Chinese, its dialects and English."
+ },
+ "MOSS-Transcribe-Diarize": {
+  "desc": "0.9B model that transcribes long multi-speaker recordings (up to 90 minutes, 50+ languages) and labels who spoke when, with timestamps and sound events."
+ },
+ "Parakeet-TDT-0.6B-V3": {
+  "desc": "NVIDIA's fast 600M transcriber for 25 European languages; detects the language by itself."
+ },
+ "Whisper-large-v3-turbo": {
+  "desc": "OpenAI's Whisper large-v3, pruned to 4 decoder layers: much faster, nearly the same accuracy, ~100 languages and translation to English."
+ },
+ "BigBang-v1-Turbo": {
+  "desc": "Tiiny's Turbo build of BigBang-v1 (Endless Frontier), a model trained on verifiable frontier tasks in maths, science and code."
+ },
+ "Huihui-Ornith-1.5-35B-A3B-abliterated-Turbo": {
+  "desc": "Ornith-1.5 with its refusals removed (abliterated) by huihui-ai. Uncensored: it will answer what the original declines."
+ },
+ "Ornith-1.0-35B": {
+  "desc": "Ornith-1.0, a self-improving open model family for agentic coding, post-trained on Gemma 4 and Qwen 3.5."
+ },
+ "Ornith-1.5-35B-A3B-Turbo": {
+  "desc": "Tiiny's Turbo build of Ornith-1.5, a 35B mixture-of-experts (3B active) agentic coding model trained with end-to-end self-improvement."
+ },
+ "Qwen-Image-2.1-PE-I2I": {
+  "desc": "Prompt enhancer for Qwen-Image-2.1 editing: rewrites a short edit instruction (with the image in view) into the detailed prompt the image model works best with."
+ },
+ "Qwen3.5-35B-A3B": {
+  "desc": "Qwen 3.5 mixture-of-experts (35B, 3B active) with built-in vision: chat, reasoning, tools and image understanding."
+ },
+ "Qwen3.5-9B": {
+  "desc": "Qwen 3.5 dense 9B with vision: a small all-rounder for chat, tools and images."
+ },
+ "Qwen3.5-9B-Turbo": {
+  "desc": "Tiiny's Turbo build of Qwen3.5-9B: the same model, faster on the device."
+ },
+ "Qwen3.6-27B": {
+  "desc": "Qwen 3.6 dense 27B with vision, tuned for agentic coding, frontend work and repository-level reasoning."
+ },
+ "Qwen3.6-27B-Turbo": {
+  "desc": "Tiiny's Turbo build of Qwen3.6-27B: the same model, faster on the device."
+ },
+ "Sage-A1.5-Turbo": {
+  "desc": "Tiiny's Turbo build of InternScience's Sage-A1.5, an agent model that delegates to subagents and checks its own progress on long tasks."
+ },
+ "gemma-4-26B-A4B-it": {
+  "desc": "Google DeepMind's Gemma 4 mixture-of-experts (26B, 4B active), instruction-tuned; text and image input, 256K context."
+ },
+ "gemma-4-31B-it": {
+  "desc": "Google DeepMind's dense Gemma 4 31B, instruction-tuned; text and image input, 256K context."
+ },
+ "Hunyuan3D-2.1": {
+  "desc": "Tencent's image-to-3D model: turns one picture into a textured 3D mesh with physically based materials."
+ },
+ "GLM-OCR": {
+  "desc": "Zhipu's OCR model for complex documents (tables, formulas, layouts), built on the GLM-V vision encoder."
+ },
+ "MiniCPM-OCR-1.0": {
+  "desc": "OpenBMB's document parser: turns pages into structured text and Markdown; small enough to run on phones."
+ },
+ "PP-OCRv6-Medium": {
+  "desc": "PaddleOCR's v6 text recognizer, medium tier: a few dozen million parameters that rival billion-parameter vision models on OCR."
+ },
+ "PP-OCRv6-Small": {
+  "desc": "PaddleOCR's v6 text recognizer, small tier: faster and lighter than Medium."
+ },
+ "Pp-Doc-Layout": {
+  "desc": "PaddlePaddle's layout detector (PP-DocLayoutV3): finds titles, paragraphs, tables and figures on a page before OCR."
+ },
+ "Unlimited-Ocr": {
+  "desc": "Baidu's OCR model for long, many-page documents in one pass."
+ },
+ "AceStep-XL-Base": {
+  "desc": "ACE-Step 1.5 XL (4B) base: full-quality text-to-music with lyrics, plus cover, repaint, extract and continue. Trained on licensed data.",
+  "link": "https://ace-step.github.io/ace-step-v1.5.github.io/"
+ },
+ "AceStep-XL-Turbo": {
+  "desc": "ACE-Step 1.5 XL distilled to 8 steps: the 4B model's quality, much faster.",
+  "link": "https://ace-step.github.io/ace-step-v1.5.github.io/"
+ },
+ "Foundation-1": {
+  "desc": "Text-to-sample model for producers: tempo-synced loops, one-shots and playable instruments from structured tags (instrument, timbre, effects, key, BPM).",
+  "captions": [
+   "Example loop 1",
+   "Example loop 2"
+  ]
+ },
+ "SongGeneration-v2-large": {
+  "desc": "Tencent's song generator: full songs with vocals and accompaniment from lyrics and a style prompt.",
+  "note": "Tencent's official repositories are gone; linked to an MLX conversion. No samples found.",
+  "link": "https://huggingface.co/mlx-community/SongGeneration-v2-large"
+ },
+ "YuE2-3B": {
+  "desc": "M-A-P's YuE 2: full songs with vocals from lyrics, plus covers and edits of melody and chords. Non-commercial licence.",
+  "captions": [
+   "“Tonight Awake”",
+   "Cyber metal"
+  ]
+ },
+ "KnowLine-35B-A3B-Gen1.5": {
+  "desc": "PelaAI's 35B mixture-of-experts yes/no and multiple-choice classifier: answers questions about a text as probabilities, without writing text."
+ },
+ "KnowLine-4B-Gen5.5": {
+  "desc": "PelaAI's 4B classifier, the small sibling of KnowLine-35B."
+ },
+ "d3": {
+  "desc": "vllm-sr's largest d3 decision model (27B class): tops the Jev Decision Index text board."
+ },
+ "d3-edge": {
+  "desc": "Smallest d3 decision model (0.6B class), for the lowest latency."
+ },
+ "d3-flash": {
+  "desc": "d3 decision model in the 9B class: close to d3's accuracy, much faster."
+ },
+ "d3-lite": {
+  "desc": "d3 decision model in the 0.8B class."
+ },
+ "d3-mini": {
+  "desc": "d3 decision model in the 4B class."
+ },
+ "d3-nano": {
+  "desc": "d3 decision model in the 2B class."
+ },
+ "Nemotron-3-Embed-1B": {
+  "desc": "NVIDIA's multilingual 1B text embedder for search and RAG."
+ },
+ "Nemotron-3-Embed-8B": {
+  "desc": "NVIDIA's multilingual 8B text embedder: more accurate retrieval than the 1B."
+ },
+ "Qwen3-Embedding-4B": {
+  "desc": "Qwen3 text embedder (4B): multilingual, long texts, strong on retrieval benchmarks."
+ },
+ "Qwen3-Embedding-8B": {
+  "desc": "Qwen3 text embedder (8B), the largest of the series."
+ },
+ "Qwen3-VL-Embedding-2B": {
+  "desc": "Multimodal embedder on Qwen3-VL: puts text, images, screenshots and video in one search space."
+ },
+ "Qwen3-VL-Embedding-8B": {
+  "desc": "The 8B multimodal embedder: text, images and video in one search space."
+ },
+ "R3-Embedding-0.6B": {
+  "desc": "Tencent's small embedder for picking the right agent skill for a request (recall stage; pairs with R3-reranker)."
+ },
+ "GLM-4.7-Flash": {
+  "desc": "Zhipu's 30B mixture-of-experts (3B active), the strongest of its class; good at agentic tasks and coding."
+ },
+ "Qwen-Image-2.1-PE-T2I": {
+  "desc": "Prompt enhancer for Qwen-Image-2.1: expands a short idea into the detailed prompt the image model works best with."
+ },
+ "Qwen3-30B-A3B-Instruct": {
+  "desc": "Qwen3 30B mixture-of-experts (3B active), 2507 update, no thinking: quick, capable everyday chat."
+ },
+ "Qwen3-30B-A3B-Thinking": {
+  "desc": "Qwen3 30B mixture-of-experts, 2507 update, always reasons first: better at maths, science and code."
+ },
+ "Qwen3-4B-Instruct-2507": {
+  "desc": "Qwen3 4B, 2507 update: a small, fast chat model."
+ },
+ "Qwen3-8B": {
+  "desc": "Qwen3 dense 8B with switchable thinking."
+ },
+ "Qwen3-Coder-30B": {
+  "desc": "Qwen3-Coder 30B mixture-of-experts (3B active): agentic coding with 256K context."
+ },
+ "Qwen3-Coder-30B-A3B-Instruct-Turbo": {
+  "desc": "Tiiny's Turbo build of Qwen3-Coder-30B: the same model, faster on the device."
+ },
+ "gpt-oss-20b": {
+  "desc": "OpenAI's open-weight 21B mixture-of-experts (3.6B active) reasoning model with adjustable reasoning effort."
+ },
+ "Qwen3-Reranker-0.6B": {
+  "desc": "Qwen3 reranker (0.6B): re-orders search results by relevance to the question."
+ },
+ "Qwen3-Reranker-4B": {
+  "desc": "Qwen3 reranker (4B)."
+ },
+ "Qwen3-Reranker-8B": {
+  "desc": "Qwen3 reranker (8B), the most accurate of the series."
+ },
+ "Qwen3-VL-Reranker-2B": {
+  "desc": "Multimodal reranker on Qwen3-VL: ranks text, image and video results."
+ },
+ "Qwen3-VL-Reranker-8B": {
+  "desc": "Multimodal reranker (8B)."
+ },
+ "R3-reranker-0.6b": {
+  "desc": "Tencent's reranker for agent-skill routing (rerank stage; pairs with R3-Embedding)."
+ },
+ "ERNIE-Image-Turbo": {
+  "desc": "Baidu's distilled ERNIE-Image text-to-image model: a single-stream diffusion transformer that is fast and good with text in images."
+ },
+ "FLUX.2-klein-4B": {
+  "desc": "Black Forest Labs' fastest FLUX: generation and editing in one compact 4B model, under a second on a GPU."
+ },
+ "FLUX.2-klein-4B-Background-Remove": {
+  "desc": "FLUX.2 klein with fal's LoRA that cuts the subject out of a photo onto a clean background.",
+  "captions": [
+   "Input",
+   "Output"
+  ]
+ },
+ "FLUX.2-klein-4B-Object-Remove": {
+  "desc": "FLUX.2 klein with fal's LoRA that erases a highlighted object and fills the gap naturally.",
+  "captions": [
+   "Input (object marked)",
+   "Output"
+  ]
+ },
+ "FLUX.2-klein-4B-Outpaint": {
+  "desc": "FLUX.2 klein with fal's LoRA that extends a picture into a pure-green (#00FF00) border you add around it.",
+  "captions": [
+   "Input (green border)",
+   "Output"
+  ]
+ },
+ "FLUX.2-klein-4B-Zoom": {
+  "desc": "FLUX.2 klein with fal's LoRA that zooms into a red-marked region and redraws it in detail.",
+  "captions": [
+   "Input (red mark)",
+   "Output"
+  ]
+ },
+ "Krea-2-Turbo": {
+  "desc": "Krea 2 made several times faster: images in about 2 seconds, keeping style references, moodboards and LoRAs.",
+  "note": "Gated on Hugging Face (request access there); description and sample from Krea's blog.",
+  "link": "https://www.krea.ai/blog/krea-2-turbo",
+  "captions": [
+   "“A rabbit riding a motocross bike”, from Krea's blog"
+  ]
+ },
+ "Qwen-Image-2.1": {
+  "desc": "Qwen's unified generation and editing model (7B image transformer): strong at text in images and instruction edits."
+ },
+ "Qwen-Image-2.1-viggle-turbo": {
+  "desc": "Viggle's distilled Qwen-Image-2.1: 6 steps instead of 40, about 5× faster, hard to tell apart on most prompts; edits with 1–3 reference images.",
+  "link": "https://huggingface.co/spaces/Viggle/Qwen-Image-2.1-viggle-turbo"
+ },
+ "SenseNova-U1.5-8B-MoT": {
+  "desc": "SenseTime's any-to-any model: understands and generates images, with stable multi-turn editing."
+ },
+ "Z-Image-Turbo-CharacterDesignSheet": {
+  "desc": "Z-Image-Turbo with a LoRA for character design sheets (front, side and back views with a colour palette).",
+  "note": "No Hugging Face page found; described from its name."
+ },
+ "Z-Image-Turbo-Children-Drawing": {
+  "desc": "Z-Image-Turbo with ostris's LoRA that turns any prompt into a child's crayon drawing."
+ },
+ "Z-Image-Turbo-Creating-Realistic": {
+  "desc": "Z-Image-Turbo with a LoRA tuned for realistic, photographic images.",
+  "note": "Its model card is empty; described from its name."
+ },
+ "Fun-CosyVoice3-0.5B-2512": {
+  "desc": "Tongyi Lab's CosyVoice 3: 9 languages and 18+ Chinese dialects, zero-shot voice cloning across languages.",
+  "link": "https://funaudiollm.github.io/cosyvoice3/"
+ },
+ "MOSS-TTS-Local-Transformer-v1.5": {
+  "desc": "OpenMOSS's TTS with native 48 kHz stereo output and voice cloning.",
+  "link": "https://github.com/OpenMOSS/MOSS-TTS"
+ },
+ "MOSS-TTS-Nano-100M": {
+  "desc": "OpenMOSS's tiny 0.1B multilingual TTS for realtime speech; light enough for a CPU.",
+  "link": "https://openmoss.github.io/MOSS-TTS-Nano-Demo/"
+ },
+ "Qwen3-CustomVoice-1.7B": {
+  "desc": "Qwen3-TTS with preset voices you steer by instruction (tone, speed, emotion); 10 languages.",
+  "link": "https://qwen.ai/blog?id=qwen3tts-0115"
+ },
+ "Qwen3-VoiceDesign-1.7B": {
+  "desc": "Qwen3-TTS that creates a new voice from a written description, e.g. \"a calm older man with a slight rasp\".",
+  "link": "https://qwen.ai/blog?id=qwen3tts-0115"
+ },
+ "VibeVoice-Realtime-0.5B": {
+  "desc": "Microsoft's streaming TTS: starts speaking in ~300 ms while text is still arriving, so a chat model can talk as it writes.",
+  "link": "https://microsoft.github.io/VibeVoice"
+ },
+ "supertonic-3": {
+  "desc": "Supertone's fast on-device TTS: 31 languages, expressive, runs in real time on a CPU.",
+  "captions": [
+   "Voice “Nora”",
+   "Voice “Luna”"
+  ]
+ }
+}

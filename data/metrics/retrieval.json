@@ -1,0 +1,224 @@
+{
+  "Nemotron-3-Embed-1B": {
+    "metrics": [
+      {
+        "label": "RTEB (NDCG@10)",
+        "value": "72.38"
+      },
+      {
+        "label": "MMTEB Retrieval (NDCG@10)",
+        "value": "71.04"
+      },
+      {
+        "label": "ViDoRe-V3 text (NDCG@10)",
+        "value": "57.74"
+      }
+    ],
+    "source": "https://huggingface.co/nvidia/Nemotron-3-Embed-1B-BF16",
+    "note": "Evaluated at sequence length 4096"
+  },
+  "Nemotron-3-Embed-8B": {
+    "metrics": [
+      {
+        "label": "RTEB (NDCG@10)",
+        "value": "78.46"
+      },
+      {
+        "label": "MMTEB Retrieval (NDCG@10)",
+        "value": "75.45"
+      },
+      {
+        "label": "ViDoRe-V3 text (NDCG@10)",
+        "value": "60.60"
+      }
+    ],
+    "source": "https://huggingface.co/nvidia/Nemotron-3-Embed-8B-BF16",
+    "note": "Evaluated at sequence length 4096"
+  },
+  "Qwen3-Embedding-4B": {
+    "metrics": [
+      {
+        "label": "MTEB Multilingual (mean)",
+        "value": "69.45"
+      },
+      {
+        "label": "MTEB English v2 (mean)",
+        "value": "74.60"
+      },
+      {
+        "label": "C-MTEB (mean)",
+        "value": "72.27"
+      }
+    ],
+    "source": "https://huggingface.co/Qwen/Qwen3-Embedding-4B"
+  },
+  "Qwen3-Embedding-8B": {
+    "metrics": [
+      {
+        "label": "MTEB Multilingual (mean)",
+        "value": "70.58"
+      },
+      {
+        "label": "MTEB English v2 (mean)",
+        "value": "75.22"
+      },
+      {
+        "label": "C-MTEB (mean)",
+        "value": "73.84"
+      }
+    ],
+    "source": "https://huggingface.co/Qwen/Qwen3-Embedding-8B"
+  },
+  "Qwen3-VL-Embedding-2B": {
+    "metrics": [
+      {
+        "label": "MMEB-V2 (overall)",
+        "value": "73.2"
+      },
+      {
+        "label": "MMTEB (mean)",
+        "value": "63.87"
+      },
+      {
+        "label": "MMTEB Retrieval",
+        "value": "67.12"
+      }
+    ],
+    "source": "https://huggingface.co/Qwen/Qwen3-VL-Embedding-2B"
+  },
+  "Qwen3-VL-Embedding-8B": {
+    "metrics": [
+      {
+        "label": "MMEB-V2 (overall)",
+        "value": "77.9"
+      },
+      {
+        "label": "MMTEB (mean)",
+        "value": "67.88"
+      },
+      {
+        "label": "MMTEB Retrieval",
+        "value": "69.41"
+      }
+    ],
+    "source": "https://huggingface.co/Qwen/Qwen3-VL-Embedding-8B",
+    "note": "The 2B card lists 77.8 for this model on MMEB-V2; this is the 8B card's own figure"
+  },
+  "R3-Embedding-0.6B": {
+    "metrics": [
+      {
+        "label": "R3-Skill NDCG@10",
+        "value": "81.60"
+      },
+      {
+        "label": "R3-Skill Hit@1",
+        "value": "72.07"
+      }
+    ],
+    "source": "https://arxiv.org/html/2606.03565",
+    "note": "Agent-skill retrieval benchmark from the paper (Table 4, embedding only); the HF card has no numbers"
+  },
+  "Qwen3-Reranker-0.6B": {
+    "metrics": [
+      {
+        "label": "MTEB-R",
+        "value": "65.80"
+      },
+      {
+        "label": "CMTEB-R",
+        "value": "71.31"
+      },
+      {
+        "label": "MMTEB-R",
+        "value": "66.36"
+      }
+    ],
+    "source": "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B"
+  },
+  "Qwen3-Reranker-4B": {
+    "metrics": [
+      {
+        "label": "MTEB-R",
+        "value": "69.76"
+      },
+      {
+        "label": "CMTEB-R",
+        "value": "75.94"
+      },
+      {
+        "label": "MMTEB-R",
+        "value": "72.74"
+      }
+    ],
+    "source": "https://huggingface.co/Qwen/Qwen3-Reranker-4B"
+  },
+  "Qwen3-Reranker-8B": {
+    "metrics": [
+      {
+        "label": "MTEB-R",
+        "value": "69.02"
+      },
+      {
+        "label": "CMTEB-R",
+        "value": "77.45"
+      },
+      {
+        "label": "MMTEB-R",
+        "value": "72.94"
+      }
+    ],
+    "source": "https://huggingface.co/Qwen/Qwen3-Reranker-8B"
+  },
+  "Qwen3-VL-Reranker-2B": {
+    "metrics": [
+      {
+        "label": "MMEB-v2 Retrieval (avg)",
+        "value": "75.1"
+      },
+      {
+        "label": "MMTEB Retrieval",
+        "value": "70.0"
+      },
+      {
+        "label": "JinaVDR",
+        "value": "80.9"
+      }
+    ],
+    "source": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-2B"
+  },
+  "Qwen3-VL-Reranker-8B": {
+    "metrics": [
+      {
+        "label": "MMEB-v2 Retrieval (avg)",
+        "value": "79.2"
+      },
+      {
+        "label": "MMTEB Retrieval",
+        "value": "74.9"
+      },
+      {
+        "label": "JinaVDR",
+        "value": "83.6"
+      }
+    ],
+    "source": "https://huggingface.co/Qwen/Qwen3-VL-Reranker-8B"
+  },
+  "R3-reranker-0.6b": {
+    "metrics": [
+      {
+        "label": "R3-Skill NDCG@10",
+        "value": "81.97"
+      },
+      {
+        "label": "R3-Skill Hit@1",
+        "value": "75.39"
+      },
+      {
+        "label": "SkillRet NDCG@10",
+        "value": "83.87"
+      }
+    ],
+    "source": "https://arxiv.org/html/2606.03565",
+    "note": "Full pipeline (R3-Embedding top-20 + R3-Reranker) on the paper's agent-skill benchmarks; the HF card has no numbers"
+  }
+}

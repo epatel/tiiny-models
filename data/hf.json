@@ -1,0 +1,1480 @@
+[
+ {
+  "name": "Fun-ASR-MLT-Nano",
+  "type": "ASR",
+  "id": "FunAudioLLM/Fun-ASR-MLT-Nano",
+  "hf_id": "FunAudioLLM/Fun-ASR-MLT-Nano-2512",
+  "via": "FunAudioLLM/Fun-ASR-MLT-Nano-2512",
+  "pipeline": "automatic-speech-recognition",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": [
+    "zh",
+    "en",
+    "ja",
+    "ko",
+    "vi",
+    "id",
+    "th",
+    "ms",
+    "tl",
+    "ar",
+    "hi",
+    "bg",
+    "hr",
+    "cs",
+    "da",
+    "nl",
+    "et",
+    "fi",
+    "el",
+    "hu",
+    "ga",
+    "lv",
+    "lt",
+    "mt",
+    "pl",
+    "pt",
+    "ro",
+    "sk",
+    "sl",
+    "sv",
+    "multilingual"
+   ]
+  }
+ },
+ {
+  "name": "Fun-ASR-Nano",
+  "type": "ASR",
+  "id": "FunAudioLLM/Fun-ASR-Nano",
+  "hf_id": "FunAudioLLM/Fun-ASR-Nano-2512",
+  "via": "FunAudioLLM/Fun-ASR-Nano-2512",
+  "pipeline": "automatic-speech-recognition",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": [
+    "zh",
+    "en",
+    "ja",
+    "ko",
+    "yue",
+    "vi",
+    "id",
+    "th",
+    "ms",
+    "tl",
+    "ar",
+    "hi",
+    "multilingual"
+   ]
+  }
+ },
+ {
+  "name": "MOSS-Transcribe-Diarize",
+  "type": "ASR",
+  "id": "OpenMOSS-Team/MOSS-Transcribe-Diarize",
+  "hf_id": "OpenMOSS-Team/MOSS-Transcribe-Diarize",
+  "via": null,
+  "pipeline": "audio-text-to-text",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": [
+    "en",
+    "zh"
+   ]
+  }
+ },
+ {
+  "name": "Parakeet-TDT-0.6B-V3",
+  "type": "ASR",
+  "id": "nvidia/Parakeet-TDT-0.6B-V3",
+  "hf_id": "nvidia/parakeet-tdt-0.6b-v3",
+  "via": null,
+  "pipeline": "automatic-speech-recognition",
+  "card": {
+   "license": "cc-by-4.0",
+   "base_model": null,
+   "language": [
+    "en",
+    "es",
+    "fr",
+    "de",
+    "bg",
+    "hr",
+    "cs",
+    "da",
+    "nl",
+    "et",
+    "fi",
+    "el",
+    "hu",
+    "it",
+    "lv",
+    "lt",
+    "mt",
+    "pl",
+    "pt",
+    "ro",
+    "sk",
+    "sl",
+    "sv",
+    "ru",
+    "uk"
+   ]
+  }
+ },
+ {
+  "name": "Whisper-large-v3-turbo",
+  "type": "ASR",
+  "id": "openai/Whisper-large-v3-turbo",
+  "hf_id": "openai/whisper-large-v3-turbo",
+  "via": null,
+  "pipeline": "automatic-speech-recognition",
+  "card": {
+   "license": "mit",
+   "base_model": [
+    "openai/whisper-large-v3"
+   ],
+   "language": [
+    "en",
+    "zh",
+    "de",
+    "es",
+    "ru",
+    "ko",
+    "fr",
+    "ja",
+    "pt",
+    "tr",
+    "pl",
+    "ca",
+    "nl",
+    "ar",
+    "sv",
+    "it",
+    "id",
+    "hi",
+    "fi",
+    "vi",
+    "he",
+    "uk",
+    "el",
+    "ms",
+    "cs",
+    "ro",
+    "da",
+    "hu",
+    "ta",
+    "no",
+    "th",
+    "ur",
+    "hr",
+    "bg",
+    "lt",
+    "la",
+    "mi",
+    "ml",
+    "cy",
+    "sk",
+    "te",
+    "fa",
+    "lv",
+    "bn",
+    "sr",
+    "az",
+    "sl",
+    "kn",
+    "et",
+    "mk",
+    "br",
+    "eu",
+    "is",
+    "hy",
+    "ne",
+    "mn",
+    "bs",
+    "kk",
+    "sq",
+    "sw",
+    "gl",
+    "mr",
+    "pa",
+    "si",
+    "km",
+    "sn",
+    "yo",
+    "so",
+    "af",
+    "oc",
+    "ka",
+    "be",
+    "tg",
+    "sd",
+    "gu",
+    "am",
+    "yi",
+    "lo",
+    "uz",
+    "fo",
+    "ht",
+    "ps",
+    "tk",
+    "nn",
+    "mt",
+    "sa",
+    "lb",
+    "my",
+    "bo",
+    "tl",
+    "mg",
+    "as",
+    "tt",
+    "haw",
+    "ln",
+    "ha",
+    "ba",
+    "jw",
+    "su"
+   ]
+  }
+ },
+ {
+  "name": "BigBang-v1-Turbo",
+  "type": "Image-Text-to-Text",
+  "id": "endless-frontier/BigBang-v1-Turbo",
+  "hf_id": "endless-frontier/BigBang-v1",
+  "via": "endless-frontier/BigBang-v1",
+  "pipeline": "image-text-to-text",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": "Qwen/Qwen3.6-35B-A3B",
+   "language": [
+    "en"
+   ]
+  }
+ },
+ {
+  "name": "Huihui-Ornith-1.5-35B-A3B-abliterated-Turbo",
+  "type": "Image-Text-to-Text",
+  "id": "huihui-ai/Huihui-Ornith-1.5-35B-A3B-abliterated-Turbo",
+  "hf_id": "huihui-ai/Huihui-Ornith-1.5-35B-A3B-abliterated",
+  "via": "huihui-ai/Huihui-Ornith-1.5-35B-A3B-abliterated",
+  "pipeline": "text-generation",
+  "card": {
+   "license": "mit",
+   "base_model": [
+    "ornith-ai/Ornith-1.5-35B-A3B"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "Ornith-1.0-35B",
+  "type": "Image-Text-to-Text",
+  "id": "deepreinforce-ai/Ornith-1.0-35B",
+  "hf_id": "ornith-ai/Ornith-1.0-35B",
+  "via": null,
+  "pipeline": "text-generation",
+  "card": {
+   "license": "mit",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Ornith-1.5-35B-A3B-Turbo",
+  "type": "Image-Text-to-Text",
+  "id": "ornith-ai/Ornith-1.5-35B-A3B-Turbo",
+  "hf_id": "ornith-ai/Ornith-1.5-35B-A3B",
+  "via": "ornith-ai/Ornith-1.5-35B-A3B",
+  "pipeline": "text-generation",
+  "card": {
+   "license": "mit",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen-Image-2.1-PE-I2I",
+  "type": "Image-Text-to-Text",
+  "id": "Qwen/Qwen-Image-2.1-PE-I2I",
+  "hf_id": "Qwen/Qwen-Image-2.1-PE-I2I",
+  "via": null,
+  "pipeline": null,
+  "card": {
+   "license": "other",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3.5-35B-A3B",
+  "type": "Image-Text-to-Text",
+  "id": "Qwen/Qwen3.5-35B-A3B",
+  "hf_id": "Qwen/Qwen3.5-35B-A3B",
+  "via": null,
+  "pipeline": "image-text-to-text",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3.5-35B-A3B-Base"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3.5-9B",
+  "type": "Image-Text-to-Text",
+  "id": "Qwen/Qwen3.5-9B",
+  "hf_id": "Qwen/Qwen3.5-9B",
+  "via": null,
+  "pipeline": "image-text-to-text",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3.5-9B-Base"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3.5-9B-Turbo",
+  "type": "Image-Text-to-Text",
+  "id": "Qwen/Qwen3.5-9B-Turbo",
+  "hf_id": "Qwen/Qwen3.5-9B",
+  "via": "Qwen/Qwen3.5-9B",
+  "pipeline": "image-text-to-text",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3.5-9B-Base"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3.6-27B",
+  "type": "Image-Text-to-Text",
+  "id": "Qwen/Qwen3.6-27B",
+  "hf_id": "Qwen/Qwen3.6-27B",
+  "via": null,
+  "pipeline": "image-text-to-text",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3.6-27B-Turbo",
+  "type": "Image-Text-to-Text",
+  "id": "Qwen/Qwen3.6-27B-Turbo",
+  "hf_id": "Qwen/Qwen3.6-27B",
+  "via": "Qwen/Qwen3.6-27B",
+  "pipeline": "image-text-to-text",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Sage-A1.5-Turbo",
+  "type": "Image-Text-to-Text",
+  "id": "InternScience/Sage-A1.5-Turbo",
+  "hf_id": "InternScience/Sage-A1.5",
+  "via": "InternScience/Sage-A1.5",
+  "pipeline": "text-generation",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "gemma-4-26B-A4B-it",
+  "type": "Image-Text-to-Text",
+  "id": "google/gemma-4-26B-A4B-it",
+  "hf_id": "google/gemma-4-26B-A4B-it",
+  "via": null,
+  "pipeline": "image-text-to-text",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "google/gemma-4-26B-A4B"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "gemma-4-31B-it",
+  "type": "Image-Text-to-Text",
+  "id": "google/gemma-4-31B-it",
+  "hf_id": "google/gemma-4-31B-it",
+  "via": null,
+  "pipeline": "image-text-to-text",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "google/gemma-4-31B"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "Hunyuan3D-2.1",
+  "type": "Image-to-3D",
+  "id": "Tencent/Hunyuan3d-2.1",
+  "hf_id": "tencent/Hunyuan3D-2.1",
+  "via": null,
+  "pipeline": "image-to-3d",
+  "card": {
+   "license": "other",
+   "base_model": null,
+   "language": [
+    "en",
+    "zh"
+   ]
+  }
+ },
+ {
+  "name": "GLM-OCR",
+  "type": "Image-to-Text",
+  "id": "zai-org/GLM-OCR",
+  "hf_id": "zai-org/GLM-OCR",
+  "via": null,
+  "pipeline": "image-to-text",
+  "card": {
+   "license": "mit",
+   "base_model": null,
+   "language": [
+    "zh",
+    "en",
+    "fr",
+    "es",
+    "ru",
+    "de",
+    "ja",
+    "ko"
+   ]
+  }
+ },
+ {
+  "name": "MiniCPM-OCR-1.0",
+  "type": "Image-to-Text",
+  "id": "openbmb/MiniCPM-OCR-1.0",
+  "hf_id": "openbmb/MiniCPM-OCR-1.0",
+  "via": null,
+  "pipeline": "image-text-to-text",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "openbmb/MiniCPM-V-4.6"
+   ],
+   "language": [
+    "en",
+    "zh"
+   ]
+  }
+ },
+ {
+  "name": "PP-OCRv6-Medium",
+  "type": "Image-to-Text",
+  "id": "PaddlePaddle/PP-OCRv6-Medium",
+  "hf_id": "PaddlePaddle/PP-OCRv6_medium_rec",
+  "via": "PaddlePaddle/PP-OCRv6_medium_rec",
+  "pipeline": "image-to-text",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": [
+    "en",
+    "zh"
+   ]
+  }
+ },
+ {
+  "name": "PP-OCRv6-Small",
+  "type": "Image-to-Text",
+  "id": "PaddlePaddle/PP-OCRv6-Small",
+  "hf_id": "PaddlePaddle/PP-OCRv6_small_rec",
+  "via": "PaddlePaddle/PP-OCRv6_small_rec",
+  "pipeline": "image-to-text",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": [
+    "en",
+    "zh"
+   ]
+  }
+ },
+ {
+  "name": "Pp-Doc-Layout",
+  "type": "Image-to-Text",
+  "id": "PaddlePaddle/PP-DocLayoutV3",
+  "hf_id": "PaddlePaddle/PP-DocLayoutV3",
+  "via": null,
+  "pipeline": "image-segmentation",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": [
+    "en",
+    "zh",
+    "multilingual"
+   ]
+  }
+ },
+ {
+  "name": "Unlimited-Ocr",
+  "type": "Image-to-Text",
+  "id": "baidu/Unlimited-Ocr",
+  "hf_id": "baidu/Unlimited-OCR",
+  "via": null,
+  "pipeline": "image-text-to-text",
+  "card": {
+   "license": "mit",
+   "base_model": null,
+   "language": [
+    "multilingual"
+   ]
+  }
+ },
+ {
+  "name": "AceStep-XL-Base",
+  "type": "Music Generation",
+  "id": "ACE-Step/AceStep-XL-Base",
+  "hf_id": "ACE-Step/acestep-v15-xl-base",
+  "via": "ACE-Step/acestep-v15-xl-base",
+  "pipeline": "text-to-audio",
+  "card": {
+   "license": "mit",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "AceStep-XL-Turbo",
+  "type": "Music Generation",
+  "id": "ACE-Step/AceStep-XL-Turbo",
+  "hf_id": "ACE-Step/acestep-v15-xl-turbo",
+  "via": "ACE-Step/acestep-v15-xl-turbo",
+  "pipeline": "text-to-audio",
+  "card": {
+   "license": "mit",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Foundation-1",
+  "type": "Music Generation",
+  "id": "RoyalCities/Foundation-1",
+  "hf_id": "RoyalCities/Foundation-1",
+  "via": null,
+  "pipeline": null,
+  "card": {
+   "license": "other",
+   "base_model": "stabilityai/stable-audio-open-1.0",
+   "language": "en"
+  }
+ },
+ {
+  "name": "SongGeneration-v2-large",
+  "type": "Music Generation",
+  "id": "tencent/SongGeneration-v2-large",
+  "hf_id": null,
+  "via": null,
+  "pipeline": null,
+  "card": null
+ },
+ {
+  "name": "YuE2-3B",
+  "type": "Music Generation",
+  "id": "m-a-p/YuE2-3B",
+  "hf_id": "m-a-p/YuE2-3B",
+  "via": null,
+  "pipeline": "text-to-audio",
+  "card": {
+   "license": "cc-by-nc-4.0",
+   "base_model": null,
+   "language": [
+    "zh",
+    "en"
+   ]
+  }
+ },
+ {
+  "name": "KnowLine-35B-A3B-Gen1.5",
+  "type": "Text Classification",
+  "id": "PelaAI/KnowLine-35B-A3B-Gen1.5",
+  "hf_id": "PelaAI/KnowLine-35B-A3B-Gen1.5",
+  "via": null,
+  "pipeline": "text-classification",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3.5-35B-A3B"
+   ],
+   "language": [
+    "en",
+    "zh"
+   ]
+  }
+ },
+ {
+  "name": "KnowLine-4B-Gen5.5",
+  "type": "Text Classification",
+  "id": "PelaAI/KnowLine-4B-Gen5.5",
+  "hf_id": "PelaAI/KnowLine-4B-Gen5.5",
+  "via": null,
+  "pipeline": "text-classification",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3.5-4B"
+   ],
+   "language": [
+    "en",
+    "zh"
+   ]
+  }
+ },
+ {
+  "name": "d3",
+  "type": "Text Classification",
+  "id": "vllm-sr/d3",
+  "hf_id": "vllm-sr/d3",
+  "via": null,
+  "pipeline": "zero-shot-classification",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": "Qwen/Qwen3.8-27B",
+   "language": null
+  }
+ },
+ {
+  "name": "d3-edge",
+  "type": "Text Classification",
+  "id": "vllm-sr/d3-edge",
+  "hf_id": "vllm-sr/d3-edge",
+  "via": null,
+  "pipeline": "zero-shot-classification",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": "Qwen/Qwen3.5-0.8B",
+   "language": null
+  }
+ },
+ {
+  "name": "d3-flash",
+  "type": "Text Classification",
+  "id": "vllm-sr/d3-flash",
+  "hf_id": "vllm-sr/d3-flash",
+  "via": null,
+  "pipeline": "zero-shot-classification",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": "Qwen/Qwen3.5-9B",
+   "language": null
+  }
+ },
+ {
+  "name": "d3-lite",
+  "type": "Text Classification",
+  "id": "vllm-sr/d3-lite",
+  "hf_id": "vllm-sr/d3-lite",
+  "via": null,
+  "pipeline": "zero-shot-classification",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": "Qwen/Qwen3.5-0.8B",
+   "language": null
+  }
+ },
+ {
+  "name": "d3-mini",
+  "type": "Text Classification",
+  "id": "vllm-sr/d3-mini",
+  "hf_id": "vllm-sr/d3-mini",
+  "via": null,
+  "pipeline": "zero-shot-classification",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": "Qwen/Qwen3.5-4B",
+   "language": null
+  }
+ },
+ {
+  "name": "d3-nano",
+  "type": "Text Classification",
+  "id": "vllm-sr/d3-nano",
+  "hf_id": "vllm-sr/d3-nano",
+  "via": null,
+  "pipeline": "zero-shot-classification",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": "Qwen/Qwen3.5-2B",
+   "language": null
+  }
+ },
+ {
+  "name": "Nemotron-3-Embed-1B",
+  "type": "Text Embedding",
+  "id": "nvidia/Nemotron-3-Embed-1B-BF16",
+  "hf_id": "nvidia/Nemotron-3-Embed-1B-BF16",
+  "via": null,
+  "pipeline": "sentence-similarity",
+  "card": {
+   "license": "other",
+   "base_model": [
+    "mistralai/Ministral-3-3B-Instruct-2512"
+   ],
+   "language": [
+    "multilingual",
+    "en",
+    "ar",
+    "as",
+    "bn",
+    "bg",
+    "zh",
+    "da",
+    "nl",
+    "fi",
+    "fr",
+    "de",
+    "hi",
+    "id",
+    "it",
+    "ja",
+    "ko",
+    "ms",
+    "mr",
+    "ne",
+    "no",
+    "fa",
+    "pt",
+    "ro",
+    "ru",
+    "es",
+    "sw",
+    "sv",
+    "ta",
+    "te",
+    "th",
+    "uk",
+    "ur",
+    "vi"
+   ]
+  }
+ },
+ {
+  "name": "Nemotron-3-Embed-8B",
+  "type": "Text Embedding",
+  "id": "nvidia/Nemotron-3-Embed-8b-Bf16",
+  "hf_id": "nvidia/Nemotron-3-Embed-8B-BF16",
+  "via": null,
+  "pipeline": "sentence-similarity",
+  "card": {
+   "license": "other",
+   "base_model": [
+    "mistralai/Ministral-3-8B-Instruct-2512"
+   ],
+   "language": [
+    "multilingual",
+    "en",
+    "ar",
+    "as",
+    "bn",
+    "bg",
+    "zh",
+    "da",
+    "nl",
+    "fi",
+    "fr",
+    "de",
+    "hi",
+    "id",
+    "it",
+    "ja",
+    "ko",
+    "ms",
+    "mr",
+    "ne",
+    "no",
+    "fa",
+    "pt",
+    "ro",
+    "ru",
+    "es",
+    "sw",
+    "sv",
+    "ta",
+    "te",
+    "th",
+    "uk",
+    "ur",
+    "vi"
+   ]
+  }
+ },
+ {
+  "name": "Qwen3-Embedding-4B",
+  "type": "Text Embedding",
+  "id": "Qwen/Qwen3-Embedding-4b",
+  "hf_id": "Qwen/Qwen3-Embedding-4B",
+  "via": null,
+  "pipeline": "feature-extraction",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3-4B-Base"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-Embedding-8B",
+  "type": "Text Embedding",
+  "id": "Qwen/Qwen3-Embedding-8b",
+  "hf_id": "Qwen/Qwen3-Embedding-8B",
+  "via": null,
+  "pipeline": "feature-extraction",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3-8B-Base"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-VL-Embedding-2B",
+  "type": "Text Embedding",
+  "id": "Qwen/Qwen3-Vl-Embedding-2b",
+  "hf_id": "Qwen/Qwen3-VL-Embedding-2B",
+  "via": null,
+  "pipeline": "sentence-similarity",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3-VL-2B-Instruct"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-VL-Embedding-8B",
+  "type": "Text Embedding",
+  "id": "Qwen/Qwen3-Vl-Embedding-8b",
+  "hf_id": "Qwen/Qwen3-VL-Embedding-8B",
+  "via": null,
+  "pipeline": "sentence-similarity",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3-VL-8B-Instruct"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "R3-Embedding-0.6B",
+  "type": "Text Embedding",
+  "id": "tencent/R3-embedding-0.6b",
+  "hf_id": "tencent/R3-embedding-0.6b",
+  "via": null,
+  "pipeline": "sentence-similarity",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": "Qwen/Qwen3-Embedding-0.6B",
+   "language": null
+  }
+ },
+ {
+  "name": "GLM-4.7-Flash",
+  "type": "Text Generation",
+  "id": "zai-org/GLM-4.7-Flash",
+  "hf_id": "zai-org/GLM-4.7-Flash",
+  "via": null,
+  "pipeline": "text-generation",
+  "card": {
+   "license": "mit",
+   "base_model": null,
+   "language": [
+    "en",
+    "zh"
+   ]
+  }
+ },
+ {
+  "name": "Qwen-Image-2.1-PE-T2I",
+  "type": "Text Generation",
+  "id": "Qwen/Qwen-Image-2.1-PE-T2I",
+  "hf_id": "Qwen/Qwen-Image-2.1-PE-T2I",
+  "via": null,
+  "pipeline": "text-to-image",
+  "card": {
+   "license": "other",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-30B-A3B-Instruct",
+  "type": "Text Generation",
+  "id": "Qwen/Qwen3-30B-A3B-Instruct",
+  "hf_id": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+  "via": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+  "pipeline": "text-generation",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-30B-A3B-Thinking",
+  "type": "Text Generation",
+  "id": "Qwen/Qwen3-30B-A3B-Thinking",
+  "hf_id": "Qwen/Qwen3-30B-A3B-Thinking-2507",
+  "via": "Qwen/Qwen3-30B-A3B-Thinking-2507",
+  "pipeline": "text-generation",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-4B-Instruct-2507",
+  "type": "Text Generation",
+  "id": "Qwen/Qwen3-4B-Instruct-2507",
+  "hf_id": "Qwen/Qwen3-4B-Instruct-2507",
+  "via": null,
+  "pipeline": "text-generation",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-8B",
+  "type": "Text Generation",
+  "id": "Qwen/Qwen3-8B",
+  "hf_id": "Qwen/Qwen3-8B",
+  "via": null,
+  "pipeline": "text-generation",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3-8B-Base"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-Coder-30B",
+  "type": "Text Generation",
+  "id": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+  "hf_id": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+  "via": null,
+  "pipeline": "text-generation",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-Coder-30B-A3B-Instruct-Turbo",
+  "type": "Text Generation",
+  "id": "Qwen/Qwen3-Coder-30B-A3B-Instruct-Turbo",
+  "hf_id": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+  "via": "Qwen/Qwen3-Coder-30B-A3B-Instruct",
+  "pipeline": "text-generation",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "gpt-oss-20b",
+  "type": "Text Generation",
+  "id": "openai/gpt-oss-20b",
+  "hf_id": "openai/gpt-oss-20b",
+  "via": null,
+  "pipeline": "text-generation",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-Reranker-0.6B",
+  "type": "Text Reranking",
+  "id": "Qwen/Qwen3-Reranker-0.6B",
+  "hf_id": "Qwen/Qwen3-Reranker-0.6B",
+  "via": null,
+  "pipeline": "text-ranking",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3-0.6B-Base"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-Reranker-4B",
+  "type": "Text Reranking",
+  "id": "Qwen/Qwen3-Reranker-4b",
+  "hf_id": "Qwen/Qwen3-Reranker-4B",
+  "via": null,
+  "pipeline": "text-ranking",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3-4B-Base"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-Reranker-8B",
+  "type": "Text Reranking",
+  "id": "Qwen/Qwen3-Reranker-8b",
+  "hf_id": "Qwen/Qwen3-Reranker-8B",
+  "via": null,
+  "pipeline": "text-ranking",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3-8B-Base"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-VL-Reranker-2B",
+  "type": "Text Reranking",
+  "id": "Qwen/Qwen3-Vl-Reranker-2b",
+  "hf_id": "Qwen/Qwen3-VL-Reranker-2B",
+  "via": null,
+  "pipeline": "text-ranking",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3-VL-2B-Instruct"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-VL-Reranker-8B",
+  "type": "Text Reranking",
+  "id": "Qwen/Qwen3-Vl-Reranker-8b",
+  "hf_id": "Qwen/Qwen3-VL-Reranker-8B",
+  "via": null,
+  "pipeline": "text-ranking",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": [
+    "Qwen/Qwen3-VL-8B-Instruct"
+   ],
+   "language": null
+  }
+ },
+ {
+  "name": "R3-reranker-0.6b",
+  "type": "Text Reranking",
+  "id": "tencent/R3-rerank-0.6b",
+  "hf_id": "tencent/R3-rerank-0.6b",
+  "via": null,
+  "pipeline": "text-ranking",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": "Qwen/Qwen3-Reranker-0.6B",
+   "language": null
+  }
+ },
+ {
+  "name": "ERNIE-Image-Turbo",
+  "type": "Text-to-Image",
+  "id": "baidu/ERNIE-Image-Turbo",
+  "hf_id": "baidu/ERNIE-Image-Turbo",
+  "via": null,
+  "pipeline": "text-to-image",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "FLUX.2-klein-4B",
+  "type": "Text-to-Image",
+  "id": "black-forest-labs/FLUX.2-klein-4B",
+  "hf_id": "black-forest-labs/FLUX.2-klein-4B",
+  "via": null,
+  "pipeline": "image-to-image",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": [
+    "en"
+   ]
+  }
+ },
+ {
+  "name": "FLUX.2-klein-4B-Background-Remove",
+  "type": "Text-to-Image",
+  "id": "fal/FLUX.2-klein-4B-Background-Remove",
+  "hf_id": "fal/flux-2-klein-4B-background-remove-lora",
+  "via": "fal/flux-2-klein-4B-background-remove-lora",
+  "pipeline": "image-to-image",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": "black-forest-labs/FLUX.2-klein-4B",
+   "language": [
+    "en"
+   ]
+  }
+ },
+ {
+  "name": "FLUX.2-klein-4B-Object-Remove",
+  "type": "Text-to-Image",
+  "id": "fal/FLUX.2-klein-4B-Object-Remove",
+  "hf_id": "fal/flux-2-klein-4B-object-remove-lora",
+  "via": "fal/flux-2-klein-4B-object-remove-lora",
+  "pipeline": "image-to-image",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": "black-forest-labs/FLUX.2-klein-4B",
+   "language": [
+    "en"
+   ]
+  }
+ },
+ {
+  "name": "FLUX.2-klein-4B-Outpaint",
+  "type": "Text-to-Image",
+  "id": "fal/FLUX.2-klein-4B-Outpaint",
+  "hf_id": "fal/flux-2-klein-4B-outpaint-lora",
+  "via": "fal/flux-2-klein-4B-outpaint-lora",
+  "pipeline": "image-to-image",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": "black-forest-labs/FLUX.2-klein-4B",
+   "language": [
+    "en"
+   ]
+  }
+ },
+ {
+  "name": "FLUX.2-klein-4B-Zoom",
+  "type": "Text-to-Image",
+  "id": "fal/FLUX.2-klein-4B-Zoom",
+  "hf_id": "fal/flux-2-klein-4B-zoom-lora",
+  "via": "fal/flux-2-klein-4B-zoom-lora",
+  "pipeline": "image-to-image",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": "black-forest-labs/FLUX.2-klein-4B",
+   "language": [
+    "en"
+   ]
+  }
+ },
+ {
+  "name": "Krea-2-Turbo",
+  "type": "Text-to-Image",
+  "id": "krea/Krea-2-Turbo",
+  "hf_id": "krea/Krea-2-Turbo",
+  "via": null,
+  "pipeline": "text-to-image",
+  "card": {
+   "license": "other",
+   "base_model": [
+    "krea/Krea-2-Raw"
+   ],
+   "language": [
+    "en"
+   ]
+  }
+ },
+ {
+  "name": "Qwen-Image-2.1",
+  "type": "Text-to-Image",
+  "id": "Qwen/Qwen-Image-2.1",
+  "hf_id": "Qwen/Qwen-Image-2.1",
+  "via": null,
+  "pipeline": "text-to-image",
+  "card": {
+   "license": "other",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen-Image-2.1-viggle-turbo",
+  "type": "Text-to-Image",
+  "id": "Viggle/Qwen-Image-2.1-viggle-turbo",
+  "hf_id": "Viggle/Qwen-Image-2.1-viggle-turbo",
+  "via": null,
+  "pipeline": "text-to-image",
+  "card": {
+   "license": "other",
+   "base_model": "Qwen/Qwen-Image-2.1",
+   "language": null
+  }
+ },
+ {
+  "name": "SenseNova-U1.5-8B-MoT",
+  "type": "Text-to-Image",
+  "id": "SenseTime/SenseNova-U1.5-8B-MoT",
+  "hf_id": "sensenova/SenseNova-U1.5-8B-MoT",
+  "via": "sensenova/SenseNova-U1.5-8B-MoT",
+  "pipeline": "any-to-any",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": [
+    "en",
+    "zh"
+   ]
+  }
+ },
+ {
+  "name": "Z-Image-Turbo-CharacterDesignSheet",
+  "type": "Text-to-Image",
+  "id": "YeiYeiArt/Z-Image-Turbo-CharacterDesignSheet",
+  "hf_id": null,
+  "via": null,
+  "pipeline": null,
+  "card": null
+ },
+ {
+  "name": "Z-Image-Turbo-Children-Drawing",
+  "type": "Text-to-Image",
+  "id": "Tongyi-MAI/Z-Image-Turbo-Children-Drawing",
+  "hf_id": "ostris/z_image_turbo_childrens_drawings",
+  "via": "ostris/z_image_turbo_childrens_drawings",
+  "pipeline": "text-to-image",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": "Tongyi-MAI/Z-Image-Turbo",
+   "language": null
+  }
+ },
+ {
+  "name": "Z-Image-Turbo-Creating-Realistic",
+  "type": "Text-to-Image",
+  "id": "TaoBaiBai2025/Z-Image-Turbo-Creating-Realistic",
+  "hf_id": "long12256/Z-image-turbo_Creating-Realistic",
+  "via": "long12256/Z-image-turbo_Creating-Realistic",
+  "pipeline": null,
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Fun-CosyVoice3-0.5B-2512",
+  "type": "Text-to-Speech",
+  "id": "FunAudioLLM/Fun-CosyVoice3-0.5B-2512",
+  "hf_id": "FunAudioLLM/Fun-CosyVoice3-0.5B-2512",
+  "via": null,
+  "pipeline": "text-to-speech",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": [
+    "zh",
+    "en",
+    "fr",
+    "es",
+    "ja",
+    "ko",
+    "it",
+    "ru",
+    "de"
+   ]
+  }
+ },
+ {
+  "name": "MOSS-TTS-Local-Transformer-v1.5",
+  "type": "Text-to-Speech",
+  "id": "OpenMOSS-Team/MOSS-TTS-Local-Transformer-v1.5",
+  "hf_id": "OpenMOSS-Team/MOSS-TTS-Local-Transformer-v1.5",
+  "via": null,
+  "pipeline": "text-to-speech",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": [
+    "zh",
+    "yue",
+    "en",
+    "ar",
+    "cs",
+    "da",
+    "de",
+    "nl",
+    "es",
+    "fr",
+    "fi",
+    "el",
+    "he",
+    "hi",
+    "hu",
+    "ja",
+    "it",
+    "ko",
+    "mk",
+    "ms",
+    "ru",
+    "fa",
+    "pl",
+    "pt",
+    "sv",
+    "ro",
+    "sw",
+    "tl",
+    "th",
+    "tr",
+    "vi"
+   ]
+  }
+ },
+ {
+  "name": "MOSS-TTS-Nano-100M",
+  "type": "Text-to-Speech",
+  "id": "OpenMOSS-Team/MOSS-TTS-Nano-100M",
+  "hf_id": "OpenMOSS-Team/MOSS-TTS-Nano-100M",
+  "via": null,
+  "pipeline": "text-to-speech",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": [
+    "zh",
+    "en",
+    "de",
+    "es",
+    "fr",
+    "ja",
+    "it",
+    "he",
+    "ko",
+    "ru",
+    "fa",
+    "ar",
+    "pl",
+    "pt",
+    "cs",
+    "da",
+    "sv",
+    "hu",
+    "el",
+    "tr"
+   ]
+  }
+ },
+ {
+  "name": "Qwen3-CustomVoice-1.7B",
+  "type": "Text-to-Speech",
+  "id": "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+  "hf_id": "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+  "via": null,
+  "pipeline": "text-to-speech",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "Qwen3-VoiceDesign-1.7B",
+  "type": "Text-to-Speech",
+  "id": "Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign",
+  "hf_id": "Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign",
+  "via": null,
+  "pipeline": "text-to-speech",
+  "card": {
+   "license": "apache-2.0",
+   "base_model": null,
+   "language": null
+  }
+ },
+ {
+  "name": "VibeVoice-Realtime-0.5B",
+  "type": "Text-to-Speech",
+  "id": "microsoft/VibeVoice-Realtime-0.5B",
+  "hf_id": "microsoft/VibeVoice-Realtime-0.5B",
+  "via": null,
+  "pipeline": "text-to-speech",
+  "card": {
+   "license": "mit",
+   "base_model": [
+    "Qwen/Qwen2.5-0.5B"
+   ],
+   "language": [
+    "en"
+   ]
+  }
+ },
+ {
+  "name": "supertonic-3",
+  "type": "Text-to-Speech",
+  "id": "Supertone/supertonic-3",
+  "hf_id": "Supertone/supertonic-3",
+  "via": null,
+  "pipeline": "text-to-speech",
+  "card": {
+   "license": "openrail",
+   "base_model": null,
+   "language": [
+    "en",
+    "ko",
+    "ja",
+    "ar",
+    "bg",
+    "cs",
+    "da",
+    "de",
+    "el",
+    "es",
+    "et",
+    "fi",
+    "fr",
+    "hi",
+    "hr",
+    "hu",
+    "id",
+    "it",
+    "lt",
+    "lv",
+    "nl",
+    "pl",
+    "pt",
+    "ro",
+    "ru",
+    "sk",
+    "sl",
+    "sv",
+    "tr",
+    "uk",
+    "vi"
+   ]
+  }
+ }
+]

@@ -1,0 +1,262 @@
+{
+ "AceStep-XL-Base": {
+  "metrics": [],
+  "source": "https://huggingface.co/ACE-Step/acestep-v15-xl-base",
+  "note": "Card gives only qualitative quality/diversity ratings; no per-variant numbers found."
+ },
+ "AceStep-XL-Turbo": {
+  "metrics": [],
+  "source": "https://huggingface.co/ACE-Step/acestep-v15-xl-turbo",
+  "note": "Card gives only qualitative quality/diversity ratings; no per-variant numbers found."
+ },
+ "Foundation-1": {
+  "metrics": [],
+  "source": "https://huggingface.co/RoyalCities/Foundation-1",
+  "note": "Card says it has no programmatic benchmark (only a qualitative ~90% timbre-consistency estimate)."
+ },
+ "SongGeneration-v2-large": {
+  "metrics": [
+   {
+    "label": "Overall MOS (LeVo 2 listening test)",
+    "value": "5.48"
+   },
+   {
+    "label": "PER (lyrics, lower is better)",
+    "value": "8.55%"
+   },
+   {
+    "label": "Emotion control (Gemini, 1-10)",
+    "value": "8.72"
+   }
+  ],
+  "source": "https://arxiv.org/abs/2606.30642",
+  "note": "From the LeVo 2 paper (Table I, May 2026 eval); the paper's ~4B LeLM matches v2-large but does not name the checkpoint."
+ },
+ "YuE2-3B": {
+  "metrics": [
+   {
+    "label": "WildSongBench SongBench Avg",
+    "value": "6.7316"
+   },
+   {
+    "label": "Musicality",
+    "value": "5.9075"
+   },
+   {
+    "label": "PER (lower is better)",
+    "value": "8.44%"
+   }
+  ],
+  "source": "https://huggingface.co/m-a-p/YuE2-3B",
+  "note": "Single-sample YuE2 row; best-of-8 reaches 6.9632 SongBench Avg."
+ },
+ "ERNIE-Image-Turbo": {
+  "metrics": [
+   {
+    "label": "GenEval",
+    "value": "0.8667"
+   },
+   {
+    "label": "OneIG-EN",
+    "value": "0.5656"
+   },
+   {
+    "label": "LongText-Bench (avg EN/ZH)",
+    "value": "0.9655"
+   }
+  ],
+  "source": "https://huggingface.co/baidu/ERNIE-Image-Turbo",
+  "note": "GenEval without prompt enhancer; OneIG-EN and LongText-Bench with prompt enhancer."
+ },
+ "FLUX.2-klein-4B": {
+  "metrics": [
+   {
+    "label": "LMArena text-to-image",
+    "value": "1,030 (#75 of 87)"
+   },
+   {
+    "label": "LMArena image edit (single image)",
+    "value": "1,187 (#54 of 64)"
+   }
+  ],
+  "source": "https://arena.ai/leaderboard/image/text-to-image/models/flux.2-klein-4b-goew",
+  "note": "LMArena, ranking updated 2026-11-21 (T2I) / 2026-11-16 (edit); edit page https://arena.ai/leaderboard/image/image-edit/single-image/models/flux.2-klein-4b-goew. Card itself has no numbers; Artificial Analysis Elo varied between snapshots so it was left out."
+ },
+ "FLUX.2-klein-4B-Background-Remove": {
+  "metrics": [],
+  "source": "https://huggingface.co/fal/flux-2-klein-4B-background-remove-lora",
+  "note": "LoRA adapter; no benchmarks of its own."
+ },
+ "FLUX.2-klein-4B-Object-Remove": {
+  "metrics": [],
+  "source": "https://huggingface.co/fal/flux-2-klein-4B-object-remove-lora",
+  "note": "LoRA adapter; no benchmarks of its own."
+ },
+ "FLUX.2-klein-4B-Outpaint": {
+  "metrics": [],
+  "source": "https://huggingface.co/fal/flux-2-klein-4B-outpaint-lora",
+  "note": "LoRA adapter; no benchmarks of its own."
+ },
+ "FLUX.2-klein-4B-Zoom": {
+  "metrics": [],
+  "source": "https://huggingface.co/fal/flux-2-klein-4B-zoom-lora",
+  "note": "LoRA adapter; no benchmarks of its own."
+ },
+ "Krea-2-Turbo": {
+  "metrics": [
+   {
+    "label": "LMArena text-to-image",
+    "value": "1,115 (#53 of 87)"
+   }
+  ],
+  "source": "https://arena.ai/leaderboard/image/text-to-image/models/krea-2-turbo-clty",
+  "note": "LMArena 'Krea 2 Turbo', ranking updated 2026-11-21; no HF card text available."
+ },
+ "Qwen-Image-2.1": {
+  "metrics": [
+   {
+    "label": "LMArena text-to-image",
+    "value": "1,227 (#22 of 87)"
+   }
+  ],
+  "source": "https://arena.ai/leaderboard/image/text-to-image/models/qwen-image-2.1-1g7p",
+  "note": "LMArena, ranking updated 2026-11-21; LMArena calls it the best open model. Card/GitHub give no benchmark tables."
+ },
+ "Qwen-Image-2.1-viggle-turbo": {
+  "metrics": [],
+  "source": "https://huggingface.co/Viggle/Qwen-Image-2.1-viggle-turbo",
+  "note": "Distilled LoRA; card says no standard benchmark is claimed."
+ },
+ "SenseNova-U1.5-8B-MoT": {
+  "metrics": [
+   {
+    "label": "GenEval",
+    "value": "0.92"
+   },
+   {
+    "label": "DPG-Bench",
+    "value": "88.11"
+   },
+   {
+    "label": "ImgEdit",
+    "value": "4.59"
+   }
+  ],
+  "source": "https://arxiv.org/abs/2609.11929",
+  "note": "From the SenseNova-U1.5 tech report (the HF card shows the results only as images)."
+ },
+ "Z-Image-Turbo-CharacterDesignSheet": {
+  "metrics": [],
+  "source": "",
+  "note": "LoRA adapter; no benchmarks of its own."
+ },
+ "Z-Image-Turbo-Children-Drawing": {
+  "metrics": [],
+  "source": "https://huggingface.co/ostris/z_image_turbo_childrens_drawings",
+  "note": "LoRA adapter; no benchmarks of its own."
+ },
+ "Z-Image-Turbo-Creating-Realistic": {
+  "metrics": [],
+  "source": "https://huggingface.co/long12256/Z-image-turbo_Creating-Realistic",
+  "note": "LoRA adapter; no benchmarks of its own."
+ },
+ "Fun-CosyVoice3-0.5B-2512": {
+  "metrics": [
+   {
+    "label": "Seed-TTS test-en WER (lower is better)",
+    "value": "2.24%"
+   },
+   {
+    "label": "Seed-TTS test-zh CER (lower is better)",
+    "value": "1.21%"
+   },
+   {
+    "label": "Seed-TTS test-en SIM",
+    "value": "71.8%"
+   }
+  ],
+  "source": "https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512",
+  "note": "Non-RL row; the _RL variant scores 1.68% WER / 0.81% CER."
+ },
+ "MOSS-TTS-Local-Transformer-v1.5": {
+  "metrics": [],
+  "source": "https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Local-Transformer-v1.5",
+  "note": "Only v1.0 (1.7B) Seed-TTS-eval numbers are published; none for the 4B v1.5."
+ },
+ "MOSS-TTS-Nano-100M": {
+  "metrics": [],
+  "source": "https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Nano-100M",
+  "note": "No benchmark numbers on the card or GitHub README."
+ },
+ "Qwen3-CustomVoice-1.7B": {
+  "metrics": [
+   {
+    "label": "WER English, multilingual test set (lower is better)",
+    "value": "0.899"
+   },
+   {
+    "label": "WER Chinese, multilingual test set (lower is better)",
+    "value": "0.903"
+   },
+   {
+    "label": "InstructTTSEval-EN APS",
+    "value": "77.3"
+   }
+  ],
+  "source": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+  "note": "Qwen3-TTS-12Hz-1.7B-CustomVoice rows."
+ },
+ "Qwen3-VoiceDesign-1.7B": {
+  "metrics": [
+   {
+    "label": "InstructTTSEval-EN APS",
+    "value": "82.9"
+   },
+   {
+    "label": "InstructTTSEval-ZH APS",
+    "value": "85.2"
+   },
+   {
+    "label": "InstructTTSEval-EN DSD",
+    "value": "82.4"
+   }
+  ],
+  "source": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice",
+  "note": "Qwen3TTS-12Hz-1.7B-VD row; the table is on the sister CustomVoice card (the VoiceDesign card shows only the Base model's WER)."
+ },
+ "VibeVoice-Realtime-0.5B": {
+  "metrics": [
+   {
+    "label": "Seed-TTS test-en WER (lower is better)",
+    "value": "2.05%"
+   },
+   {
+    "label": "Seed-TTS test-en SIM",
+    "value": "0.633"
+   },
+   {
+    "label": "LibriSpeech test-clean WER (lower is better)",
+    "value": "2.00%"
+   }
+  ],
+  "source": "https://huggingface.co/microsoft/VibeVoice-Realtime-0.5B"
+ },
+ "supertonic-3": {
+  "metrics": [
+   {
+    "label": "MiniMax-MLS-test WER English (lower is better)",
+    "value": "2.06"
+   },
+   {
+    "label": "WER German",
+    "value": "0.86"
+   },
+   {
+    "label": "WER Spanish",
+    "value": "1.13"
+   }
+  ],
+  "source": "https://github.com/supertone-inc/supertonic",
+  "note": "From the official GitHub README; the HF card shows the same results only as charts."
+ }
+}

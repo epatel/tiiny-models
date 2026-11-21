@@ -1,0 +1,126 @@
+{
+ "Hunyuan3D-2.1": [
+  [
+   "img",
+   "https://raw.githubusercontent.com/Tencent-Hunyuan/Hunyuan3D-2.1/refs/heads/main/assets/images/teaser.jpg"
+  ]
+ ],
+ "Foundation-1": [
+  [
+   "aud",
+   "https://huggingface.co/RoyalCities/Foundation-1/resolve/main/examples/example_1.mp3"
+  ],
+  [
+   "aud",
+   "https://huggingface.co/RoyalCities/Foundation-1/resolve/main/examples/example_2.mp3"
+  ]
+ ],
+ "YuE2-3B": [
+  [
+   "aud",
+   "https://huggingface.co/m-a-p/YuE2-3B/resolve/main/assets/audio/tonight-awake.mp3"
+  ],
+  [
+   "aud",
+   "https://huggingface.co/m-a-p/YuE2-3B/resolve/main/assets/audio/cyber-metal.mp3"
+  ]
+ ],
+ "ERNIE-Image-Turbo": [
+  [
+   "img",
+   "https://cdn-uploads.huggingface.co/production/uploads/5f8d780e5d083370c711f575/QRt1mPSU9SCkcxxFWQje2.jpeg"
+  ]
+ ],
+ "FLUX.2-klein-4B": [
+  [
+   "img",
+   "https://huggingface.co/black-forest-labs/FLUX.2-klein-4B/resolve/main/realism.jpg"
+  ],
+  [
+   "img",
+   "https://huggingface.co/black-forest-labs/FLUX.2-klein-4B/resolve/main/editing.jpg"
+  ]
+ ],
+ "FLUX.2-klein-4B-Background-Remove": [
+  [
+   "img",
+   "https://huggingface.co/fal/flux-2-klein-4B-background-remove-lora/resolve/main/examples/example1_input.jpg"
+  ],
+  [
+   "img",
+   "https://huggingface.co/fal/flux-2-klein-4B-background-remove-lora/resolve/main/examples/example1_output.jpg"
+  ]
+ ],
+ "FLUX.2-klein-4B-Object-Remove": [
+  [
+   "img",
+   "https://huggingface.co/fal/flux-2-klein-4B-object-remove-lora/resolve/main/examples/example1_input.jpg"
+  ],
+  [
+   "img",
+   "https://huggingface.co/fal/flux-2-klein-4B-object-remove-lora/resolve/main/examples/example1_output.jpg"
+  ]
+ ],
+ "FLUX.2-klein-4B-Outpaint": [
+  [
+   "img",
+   "https://huggingface.co/fal/flux-2-klein-4B-outpaint-lora/resolve/main/examples/example1_input.jpg"
+  ],
+  [
+   "img",
+   "https://huggingface.co/fal/flux-2-klein-4B-outpaint-lora/resolve/main/examples/example1_output.jpg"
+  ]
+ ],
+ "FLUX.2-klein-4B-Zoom": [
+  [
+   "img",
+   "https://huggingface.co/fal/flux-2-klein-4B-zoom-lora/resolve/main/examples/example1_input.jpg"
+  ],
+  [
+   "img",
+   "https://huggingface.co/fal/flux-2-klein-4B-zoom-lora/resolve/main/examples/example1_output.jpg"
+  ]
+ ],
+ "Krea-2-Turbo": [
+  [
+   "img",
+   "https://s.krea.ai/dynamic_vibrant_minimal_illustration_of_a_rabbit_riding_a_motocross_bike_mid-air_extreme_wide_angle_i3dghnrmc0189glbqpgq_2.png"
+  ]
+ ],
+ "Qwen-Image-2.1": [
+  [
+   "img",
+   "https://qianwen-res.oss-accelerate.aliyuncs.com/Qwen-Image/image2.1/images/example-01.png"
+  ],
+  [
+   "img",
+   "https://qianwen-res.oss-accelerate.aliyuncs.com/Qwen-Image/image2.1/images/example-04.png"
+  ]
+ ],
+ "SenseNova-U1.5-8B-MoT": [
+  [
+   "img",
+   "https://raw.githubusercontent.com/OpenSenseNova/SenseNova-U1/refs/heads/feat/u1.5/docs/assets/teaserU1.5.png"
+  ]
+ ],
+ "Z-Image-Turbo-Children-Drawing": [
+  [
+   "img",
+   "https://huggingface.co/ostris/z_image_turbo_childrens_drawings/resolve/main/images/1764433583842__000003000_0.jpg"
+  ],
+  [
+   "img",
+   "https://huggingface.co/ostris/z_image_turbo_childrens_drawings/resolve/main/images/1764433587842__000003000_1.jpg"
+  ]
+ ],
+ "supertonic-3": [
+  [
+   "aud",
+   "https://huggingface.co/Supertone/supertonic-3/resolve/main/audio_samples/nora_supertonic3.wav"
+  ],
+  [
+   "aud",
+   "https://huggingface.co/Supertone/supertonic-3/resolve/main/audio_samples/luna_supertonic3.wav"
+  ]
+ ]
+}

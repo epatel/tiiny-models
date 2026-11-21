@@ -1,0 +1,400 @@
+{
+ "Fun-ASR-MLT-Nano": {
+  "metrics": [],
+  "source": "https://huggingface.co/FunAudioLLM/Fun-ASR-MLT-Nano-2512"
+ },
+ "Fun-ASR-Nano": {
+  "metrics": [
+   {
+    "label": "LibriSpeech test-clean WER",
+    "value": "1.76",
+    "note": "%, lower is better"
+   },
+   {
+    "label": "LibriSpeech test-other WER",
+    "value": "4.33",
+    "note": "%, lower is better"
+   },
+   {
+    "label": "FLEURS-en WER",
+    "value": "5.96",
+    "note": "%, lower is better"
+   },
+   {
+    "label": "FLEURS-zh WER",
+    "value": "2.56",
+    "note": "%, lower is better"
+   }
+  ],
+  "source": "https://huggingface.co/FunAudioLLM/Fun-ASR-Nano-2512"
+ },
+ "MOSS-Transcribe-Diarize": {
+  "metrics": [
+   {
+    "label": "AISHELL-4 cpCER",
+    "value": "15.83",
+    "note": "speaker-attributed CER %, lower is better"
+   },
+   {
+    "label": "AliMeeting cpCER",
+    "value": "22.17",
+    "note": "speaker-attributed CER %, lower is better"
+   },
+   {
+    "label": "Podcast CER",
+    "value": "5.97",
+    "note": "%, lower is better"
+   },
+   {
+    "label": "Movies cpCER",
+    "value": "12.76",
+    "note": "speaker-attributed CER %, lower is better"
+   }
+  ],
+  "source": "https://huggingface.co/OpenMOSS-Team/MOSS-Transcribe-Diarize"
+ },
+ "Parakeet-TDT-0.6B-V3": {
+  "metrics": [
+   {
+    "label": "Open ASR Leaderboard avg WER (English)",
+    "value": "6.34%",
+    "note": "lower is better"
+   },
+   {
+    "label": "LibriSpeech test-clean WER",
+    "value": "1.93%",
+    "note": "lower is better"
+   },
+   {
+    "label": "LibriSpeech test-other WER",
+    "value": "3.59%",
+    "note": "lower is better"
+   },
+   {
+    "label": "FLEURS avg WER (25 EU languages)",
+    "value": "11.97%",
+    "note": "lower is better"
+   }
+  ],
+  "source": "https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3"
+ },
+ "Whisper-large-v3-turbo": {
+  "metrics": [
+   {
+    "label": "Open ASR Leaderboard avg WER (English)",
+    "value": "8.75",
+    "note": "lower is better; leaderboard v1.16.2, 2026-11-20"
+   },
+   {
+    "label": "Open ASR Leaderboard avg error rate (multilingual, 8 languages)",
+    "value": "9.94",
+    "note": "lower is better"
+   },
+   {
+    "label": "RTFx (English)",
+    "value": "808.92",
+    "note": "speed, higher is better"
+   }
+  ],
+  "source": "https://huggingface.co/spaces/hf-audio/open_asr_leaderboard"
+ },
+ "Hunyuan3D-2.1": {
+  "metrics": [
+   {
+    "label": "ULIP-I (shape)",
+    "value": "0.1395",
+    "note": "higher is better"
+   },
+   {
+    "label": "Uni3D-I (shape)",
+    "value": "0.3213",
+    "note": "higher is better"
+   },
+   {
+    "label": "CLIP-FiD (texture)",
+    "value": "24.78",
+    "note": "lower is better"
+   },
+   {
+    "label": "CLIP-I (texture)",
+    "value": "0.9207",
+    "note": "higher is better"
+   }
+  ],
+  "source": "https://github.com/Tencent-Hunyuan/Hunyuan3D-2.1"
+ },
+ "GLM-OCR": {
+  "metrics": [
+   {
+    "label": "OmniDocBench v1.5 overall",
+    "value": "94.62",
+    "note": "higher is better"
+   },
+   {
+    "label": "OCRBench (Text)",
+    "value": "94.0",
+    "note": "higher is better"
+   },
+   {
+    "label": "UniMERNet (formulas)",
+    "value": "96.5",
+    "note": "higher is better"
+   },
+   {
+    "label": "PubTabNet (tables)",
+    "value": "85.2",
+    "note": "higher is better"
+   }
+  ],
+  "source": "https://arxiv.org/abs/2603.10910"
+ },
+ "MiniCPM-OCR-1.0": {
+  "metrics": [
+   {
+    "label": "Real5-OmniDocBench",
+    "value": "93.68",
+    "note": "higher is better"
+   },
+   {
+    "label": "OCRBench v2",
+    "value": "54.7",
+    "note": "higher is better"
+   }
+  ],
+  "source": "https://huggingface.co/openbmb/MiniCPM-OCR-1.0"
+ },
+ "PP-OCRv6-Medium": {
+  "metrics": [
+   {
+    "label": "Recognition accuracy, weighted avg",
+    "value": "83.2",
+    "note": "%, Paddle's multi-scenario benchmark, higher is better"
+   },
+   {
+    "label": "Printed Chinese accuracy",
+    "value": "91.5",
+    "note": "%, higher is better"
+   },
+   {
+    "label": "Printed English accuracy",
+    "value": "94.1",
+    "note": "%, higher is better"
+   },
+   {
+    "label": "Handwritten English accuracy",
+    "value": "67.8",
+    "note": "%, higher is better"
+   }
+  ],
+  "source": "https://huggingface.co/PaddlePaddle/PP-OCRv6_medium_rec"
+ },
+ "PP-OCRv6-Small": {
+  "metrics": [
+   {
+    "label": "Recognition accuracy, weighted avg",
+    "value": "81.3",
+    "note": "%, Paddle's multi-scenario benchmark, higher is better"
+   },
+   {
+    "label": "Printed Chinese accuracy",
+    "value": "90.5",
+    "note": "%, higher is better"
+   },
+   {
+    "label": "Printed English accuracy",
+    "value": "93.3",
+    "note": "%, higher is better"
+   },
+   {
+    "label": "Handwritten English accuracy",
+    "value": "61.1",
+    "note": "%, higher is better"
+   }
+  ],
+  "source": "https://huggingface.co/PaddlePaddle/PP-OCRv6_small_rec"
+ },
+ "Pp-Doc-Layout": {
+  "metrics": [],
+  "source": ""
+ },
+ "Unlimited-Ocr": {
+  "metrics": [
+   {
+    "label": "OmniDocBench v1.5 overall",
+    "value": "93.23",
+    "note": "higher is better"
+   },
+   {
+    "label": "OmniDocBench v1.6 overall",
+    "value": "93.92",
+    "note": "higher is better"
+   },
+   {
+    "label": "OmniDocBench v1.5 text edit distance",
+    "value": "0.038",
+    "note": "lower is better"
+   }
+  ],
+  "source": "https://arxiv.org/abs/2606.23050"
+ },
+ "KnowLine-35B-A3B-Gen1.5": {
+  "metrics": [
+   {
+    "label": "Jev Decision Index 0.3 public",
+    "value": "70.72",
+    "note": "self-run with the official kit, higher is better"
+   },
+   {
+    "label": "C-Eval (4 categories, macro)",
+    "value": "88.1",
+    "note": "higher is better"
+   },
+   {
+    "label": "JevBench / JevBench-hard",
+    "value": "87.0 / 73.0",
+    "note": "higher is better"
+   }
+  ],
+  "source": "https://huggingface.co/PelaAI/KnowLine-35B-A3B-Gen1.5"
+ },
+ "KnowLine-4B-Gen5.5": {
+  "metrics": [
+   {
+    "label": "Jev Decision Index 0.3 public",
+    "value": "66.75",
+    "note": "self-run with the official kit, higher is better"
+   },
+   {
+    "label": "C-Eval (4 categories, macro)",
+    "value": "80.5",
+    "note": "higher is better"
+   },
+   {
+    "label": "JevBench / JevBench-hard",
+    "value": "85.3 / 70.3",
+    "note": "higher is better"
+   }
+  ],
+  "source": "https://huggingface.co/PelaAI/KnowLine-4B-Gen5.5"
+ },
+ "d3": {
+  "metrics": [
+   {
+    "label": "Jev Decision Index 0.3.2 (text)",
+    "value": "66.3",
+    "note": "higher is better"
+   },
+   {
+    "label": "Jev Decision Index vision board 0.3.2",
+    "value": "71.3",
+    "note": "higher is better"
+   },
+   {
+    "label": "Perception Test (video QA, validation)",
+    "value": "77.4",
+    "note": "higher is better"
+   }
+  ],
+  "source": "https://huggingface.co/vllm-sr/d3"
+ },
+ "d3-edge": {
+  "metrics": [
+   {
+    "label": "Jev Decision Index 0.3.2 (text)",
+    "value": "20.2",
+    "note": "higher is better"
+   },
+   {
+    "label": "Jev Decision Index vision board 0.3.2",
+    "value": "31.7",
+    "note": "higher is better"
+   },
+   {
+    "label": "Perception Test (video QA, validation)",
+    "value": "46.6",
+    "note": "higher is better"
+   }
+  ],
+  "source": "https://huggingface.co/vllm-sr/d3-edge"
+ },
+ "d3-flash": {
+  "metrics": [
+   {
+    "label": "Jev Decision Index 0.3.2 (text)",
+    "value": "55.8",
+    "note": "higher is better"
+   },
+   {
+    "label": "Jev Decision Index vision board 0.3.2",
+    "value": "66.9",
+    "note": "higher is better"
+   },
+   {
+    "label": "Perception Test (video QA, validation)",
+    "value": "73.3",
+    "note": "higher is better"
+   }
+  ],
+  "source": "https://huggingface.co/vllm-sr/d3-flash"
+ },
+ "d3-lite": {
+  "metrics": [
+   {
+    "label": "Jev Decision Index 0.3.2 (text)",
+    "value": "32.3",
+    "note": "higher is better"
+   },
+   {
+    "label": "Jev Decision Index vision board 0.3.2",
+    "value": "42.1",
+    "note": "higher is better"
+   },
+   {
+    "label": "Perception Test (video QA, validation)",
+    "value": "59.3",
+    "note": "higher is better"
+   }
+  ],
+  "source": "https://huggingface.co/vllm-sr/d3-lite"
+ },
+ "d3-mini": {
+  "metrics": [
+   {
+    "label": "Jev Decision Index 0.3.2 (text)",
+    "value": "52.6",
+    "note": "higher is better"
+   },
+   {
+    "label": "Jev Decision Index vision board 0.3.2",
+    "value": "63.2",
+    "note": "higher is better"
+   },
+   {
+    "label": "Perception Test (video QA, validation)",
+    "value": "70.3",
+    "note": "higher is better"
+   }
+  ],
+  "source": "https://huggingface.co/vllm-sr/d3-mini"
+ },
+ "d3-nano": {
+  "metrics": [
+   {
+    "label": "Jev Decision Index 0.3.2 (text)",
+    "value": "38.9",
+    "note": "higher is better"
+   },
+   {
+    "label": "Jev Decision Index vision board 0.3.2",
+    "value": "54.7",
+    "note": "higher is better"
+   },
+   {
+    "label": "Perception Test (video QA, validation)",
+    "value": "63.5",
+    "note": "higher is better"
+   }
+  ],
+  "source": "https://huggingface.co/vllm-sr/d3-nano"
+ }
+}

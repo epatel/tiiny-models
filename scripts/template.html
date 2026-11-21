@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Models in the Tiiny store: descriptions, benchmarks and samples.">
+<title>Tiiny Model Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a store shelf. Sticky aisle signs (type chips) over sections of cards; generators get wider cards with their samples. */
+:root {
+  --bg: #f3f4f1; --surface: #ffffff; --ink: #1b1f1d; --muted: #5d6662; --line: #dde1dc;
+  --accent: #0f6b5c; --accent-soft: #e0efe9; --chip: #e9ece7;
+  --display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121614; --surface: #1a1f1d; --ink: #e6ebe8; --muted: #9aa5a0; --line: #2b3330;
+  --accent: #5cc6ae; --accent-soft: #1d3a33; --chip: #222a27; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121614; --surface: #1a1f1d; --ink: #e6ebe8; --muted: #9aa5a0; --line: #2b3330;
+  --accent: #5cc6ae; --accent-soft: #1d3a33; --chip: #222a27; color-scheme: dark }
+* { box-sizing: border-box }
+html { -webkit-text-size-adjust: 100% }
+img { max-width: 100% }
+[hidden] { display: none !important }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 var(--body); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg) }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.top { padding-block: 40px 20px; display: grid; gap: 10px }
+.top h1 { font: 700 clamp(2rem, 5vw, 3.2rem)/1.05 var(--display); margin: 0; letter-spacing: -0.02em; text-wrap: balance }
+.top p { margin: 0; color: var(--muted); max-width: 68ch }
+.top p strong { color: var(--ink); font-weight: 500 }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+.bar .wrap { display: flex; gap: 12px; align-items: center; padding-block: 10px; flex-wrap: wrap }
+.bar nav { display: flex; gap: 6px; flex-wrap: wrap; flex: 1 1 520px; min-width: 0 }
+.bar nav a { font-size: 13px; text-decoration: none; color: var(--ink); background: var(--chip); padding: 4px 10px; border-radius: 999px; white-space: nowrap }
+.bar nav a span { color: var(--muted); font-variant-numeric: tabular-nums; margin-left: 2px }
+.bar nav a:hover, .bar nav a:focus-visible { background: var(--accent-soft); color: var(--accent) }
+#q { flex: 0 1 240px; min-width: 0; width: 100%; font: inherit; font-size: 14px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); color: var(--ink) }
+#q:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px }
+section { padding-block: 28px 8px; scroll-margin-top: 64px }
+.sechead { display: flex; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; margin-bottom: 14px }
+.sechead h2 { font: 700 1.55rem/1.1 var(--display); margin: 0 }
+.sechead p { margin: 0; color: var(--muted); flex: 1 1 320px; min-width: 0 }
+.sechead code { font: 13px var(--mono); color: var(--ink) }
+.type { font: 12px var(--mono); color: var(--muted); letter-spacing: 0.02em }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 12px }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; scroll-margin-top: 72px }
+.card.gen { grid-column: span 2 }
+@media (max-width: 660px) { .card.gen { grid-column: auto } }
+.card header { display: flex; justify-content: space-between; align-items: start; gap: 8px }
+.card h3 { font: 600 1.02rem/1.25 var(--body); margin: 0; overflow-wrap: anywhere }
+.lic { font: 11px var(--mono); color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; white-space: nowrap }
+.id { font: 12px var(--mono); color: var(--muted); overflow-wrap: anywhere }
+.card p { margin: 0 }
+.note { font-size: 13px; color: var(--muted); font-style: italic }
+.nomedia { font-size: 13px; color: var(--muted) }
+.media.imgs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 8px }
+.media figure { margin: 0; display: grid; gap: 4px }
+.media img { width: 100%; max-width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 6px; background: var(--chip); display: block }
+.media figcaption, .clip span { font-size: 12px; color: var(--muted) }
+.media.clips { display: grid; gap: 8px }
+.clip { display: grid; gap: 2px }
+.clip audio { width: 100%; height: 36px }
+.metrics { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 6px; margin: 2px 0 0 }
+.metrics div { background: var(--chip); border-radius: 6px; padding: 6px 8px; min-width: 0 }
+.metrics dt { font-size: 11px; color: var(--muted); line-height: 1.3; overflow-wrap: anywhere }
+.metrics dd { margin: 2px 0 0; font: 500 15px/1.2 var(--mono); font-variant-numeric: tabular-nums; color: var(--ink) }
+.metrics small { display: block; font: 11px var(--body); color: var(--muted); margin-top: 2px }
+.msrc { font-size: 12px; color: var(--muted) }
+.card footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 6px; border-top: 1px dashed var(--line) }
+.links { font-size: 13px }
+.links a { color: var(--accent) }
+.copy { font: 12px var(--mono); background: var(--chip); color: var(--ink); border: 0; border-radius: 6px; padding: 4px 8px; cursor: pointer; max-width: 100%; overflow-wrap: anywhere; text-align: left }
+.copy:hover, .copy:focus-visible { background: var(--accent-soft); color: var(--accent); outline: none }
+.copy.done::after { content: "  copied"; color: var(--accent) }
+.empty { color: var(--muted); padding-block: 30px }
+.foot { color: var(--muted); font-size: 13px; padding-block: 30px 40px; border-top: 1px solid var(--line); margin-top: 28px }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth } }
+</style>
+</head>
+<body>
+
+<div class="wrap top">
+  <h1>Tiiny Model Store</h1>
+  <p><strong>{{COUNT}} models</strong> you can download to the device and aren't on it yet, grouped by what they do. Descriptions, benchmark numbers and samples come from each model's Hugging Face card or its maker's pages; {{NMETRICS}} show benchmark numbers and {{NMEDIA}} have sample images or audio. Click a command to copy it.</p>
+</div>
+<div class="bar"><div class="wrap">
+  <nav aria-label="Model types">{{NAV}}</nav>
+  <input id="q" type="search" placeholder="Filter models" aria-label="Filter models">
+</div></div>
+<main class="wrap">
+{{SECTIONS}}
+<p class="empty" id="none" hidden>No model matches that filter.</p>
+<p class="foot">Store list from <code>tai download</code>, {{DATE}}. “Turbo” entries are Tiiny's faster builds of the model linked as the original. Samples are the model makers' own, from their cards, shortened. Source and update notes: <a href="https://github.com/epatel/tiiny-models">github.com/epatel/tiiny-models</a>.</p>
+</main>
+<script>
+const q = document.getElementById("q"), none = document.getElementById("none");
+q.addEventListener("input", () => {
+  const t = q.value.trim().toLowerCase(); let shown = 0;
+  document.querySelectorAll("section").forEach(s => {
+    let n = 0;
+    s.querySelectorAll(".card").forEach(c => { const ok = !t || c.dataset.q.includes(t); c.hidden = !ok; n += ok; });
+    s.hidden = n === 0; shown += n;
+  });
+  none.hidden = shown > 0;
+});
+document.addEventListener("click", e => {
+  const b = e.target.closest(".copy"); if (!b) return;
+  const done = () => { b.classList.add("done"); setTimeout(() => b.classList.remove("done"), 1400); };
+  const pick = () => { const r = document.createRange(); r.selectNodeContents(b); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+  try { navigator.clipboard.writeText(b.dataset.cmd).then(done, pick); } catch { pick(); }
+});
+document.addEventListener("play", e => document.querySelectorAll("audio").forEach(a => a !== e.target && a.pause()), true);
+</script>
+</body>
+</html>
