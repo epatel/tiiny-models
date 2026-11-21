@@ -23,6 +23,16 @@ GROUPS = [  # (store type, heading, what it's for, tai command)
     ("Text Classification", "Classification", "Yes/no, choice and score answers about a text, as probabilities.", None),
 ]
 
+USAGE = {  # example command per store type ({m} = model name); data/models.json "usage" overrides it
+    "Text-to-Image": 'tai image -m {m} "a fox in the snow, watercolor" -o fox.png --open',
+    "Text-to-Speech": 'tai tts -m {m} "Hello there, nice to meet you." --play',
+    "Image-to-3D": "tai 3d -m {m} toy.png -o toy.glb",
+    "Image-Text-to-Text": 'tai ask -m {m} -f photo.jpg "what\'s in this picture?"',
+    "Text Generation": 'tai ask -m {m} "explain RAII in two sentences"',
+    "ASR": "tai asr -m {m} recording.wav",
+    "Text Embedding": 'tai embed -m {m} "first text" "second text"',
+}
+
 MODELS = load("models.json")
 MEDIA = load("media.json")
 HF = {d["name"]: d for d in load("hf.json")}
@@ -67,6 +77,14 @@ def media_html(name):
     return f'<div class="media {"imgs" if items[0][0] == "img" else "clips"}">{"".join(out)}</div>'
 
 
+def usage_html(name, typ):
+    cmd = MODELS.get(name, {}).get("usage") or USAGE.get(typ, "").format(m=name)
+    if not cmd:
+        return ""
+    return (f'<div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="{esc(cmd)}" '
+            f'aria-label="Copy an example command for {esc(name)}">{esc(cmd)}</button></div>')
+
+
 def card(name, typ, sid):
     info, hf = MODELS.get(name, {}), HF.get(name, {})
     hf_id, link = hf.get("hf_id"), info.get("link")
@@ -89,6 +107,7 @@ def card(name, typ, sid):
   {f'<p class="note">{esc(info["note"])}</p>' if info.get("note") else ''}
   {metrics_html(name)}
   {m}
+  {usage_html(name, typ)}
   <footer><div class="links">{' · '.join(links)}</div>
   <button class="copy" type="button" data-cmd="tai download {esc(name)}" aria-label="Copy the download command for {esc(name)}">tai download {esc(name)}</button></footer>
 </article>"""

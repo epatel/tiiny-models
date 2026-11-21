@@ -72,6 +72,9 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
 .metrics small { display: block; font: 11px var(--body); color: var(--muted); margin-top: 2px }
 .msrc { font-size: 12px; color: var(--muted) }
 .card footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 6px; border-top: 1px dashed var(--line) }
+.usage { margin-top: auto; display: flex; gap: 8px; align-items: baseline }
+.usage span { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; flex: none }
+.usage + footer { margin-top: 0 }
 .links { font-size: 13px }
 .links a { color: var(--accent) }
 .copy { font: 12px var(--mono); background: var(--chip); color: var(--ink); border: 0; border-radius: 6px; padding: 4px 8px; cursor: pointer; max-width: 100%; overflow-wrap: anywhere; text-align: left }
@@ -86,7 +89,7 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
 
 <div class="wrap top">
   <h1>Tiiny Model Store</h1>
-  <p><strong>{{COUNT}} models</strong> you can download to the device and aren't on it yet, grouped by what they do. Descriptions, benchmark numbers and samples come from each model's Hugging Face card or its maker's pages; {{NMETRICS}} show benchmark numbers and {{NMEDIA}} have sample images or audio. Click a command to copy it.</p>
+  <p><strong>{{COUNT}} models</strong> you can download to the device and aren't on it yet, grouped by what they do. Descriptions, benchmark numbers and samples come from each model's Hugging Face card or its maker's pages; {{NMETRICS}} show benchmark numbers and {{NMEDIA}} have sample images or audio. Each card has its <code>tai download</code> command and, where <code>tai</code> can run the model, an example command to try it. Click a command to copy it.</p>
 </div>
 <div class="bar"><div class="wrap">
   <nav aria-label="Model types">{{NAV}}</nav>

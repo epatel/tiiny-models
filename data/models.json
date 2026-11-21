@@ -27,7 +27,8 @@
   "desc": "Tiiny's Turbo build of Ornith-1.5, a 35B mixture-of-experts (3B active) agentic coding model trained with end-to-end self-improvement."
  },
  "Qwen-Image-2.1-PE-I2I": {
-  "desc": "Prompt enhancer for Qwen-Image-2.1 editing: rewrites a short edit instruction (with the image in view) into the detailed prompt the image model works best with."
+  "desc": "Prompt enhancer for Qwen-Image-2.1 editing: rewrites a short edit instruction (with the image in view) into the detailed prompt the image model works best with.",
+  "usage": "tai ask -m Qwen-Image-2.1-PE-I2I -f photo.jpg \"make it winter\""
  },
  "Qwen3.5-35B-A3B": {
   "desc": "Qwen 3.5 mixture-of-experts (35B, 3B active) with built-in vision: chat, reasoning, tools and image understanding."
@@ -150,7 +151,8 @@
   "desc": "Zhipu's 30B mixture-of-experts (3B active), the strongest of its class; good at agentic tasks and coding."
  },
  "Qwen-Image-2.1-PE-T2I": {
-  "desc": "Prompt enhancer for Qwen-Image-2.1: expands a short idea into the detailed prompt the image model works best with."
+  "desc": "Prompt enhancer for Qwen-Image-2.1: expands a short idea into the detailed prompt the image model works best with.",
+  "usage": "tai ask -m Qwen-Image-2.1-PE-T2I \"a fox in the snow\""
  },
  "Qwen3-30B-A3B-Instruct": {
   "desc": "Qwen3 30B mixture-of-experts (3B active), 2507 update, no thinking: quick, capable everyday chat."
@@ -195,35 +197,40 @@
   "desc": "Baidu's distilled ERNIE-Image text-to-image model: a single-stream diffusion transformer that is fast and good with text in images."
  },
  "FLUX.2-klein-4B": {
-  "desc": "Black Forest Labs' fastest FLUX: generation and editing in one compact 4B model, under a second on a GPU."
+  "desc": "Black Forest Labs' fastest FLUX: generation and editing in one compact 4B model, under a second on a GPU.",
+  "usage": "tai image -m FLUX.2-klein-4B -i fox.png \"the same fox in summer\" -o summer.png --open"
  },
  "FLUX.2-klein-4B-Background-Remove": {
   "desc": "FLUX.2 klein with fal's LoRA that cuts the subject out of a photo onto a clean background.",
   "captions": [
    "Input",
    "Output"
-  ]
+  ],
+  "usage": "tai image -m FLUX.2-klein-4B-Background-Remove -i photo.jpg \"remove the background\" -o cutout.png --open"
  },
  "FLUX.2-klein-4B-Object-Remove": {
   "desc": "FLUX.2 klein with fal's LoRA that erases a highlighted object and fills the gap naturally.",
   "captions": [
    "Input (object marked)",
    "Output"
-  ]
+  ],
+  "usage": "tai image -m FLUX.2-klein-4B-Object-Remove -i marked.jpg \"remove the highlighted object\" -o clean.png --open"
  },
  "FLUX.2-klein-4B-Outpaint": {
   "desc": "FLUX.2 klein with fal's LoRA that extends a picture into a pure-green (#00FF00) border you add around it.",
   "captions": [
    "Input (green border)",
    "Output"
-  ]
+  ],
+  "usage": "tai image -m FLUX.2-klein-4B-Outpaint -i green-border.png \"extend the picture into the green border\" -o wider.png --open"
  },
  "FLUX.2-klein-4B-Zoom": {
   "desc": "FLUX.2 klein with fal's LoRA that zooms into a red-marked region and redraws it in detail.",
   "captions": [
    "Input (red mark)",
    "Output"
-  ]
+  ],
+  "usage": "tai image -m FLUX.2-klein-4B-Zoom -i red-box.png \"zoom into the red box\" -o zoom.png --open"
  },
  "Krea-2-Turbo": {
   "desc": "Krea 2 made several times faster: images in about 2 seconds, keeping style references, moodboards and LoRAs.",
@@ -245,7 +252,8 @@
  },
  "Z-Image-Turbo-CharacterDesignSheet": {
   "desc": "Z-Image-Turbo with a LoRA for character design sheets (front, side and back views with a colour palette).",
-  "note": "No Hugging Face page found; described from its name."
+  "note": "No Hugging Face page found; described from its name.",
+  "usage": "tai image -m Z-Image-Turbo-CharacterDesignSheet \"character design sheet of a young fox explorer\" -o sheet.png --open"
  },
  "Z-Image-Turbo-Children-Drawing": {
   "desc": "Z-Image-Turbo with ostris's LoRA that turns any prompt into a child's crayon drawing."
@@ -268,11 +276,13 @@
  },
  "Qwen3-CustomVoice-1.7B": {
   "desc": "Qwen3-TTS with preset voices you steer by instruction (tone, speed, emotion); 10 languages.",
-  "link": "https://qwen.ai/blog?id=qwen3tts-0115"
+  "link": "https://qwen.ai/blog?id=qwen3tts-0115",
+  "usage": "tai tts -m Qwen3-CustomVoice-1.7B \"Hello there, nice to meet you.\" -i \"cheerful, a little faster\" --play"
  },
  "Qwen3-VoiceDesign-1.7B": {
   "desc": "Qwen3-TTS that creates a new voice from a written description, e.g. \"a calm older man with a slight rasp\".",
-  "link": "https://qwen.ai/blog?id=qwen3tts-0115"
+  "link": "https://qwen.ai/blog?id=qwen3tts-0115",
+  "usage": "tai tts -m Qwen3-VoiceDesign-1.7B \"Hello there, nice to meet you.\" -i \"female, british accent, low pitch\" --play"
  },
  "VibeVoice-Realtime-0.5B": {
   "desc": "Microsoft's streaming TTS: starts speaking in ~300 ms while text is still arriving, so a chat model can talk as it writes.",

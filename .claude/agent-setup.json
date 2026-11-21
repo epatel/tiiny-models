@@ -1,0 +1,9 @@
+{
+  "source": "https://ai.memention.net/setup",
+  "version": "2026-11-14.4",
+  "updated": "2026-11-21",
+  "applied": ["context-cards", "skill:review-agentic-setup"],
+  "declined": ["known-stack", "feature-first", "feature-first-advanced", "two-tier", "project-plan", "standing-defaults", "hooks-over-prose", "code-health", "skill:double-check"],
+  "copied": {},
+  "skills_release": "v2026.11.14"
+}
