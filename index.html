@@ -231,7 +231,7 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
 </article></div>
 </section>
 <section id="music">
-  <div class="sechead"><h2>Music</h2><p>Songs, loops and instrument samples.</p><span class="type">Music Generation · 5</span></div>
+  <div class="sechead"><h2>Music</h2><p>Songs, loops and instrument samples. Use with <code>tai music</code>.</p><span class="type">Music Generation · 5</span></div>
   <div class="grid"><article class="card gen" id="acestep-xl-base" data-q="acestep-xl-base ace-step/acestep-xl-base ace-step 1.5 xl (4b) base: full-quality text-to-music with lyrics, plus cover, repaint, extract and continue. trained on licensed data.">
   <header><h3>AceStep-XL-Base</h3><span class="lic">mit</span></header>
   <code class="id">ACE-Step/AceStep-XL-Base</code>
@@ -239,7 +239,7 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   
   
   <p class="nomedia">No samples on the model card · see the demo page.</p>
-  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai music -m AceStep-XL-Base &quot;synth-pop, female vocals&quot; -l lyrics.txt -o song.mp3" aria-label="Copy an example command for AceStep-XL-Base">tai music -m AceStep-XL-Base &quot;synth-pop, female vocals&quot; -l lyrics.txt -o song.mp3</button></div>
   <footer><div class="links"><a href="https://huggingface.co/ACE-Step/acestep-v15-xl-base">Original on Hugging Face</a> · <a href="https://ace-step.github.io/ace-step-v1.5.github.io/">Demo page</a></div>
   <button class="copy" type="button" data-cmd="tai download AceStep-XL-Base" aria-label="Copy the download command for AceStep-XL-Base">tai download AceStep-XL-Base</button></footer>
 </article><article class="card gen" id="acestep-xl-turbo" data-q="acestep-xl-turbo ace-step/acestep-xl-turbo ace-step 1.5 xl distilled to 8 steps: the 4b model&#x27;s quality, much faster.">
@@ -249,7 +249,7 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   
   
   <p class="nomedia">No samples on the model card · see the demo page.</p>
-  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai music -m AceStep-XL-Turbo &quot;lo-fi hip hop, mellow piano&quot; --instrumental --seconds 60 -x ace_step.bpm=85 -o beat.mp3" aria-label="Copy an example command for AceStep-XL-Turbo">tai music -m AceStep-XL-Turbo &quot;lo-fi hip hop, mellow piano&quot; --instrumental --seconds 60 -x ace_step.bpm=85 -o beat.mp3</button></div>
   <footer><div class="links"><a href="https://huggingface.co/ACE-Step/acestep-v15-xl-turbo">Original on Hugging Face</a> · <a href="https://ace-step.github.io/ace-step-v1.5.github.io/">Demo page</a></div>
   <button class="copy" type="button" data-cmd="tai download AceStep-XL-Turbo" aria-label="Copy the download command for AceStep-XL-Turbo">tai download AceStep-XL-Turbo</button></footer>
 </article><article class="card gen" id="foundation-1" data-q="foundation-1 royalcities/foundation-1 text-to-sample model for producers: tempo-synced loops, one-shots and playable instruments from structured tags (instrument, timbre, effects, key, bpm).">
@@ -259,7 +259,7 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   
   
   <div class="media clips"><div class="clip"><span>Example loop 1</span><audio controls preload="none" src="media/foundation-1-0.mp3"></audio></div><div class="clip"><span>Example loop 2</span><audio controls preload="none" src="media/foundation-1-1.mp3"></audio></div></div>
-  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai music -m Foundation-1 &quot;warm rhodes loop, 90 bpm&quot; --seconds 8 -o loop.wav" aria-label="Copy an example command for Foundation-1">tai music -m Foundation-1 &quot;warm rhodes loop, 90 bpm&quot; --seconds 8 -o loop.wav</button></div>
   <footer><div class="links"><a href="https://huggingface.co/RoyalCities/Foundation-1">Hugging Face</a></div>
   <button class="copy" type="button" data-cmd="tai download Foundation-1" aria-label="Copy the download command for Foundation-1">tai download Foundation-1</button></footer>
 </article><article class="card gen" id="songgeneration-v2-large" data-q="songgeneration-v2-large tencent/songgeneration-v2-large tencent&#x27;s song generator: full songs with vocals and accompaniment from lyrics and a style prompt.">
@@ -269,7 +269,7 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <p class="note">Tencent&#x27;s official repositories are gone; linked to an MLX conversion. No samples found.</p>
   <dl class="metrics"><div><dt>Overall MOS (LeVo 2 listening test)</dt><dd>5.48</dd></div><div><dt>PER (lyrics, lower is better)</dt><dd>8.55%</dd></div><div><dt>Emotion control (Gemini, 1-10)</dt><dd>8.72</dd></div></dl><a class="msrc" href="https://arxiv.org/abs/2606.30642">Benchmarks: arxiv.org</a>
   <p class="nomedia">No samples on the model card · see the demo page.</p>
-  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai music -m SongGeneration-v2-large &quot;synth-pop, female vocals&quot; -l lyrics.txt -o song.mp3" aria-label="Copy an example command for SongGeneration-v2-large">tai music -m SongGeneration-v2-large &quot;synth-pop, female vocals&quot; -l lyrics.txt -o song.mp3</button></div>
   <footer><div class="links"><a href="https://huggingface.co/mlx-community/SongGeneration-v2-large">Hugging Face (MLX)</a></div>
   <button class="copy" type="button" data-cmd="tai download SongGeneration-v2-large" aria-label="Copy the download command for SongGeneration-v2-large">tai download SongGeneration-v2-large</button></footer>
 </article><article class="card gen" id="yue2-3b" data-q="yue2-3b m-a-p/yue2-3b m-a-p&#x27;s yue 2: full songs with vocals from lyrics, plus covers and edits of melody and chords. non-commercial licence.">
@@ -279,7 +279,7 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   
   <dl class="metrics"><div><dt>WildSongBench SongBench Avg</dt><dd>6.7316</dd></div><div><dt>Musicality</dt><dd>5.9075</dd></div><div><dt>PER (lower is better)</dt><dd>8.44%</dd></div></dl><a class="msrc" href="https://huggingface.co/m-a-p/YuE2-3B">Benchmarks: huggingface.co</a>
   <div class="media clips"><div class="clip"><span>“Tonight Awake”</span><audio controls preload="none" src="media/yue2-3b-0.mp3"></audio></div><div class="clip"><span>Cyber metal</span><audio controls preload="none" src="media/yue2-3b-1.mp3"></audio></div></div>
-  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai music -m YuE2-3B &quot;synth-pop, female vocals&quot; -l lyrics.txt -o song.mp3" aria-label="Copy an example command for YuE2-3B">tai music -m YuE2-3B &quot;synth-pop, female vocals&quot; -l lyrics.txt -o song.mp3</button></div>
   <footer><div class="links"><a href="https://huggingface.co/m-a-p/YuE2-3B">Hugging Face</a></div>
   <button class="copy" type="button" data-cmd="tai download YuE2-3B" aria-label="Copy the download command for YuE2-3B">tai download YuE2-3B</button></footer>
 </article></div>

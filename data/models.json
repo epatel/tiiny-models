@@ -81,14 +81,16 @@
  },
  "AceStep-XL-Turbo": {
   "desc": "ACE-Step 1.5 XL distilled to 8 steps: the 4B model's quality, much faster.",
-  "link": "https://ace-step.github.io/ace-step-v1.5.github.io/"
+  "link": "https://ace-step.github.io/ace-step-v1.5.github.io/",
+  "usage": "tai music -m AceStep-XL-Turbo \"lo-fi hip hop, mellow piano\" --instrumental --seconds 60 -x ace_step.bpm=85 -o beat.mp3"
  },
  "Foundation-1": {
   "desc": "Text-to-sample model for producers: tempo-synced loops, one-shots and playable instruments from structured tags (instrument, timbre, effects, key, BPM).",
   "captions": [
    "Example loop 1",
    "Example loop 2"
-  ]
+  ],
+  "usage": "tai music -m Foundation-1 \"warm rhodes loop, 90 bpm\" --seconds 8 -o loop.wav"
  },
  "SongGeneration-v2-large": {
   "desc": "Tencent's song generator: full songs with vocals and accompaniment from lyrics and a style prompt.",

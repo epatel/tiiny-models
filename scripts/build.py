@@ -11,7 +11,7 @@ from common import DATA, ROOT, load, slug, store, store_date
 GENERATORS = ("Text-to-Image", "Music Generation", "Text-to-Speech", "Image-to-3D")
 GROUPS = [  # (store type, heading, what it's for, tai command)
     ("Text-to-Image", "Images", "Pictures from a prompt, and edits of pictures you give.", "tai image"),
-    ("Music Generation", "Music", "Songs, loops and instrument samples.", None),
+    ("Music Generation", "Music", "Songs, loops and instrument samples.", "tai music"),
     ("Text-to-Speech", "Speech", "Text read aloud, voice cloning and voice design.", "tai tts"),
     ("Image-to-3D", "3D", "A textured 3D model from one picture.", "tai 3d"),
     ("Image-Text-to-Text", "Chat with vision", "Chat models that also read images.", "tai ask · tai chat · tai agent"),
@@ -25,6 +25,7 @@ GROUPS = [  # (store type, heading, what it's for, tai command)
 
 USAGE = {  # example command per store type ({m} = model name); data/models.json "usage" overrides it
     "Text-to-Image": 'tai image -m {m} "a fox in the snow, watercolor" -o fox.png --open',
+    "Music Generation": 'tai music -m {m} "synth-pop, female vocals" -l lyrics.txt -o song.mp3',
     "Text-to-Speech": 'tai tts -m {m} "Hello there, nice to meet you." --play',
     "Image-to-3D": "tai 3d -m {m} toy.png -o toy.glb",
     "Image-Text-to-Text": 'tai ask -m {m} -f photo.jpg "what\'s in this picture?"',
