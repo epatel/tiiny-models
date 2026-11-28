@@ -10,7 +10,7 @@ A static one-page catalog of the Tiiny store's models (descriptions, benchmarks,
 
 ## Rules
 - **Never edit `index.html` by hand**: change `data/` or `scripts/template.html` and rebuild. Commit `index.html` and `media/` with the change (Pages serves them).
-- **Store list**: comes from the user's `tai download` output (the `tai` CLI in ../tiiny-cli). Don't invent models; keep the date line in `data/store.txt` current.
+- **Store list**: the whole store: `tai download` (models not on the device) plus `tai models --json` (those on it), from the `tai` CLI in ../tiiny-cli. Don't invent models; keep the date line in `data/store.txt` current.
 - **Benchmarks**: copy numbers exactly from the source and link it in `source`; prefer the model's own Hugging Face card → maker's paper/blog/GitHub → public leaderboard (note that leaderboard numbers drift). Take the right column in comparison tables. No numbers for LoRA/fine-tune entries borrowed from the base model; an empty list is fine. Check numbers that came through a page summary (WebFetch) against the raw page before keeping them.
 - **Descriptions**: 1–2 plain sentences from the card. When the card is gated, empty or missing, say where the text came from in `note`.
 - **Samples**: only for generating models (image, music, speech, 3D), only the makers' own published examples, never ones we generate. Keep them small (`media.sh` shrinks them). Gated Hugging Face repos (e.g. krea/Krea-2-Turbo) need the user to request access; don't fill in access forms or accept licences for them.

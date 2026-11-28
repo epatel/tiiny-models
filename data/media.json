@@ -122,5 +122,47 @@
    "aud",
    "https://huggingface.co/Supertone/supertonic-3/resolve/main/audio_samples/luna_supertonic3.wav"
   ]
+ ],
+ "MOSS-Image-Base": [
+  [
+   "img",
+   "https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base/resolve/main/assets/teaser.webp"
+  ],
+  [
+   "img",
+   "https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base/resolve/main/assets/showcase/layout-bboxes.webp"
+  ]
+ ],
+ "TRELLIS.2-4B": [
+  [
+   "img",
+   "https://raw.githubusercontent.com/microsoft/TRELLIS.2/main/assets/teaser.webp"
+  ]
+ ],
+ "HiDream-O1-Image-Dev": [
+  [
+   "img",
+   "https://huggingface.co/HiDream-ai/HiDream-O1-Image-Dev/resolve/main/assets/general.webp"
+  ],
+  [
+   "img",
+   "https://huggingface.co/HiDream-ai/HiDream-O1-Image-Dev/resolve/main/assets/text-layout.webp"
+  ]
+ ],
+ "Z-Image-Turbo": [
+  [
+   "img",
+   "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo/resolve/main/assets/showcase_realistic.png"
+  ],
+  [
+   "img",
+   "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo/resolve/main/assets/showcase_rendering.png"
+  ]
+ ],
+ "Kokoro-82M": [
+  [
+   "aud",
+   "https://huggingface.co/hexgrad/Kokoro-82M/resolve/main/samples/HEARME.wav"
+  ]
  ]
 }

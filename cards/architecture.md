@@ -1,10 +1,10 @@
 # architecture
 
-How the catalog's data flows from the `tai download` output to the published page.
+How the catalog's data flows from the `tai download` / `tai models` output to the published page.
 
 ```mermaid
 flowchart LR
-  T[tai download output] -->|pasted by hand| S[data/store.txt]
+  T[tai download + tai models output] -->|copied by hand| S[data/store.txt]
   S --> F[scripts/fetch_hf.py]
   A[data/aliases.json] --> F
   F --> H[data/hf.json]

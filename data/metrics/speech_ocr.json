@@ -396,5 +396,72 @@
    }
   ],
   "source": "https://huggingface.co/vllm-sr/d3-nano"
+ },
+ "clef": {
+  "metrics": [
+   {
+    "label": "BFCL (case exact accuracy)",
+    "value": "98.5"
+   },
+   {
+    "label": "BANKING77 (macro-F1)",
+    "value": "94.2"
+   },
+   {
+    "label": "MMLU (accuracy)",
+    "value": "90.3"
+   },
+   {
+    "label": "GSM8K (accuracy)",
+    "value": "80.8"
+   }
+  ],
+  "source": "https://huggingface.co/Cloudflare/clef"
+ },
+ "clef-flash": {
+  "metrics": [
+   {
+    "label": "BFCL (case exact accuracy)",
+    "value": "98.8"
+   },
+   {
+    "label": "BANKING77 (macro-F1)",
+    "value": "90.9"
+   },
+   {
+    "label": "MMLU (accuracy)",
+    "value": "91.8"
+   },
+   {
+    "label": "GSM8K (accuracy)",
+    "value": "67.3"
+   }
+  ],
+  "source": "https://huggingface.co/Cloudflare/clef-flash"
+ },
+ "Qwen3-ASR-1.7B": {
+  "metrics": [
+   {
+    "label": "LibriSpeech clean WER",
+    "value": "1.63",
+    "note": "%, lower is better"
+   },
+   {
+    "label": "LibriSpeech other WER",
+    "value": "3.38",
+    "note": "%, lower is better"
+   },
+   {
+    "label": "FLEURS-en WER",
+    "value": "3.35",
+    "note": "%, lower is better"
+   },
+   {
+    "label": "FLEURS-zh WER",
+    "value": "2.41",
+    "note": "%, lower is better"
+   }
+  ],
+  "source": "https://huggingface.co/Qwen/Qwen3-ASR-1.7B"
  }
 }

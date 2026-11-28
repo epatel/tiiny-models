@@ -258,5 +258,78 @@
   ],
   "source": "https://github.com/supertone-inc/supertonic",
   "note": "From the official GitHub README; the HF card shows the same results only as charts."
+ },
+ "MOSS-Image-Base": {
+  "metrics": [],
+  "source": "https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base"
+ },
+ "HiDream-O1-Image-Dev": {
+  "metrics": [],
+  "source": "https://huggingface.co/HiDream-ai/HiDream-O1-Image-Dev",
+  "note": "The card's tables cover the full 50-step HiDream-O1-Image, not this Dev model."
+ },
+ "Qwen-Image-2.1-Uncensored": {
+  "metrics": [],
+  "source": "https://huggingface.co/abenzerps/Qwen-Image-2.1-Turbo-Quantized"
+ },
+ "Z-Image-Turbo": {
+  "metrics": [],
+  "source": "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo",
+  "note": "The card shows its AI Arena Elo rating only as an image."
+ },
+ "TRELLIS.2-4B": {
+  "metrics": [],
+  "source": "https://huggingface.co/microsoft/TRELLIS.2-4B"
+ },
+ "Kokoro-82M": {
+  "metrics": [],
+  "source": "https://huggingface.co/hexgrad/Kokoro-82M"
+ },
+ "OmniVoice": {
+  "metrics": [],
+  "source": "https://huggingface.co/k2-fsa/OmniVoice"
+ },
+ "VibeVoice-1.5B": {
+  "metrics": [],
+  "source": "https://huggingface.co/microsoft/VibeVoice-1.5B"
+ },
+ "Qwen3-VoiceClone-1.7B": {
+  "metrics": [
+   {
+    "label": "Seed-TTS test-en WER (lower is better)",
+    "value": "1.24"
+   },
+   {
+    "label": "Seed-TTS test-zh WER (lower is better)",
+    "value": "0.77"
+   }
+  ],
+  "source": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base",
+  "note": "Qwen3-TTS-12Hz-1.7B-Base row, zero-shot cloning."
+ },
+ "VoxCPM2": {
+  "metrics": [
+   {
+    "label": "Seed-TTS test-EN WER (lower is better)",
+    "value": "1.84%"
+   },
+   {
+    "label": "Seed-TTS test-EN SIM",
+    "value": "75.3%"
+   },
+   {
+    "label": "Seed-TTS test-ZH CER (lower is better)",
+    "value": "0.97%"
+   },
+   {
+    "label": "InstructTTSEval-EN APS",
+    "value": "84.2"
+   }
+  ],
+  "source": "https://github.com/OpenBMB/VoxCPM#-performance"
+ },
+ "MiniMax-H3-Turbo": {
+  "metrics": [],
+  "source": "https://huggingface.co/lightx2v/Minimax-h3-Turbo"
  }
 }

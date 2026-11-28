@@ -80,6 +80,27 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
 .copy { font: 12px var(--mono); background: var(--chip); color: var(--ink); border: 0; border-radius: 6px; padding: 4px 8px; cursor: pointer; max-width: 100%; overflow-wrap: anywhere; text-align: left }
 .copy:hover, .copy:focus-visible { background: var(--accent-soft); color: var(--accent); outline: none }
 .copy.done::after { content: "  copied"; color: var(--accent) }
+.tablewrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px }
+.swe { border-collapse: collapse; width: 100%; font-size: 14px }
+.swe th, .swe td { padding: 8px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line) }
+.swe tbody tr:last-child > * { border-bottom: 0 }
+.swe thead th { font: 500 12px var(--body); color: var(--muted); white-space: nowrap; background: var(--chip) }
+.swe tbody th { font-weight: 500 }
+.swe tbody th a { color: var(--ink); text-decoration: none; overflow-wrap: anywhere }
+.swe tbody th a:hover { color: var(--accent); text-decoration: underline }
+.swe tbody th span { display: block; font: 11px var(--mono); color: var(--muted); font-weight: 400 }
+.swe td { font: 500 15px/1.2 var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap }
+.swe td small { display: block; font: 11px var(--body); color: var(--muted); margin-top: 2px; white-space: normal }
+.swe thead button { all: unset; cursor: pointer; display: inline-flex; gap: 4px; align-items: center }
+.swe thead button:hover, .swe thead button:focus-visible { color: var(--accent) }
+.swe thead button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px }
+.swe th[aria-sort] { color: var(--ink) }
+.swe th[aria-sort="descending"] .arrow::after { content: "↓" }
+.swe th[aria-sort="ascending"] .arrow::after { content: "↑" }
+.swe td.na { color: var(--line) }
+.swe td.src { font: 12px var(--body) }
+.swe td.src a { color: var(--muted) }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0) }
 .empty { color: var(--muted); padding-block: 30px }
 .foot { color: var(--muted); font-size: 13px; padding-block: 30px 40px; border-top: 1px solid var(--line); margin-top: 28px }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth } }
@@ -89,15 +110,15 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
 
 <div class="wrap top">
   <h1>Tiiny Model Store</h1>
-  <p><strong>80 models</strong> you can download to the device and aren't on it yet, grouped by what they do. Descriptions, benchmark numbers and samples come from each model's Hugging Face card or its maker's pages; 62 show benchmark numbers and 14 have sample images or audio. Each card has its <code>tai download</code> command and, where <code>tai</code> can run the model, an example command to try it. Click a command to copy it.</p>
+  <p><strong>105 models</strong> in the Tiiny store, grouped by what they do. Descriptions, benchmark numbers and samples come from each model's Hugging Face card or its maker's pages; 78 show benchmark numbers and 19 have sample images or audio. Each card has its <code>tai download</code> command and, where <code>tai</code> can run the model, an example command to try it. Click a command to copy it.</p>
 </div>
 <div class="bar"><div class="wrap">
-  <nav aria-label="Model types"><a href="#images">Images <span>13</span></a><a href="#music">Music <span>5</span></a><a href="#speech">Speech <span>7</span></a><a href="#3d">3D <span>1</span></a><a href="#chat-with-vision">Chat with vision <span>13</span></a><a href="#chat">Chat <span>9</span></a><a href="#transcription">Transcription <span>5</span></a><a href="#ocr-and-layout">OCR and layout <span>6</span></a><a href="#embeddings">Embeddings <span>7</span></a><a href="#reranking">Reranking <span>6</span></a><a href="#classification">Classification <span>8</span></a></nav>
+  <nav aria-label="Model types"><a href="#images">Images <span>17</span></a><a href="#music">Music <span>5</span></a><a href="#speech">Speech <span>12</span></a><a href="#3d">3D <span>2</span></a><a href="#video">Video <span>1</span></a><a href="#chat-with-vision">Chat with vision <span>19</span></a><a href="#chat">Chat <span>13</span></a><a href="#transcription">Transcription <span>6</span></a><a href="#ocr-and-layout">OCR and layout <span>6</span></a><a href="#embeddings">Embeddings <span>8</span></a><a href="#reranking">Reranking <span>6</span></a><a href="#classification">Classification <span>10</span></a><a href="#swe-bench">SWE-bench <span>18</span></a></nav>
   <input id="q" type="search" placeholder="Filter models" aria-label="Filter models">
 </div></div>
 <main class="wrap">
 <section id="images">
-  <div class="sechead"><h2>Images</h2><p>Pictures from a prompt, and edits of pictures you give. Use with <code>tai image</code>.</p><span class="type">Text-to-Image · 13</span></div>
+  <div class="sechead"><h2>Images</h2><p>Pictures from a prompt, and edits of pictures you give. Use with <code>tai image</code>.</p><span class="type">Text-to-Image · 17</span></div>
   <div class="grid"><article class="card gen" id="ernie-image-turbo" data-q="ernie-image-turbo baidu/ernie-image-turbo baidu&#x27;s distilled ernie-image text-to-image model: a single-stream diffusion transformer that is fast and good with text in images.">
   <header><h3>ERNIE-Image-Turbo</h3><span class="lic">apache-2.0</span></header>
   <code class="id">baidu/ERNIE-Image-Turbo</code>
@@ -158,6 +179,16 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai image -m FLUX.2-klein-4B-Zoom -i red-box.png &quot;zoom into the red box&quot; -o zoom.png --open" aria-label="Copy an example command for FLUX.2-klein-4B-Zoom">tai image -m FLUX.2-klein-4B-Zoom -i red-box.png &quot;zoom into the red box&quot; -o zoom.png --open</button></div>
   <footer><div class="links"><a href="https://huggingface.co/fal/flux-2-klein-4B-zoom-lora">Original on Hugging Face</a></div>
   <button class="copy" type="button" data-cmd="tai download FLUX.2-klein-4B-Zoom" aria-label="Copy the download command for FLUX.2-klein-4B-Zoom">tai download FLUX.2-klein-4B-Zoom</button></footer>
+</article><article class="card gen" id="hidream-o1-image-dev" data-q="hidream-o1-image-dev hidream-ai/hidream-o1-image-dev hidream&#x27;s unified image model, 28-step dev version: one transformer for text-to-image, editing and subject-driven images up to 2048×2048.">
+  <header><h3>HiDream-O1-Image-Dev</h3><span class="lic">mit</span></header>
+  <code class="id">HiDream-ai/HiDream-O1-Image-Dev</code>
+  <p>HiDream&#x27;s unified image model, 28-step Dev version: one transformer for text-to-image, editing and subject-driven images up to 2048×2048.</p>
+  
+  
+  <div class="media imgs"><figure><img src="media/hidream-o1-image-dev-0.jpg" alt="General generation" loading="lazy"><figcaption>General generation</figcaption></figure><figure><img src="media/hidream-o1-image-dev-1.jpg" alt="Text and layout" loading="lazy"><figcaption>Text and layout</figcaption></figure></div>
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai image -m HiDream-O1-Image-Dev &quot;a fox in the snow, watercolor&quot; -o fox.png --open" aria-label="Copy an example command for HiDream-O1-Image-Dev">tai image -m HiDream-O1-Image-Dev &quot;a fox in the snow, watercolor&quot; -o fox.png --open</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/HiDream-ai/HiDream-O1-Image-Dev">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download HiDream-O1-Image-Dev" aria-label="Copy the download command for HiDream-O1-Image-Dev">tai download HiDream-O1-Image-Dev</button></footer>
 </article><article class="card gen" id="krea-2-turbo" data-q="krea-2-turbo krea/krea-2-turbo krea 2 made several times faster: images in about 2 seconds, keeping style references, moodboards and loras.">
   <header><h3>Krea-2-Turbo</h3><span class="lic">other</span></header>
   <code class="id">krea/Krea-2-Turbo</code>
@@ -168,6 +199,16 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai image -m Krea-2-Turbo &quot;a fox in the snow, watercolor&quot; -o fox.png --open" aria-label="Copy an example command for Krea-2-Turbo">tai image -m Krea-2-Turbo &quot;a fox in the snow, watercolor&quot; -o fox.png --open</button></div>
   <footer><div class="links"><a href="https://huggingface.co/krea/Krea-2-Turbo">Hugging Face</a> · <a href="https://www.krea.ai/blog/krea-2-turbo">Demo page</a></div>
   <button class="copy" type="button" data-cmd="tai download Krea-2-Turbo" aria-label="Copy the download command for Krea-2-Turbo">tai download Krea-2-Turbo</button></footer>
+</article><article class="card gen" id="moss-image-base" data-q="moss-image-base openmoss-team/moss-image-base openmoss&#x27;s base text-to-image model: prompts can be natural language, tag sequences or json layouts that place text and objects.">
+  <header><h3>MOSS-Image-Base</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">OpenMOSS-Team/MOSS-Image-Base</code>
+  <p>OpenMOSS&#x27;s base text-to-image model: prompts can be natural language, tag sequences or JSON layouts that place text and objects.</p>
+  
+  
+  <div class="media imgs"><figure><img src="media/moss-image-base-0.jpg" alt="MOSS-Image-Base and MOSS-Image-SFT" loading="lazy"><figcaption>MOSS-Image-Base and MOSS-Image-SFT</figcaption></figure><figure><img src="media/moss-image-base-1.jpg" alt="Layout control with bounding boxes" loading="lazy"><figcaption>Layout control with bounding boxes</figcaption></figure></div>
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai image -m MOSS-Image-Base &quot;a fox in the snow, watercolor&quot; -o fox.png --open" aria-label="Copy an example command for MOSS-Image-Base">tai image -m MOSS-Image-Base &quot;a fox in the snow, watercolor&quot; -o fox.png --open</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/OpenMOSS-Team/MOSS-Image-Base">Hugging Face</a> · <a href="https://openmoss.ai/MOSS-Image/">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download MOSS-Image-Base" aria-label="Copy the download command for MOSS-Image-Base">tai download MOSS-Image-Base</button></footer>
 </article><article class="card gen" id="qwen-image-2-1" data-q="qwen-image-2.1 qwen/qwen-image-2.1 qwen&#x27;s unified generation and editing model (7b image transformer): strong at text in images and instruction edits.">
   <header><h3>Qwen-Image-2.1</h3><span class="lic">other</span></header>
   <code class="id">Qwen/Qwen-Image-2.1</code>
@@ -178,6 +219,16 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai image -m Qwen-Image-2.1 &quot;a fox in the snow, watercolor&quot; -o fox.png --open" aria-label="Copy an example command for Qwen-Image-2.1">tai image -m Qwen-Image-2.1 &quot;a fox in the snow, watercolor&quot; -o fox.png --open</button></div>
   <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen-Image-2.1">Hugging Face</a></div>
   <button class="copy" type="button" data-cmd="tai download Qwen-Image-2.1" aria-label="Copy the download command for Qwen-Image-2.1">tai download Qwen-Image-2.1</button></footer>
+</article><article class="card gen" id="qwen-image-2-1-uncensored" data-q="qwen-image-2.1-uncensored abenzerps/qwen-image-2.1-uncensored-quantized a quantized qwen-image-2.1-turbo with no safety checker or content filter: 7b, 8-step text-to-image.">
+  <header><h3>Qwen-Image-2.1-Uncensored</h3><span class="lic">other</span></header>
+  <code class="id">abenzerps/Qwen-Image-2.1-Uncensored-Quantized</code>
+  <p>A quantized Qwen-Image-2.1-Turbo with no safety checker or content filter: 7B, 8-step text-to-image.</p>
+  <p class="note">From the quantizer&#x27;s card (abenzerps), not Qwen&#x27;s.</p>
+  
+  <p class="nomedia">No samples on the model card.</p>
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai image -m Qwen-Image-2.1-Uncensored &quot;a fox in the snow, watercolor&quot; -o fox.png --open" aria-label="Copy an example command for Qwen-Image-2.1-Uncensored">tai image -m Qwen-Image-2.1-Uncensored &quot;a fox in the snow, watercolor&quot; -o fox.png --open</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/abenzerps/Qwen-Image-2.1-Turbo-Quantized">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen-Image-2.1-Uncensored" aria-label="Copy the download command for Qwen-Image-2.1-Uncensored">tai download Qwen-Image-2.1-Uncensored</button></footer>
 </article><article class="card gen" id="qwen-image-2-1-viggle-turbo" data-q="qwen-image-2.1-viggle-turbo viggle/qwen-image-2.1-viggle-turbo viggle&#x27;s distilled qwen-image-2.1: 6 steps instead of 40, about 5× faster, hard to tell apart on most prompts; edits with 1–3 reference images.">
   <header><h3>Qwen-Image-2.1-viggle-turbo</h3><span class="lic">other</span></header>
   <code class="id">Viggle/Qwen-Image-2.1-viggle-turbo</code>
@@ -198,6 +249,16 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai image -m SenseNova-U1.5-8B-MoT &quot;a fox in the snow, watercolor&quot; -o fox.png --open" aria-label="Copy an example command for SenseNova-U1.5-8B-MoT">tai image -m SenseNova-U1.5-8B-MoT &quot;a fox in the snow, watercolor&quot; -o fox.png --open</button></div>
   <footer><div class="links"><a href="https://huggingface.co/sensenova/SenseNova-U1.5-8B-MoT">Original on Hugging Face</a></div>
   <button class="copy" type="button" data-cmd="tai download SenseNova-U1.5-8B-MoT" aria-label="Copy the download command for SenseNova-U1.5-8B-MoT">tai download SenseNova-U1.5-8B-MoT</button></footer>
+</article><article class="card gen" id="z-image-turbo" data-q="z-image-turbo tongyi-mai/z-image-turbo tongyi&#x27;s distilled 6b z-image: high-quality pictures in 8 steps, with sub-second latency on a big gpu.">
+  <header><h3>Z-Image-Turbo</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Tongyi-MAI/Z-Image-Turbo</code>
+  <p>Tongyi&#x27;s distilled 6B Z-Image: high-quality pictures in 8 steps, with sub-second latency on a big GPU.</p>
+  
+  
+  <div class="media imgs"><figure><img src="media/z-image-turbo-0.jpg" alt="Realistic" loading="lazy"><figcaption>Realistic</figcaption></figure><figure><img src="media/z-image-turbo-1.jpg" alt="Rendering" loading="lazy"><figcaption>Rendering</figcaption></figure></div>
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai image -m Z-Image-Turbo &quot;a fox in the snow, watercolor&quot; -o fox.png --open" aria-label="Copy an example command for Z-Image-Turbo">tai image -m Z-Image-Turbo &quot;a fox in the snow, watercolor&quot; -o fox.png --open</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/Tongyi-MAI/Z-Image-Turbo">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Z-Image-Turbo" aria-label="Copy the download command for Z-Image-Turbo">tai download Z-Image-Turbo</button></footer>
 </article><article class="card gen" id="z-image-turbo-characterdesignsheet" data-q="z-image-turbo-characterdesignsheet yeiyeiart/z-image-turbo-characterdesignsheet z-image-turbo with a lora for character design sheets (front, side and back views with a colour palette).">
   <header><h3>Z-Image-Turbo-CharacterDesignSheet</h3></header>
   <code class="id">YeiYeiArt/Z-Image-Turbo-CharacterDesignSheet</code>
@@ -285,7 +346,7 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
 </article></div>
 </section>
 <section id="speech">
-  <div class="sechead"><h2>Speech</h2><p>Text read aloud, voice cloning and voice design. Use with <code>tai tts</code>.</p><span class="type">Text-to-Speech · 7</span></div>
+  <div class="sechead"><h2>Speech</h2><p>Text read aloud, voice cloning and voice design. Use with <code>tai tts</code>.</p><span class="type">Text-to-Speech · 12</span></div>
   <div class="grid"><article class="card gen" id="fun-cosyvoice3-0-5b-2512" data-q="fun-cosyvoice3-0.5b-2512 funaudiollm/fun-cosyvoice3-0.5b-2512 tongyi lab&#x27;s cosyvoice 3: 9 languages and 18+ chinese dialects, zero-shot voice cloning across languages.">
   <header><h3>Fun-CosyVoice3-0.5B-2512</h3><span class="lic">apache-2.0</span></header>
   <code class="id">FunAudioLLM/Fun-CosyVoice3-0.5B-2512</code>
@@ -296,6 +357,16 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai tts -m Fun-CosyVoice3-0.5B-2512 &quot;Hello there, nice to meet you.&quot; --play" aria-label="Copy an example command for Fun-CosyVoice3-0.5B-2512">tai tts -m Fun-CosyVoice3-0.5B-2512 &quot;Hello there, nice to meet you.&quot; --play</button></div>
   <footer><div class="links"><a href="https://huggingface.co/FunAudioLLM/Fun-CosyVoice3-0.5B-2512">Hugging Face</a> · <a href="https://funaudiollm.github.io/cosyvoice3/">Demo page</a></div>
   <button class="copy" type="button" data-cmd="tai download Fun-CosyVoice3-0.5B-2512" aria-label="Copy the download command for Fun-CosyVoice3-0.5B-2512">tai download Fun-CosyVoice3-0.5B-2512</button></footer>
+</article><article class="card gen" id="kokoro-82m" data-q="kokoro-82m hexgrad/kokoro-82m a tiny 82m-parameter tts that sounds like much larger models and runs fast; 8 languages and 54 voices.">
+  <header><h3>Kokoro-82M</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">hexgrad/Kokoro-82M</code>
+  <p>A tiny 82M-parameter TTS that sounds like much larger models and runs fast; 8 languages and 54 voices.</p>
+  
+  
+  <div class="media clips"><div class="clip"><span>Sample</span><audio controls preload="none" src="media/kokoro-82m-0.mp3"></audio></div></div>
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai tts -m Kokoro-82M &quot;Hello there, nice to meet you.&quot; --play" aria-label="Copy an example command for Kokoro-82M">tai tts -m Kokoro-82M &quot;Hello there, nice to meet you.&quot; --play</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/hexgrad/Kokoro-82M">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Kokoro-82M" aria-label="Copy the download command for Kokoro-82M">tai download Kokoro-82M</button></footer>
 </article><article class="card gen" id="moss-tts-local-transformer-v1-5" data-q="moss-tts-local-transformer-v1.5 openmoss-team/moss-tts-local-transformer-v1.5 openmoss&#x27;s tts with native 48 khz stereo output and voice cloning.">
   <header><h3>MOSS-TTS-Local-Transformer-v1.5</h3><span class="lic">apache-2.0</span></header>
   <code class="id">OpenMOSS-Team/MOSS-TTS-Local-Transformer-v1.5</code>
@@ -314,8 +385,18 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   
   <p class="nomedia">No samples on the model card · see the demo page.</p>
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai tts -m MOSS-TTS-Nano-100M &quot;Hello there, nice to meet you.&quot; --play" aria-label="Copy an example command for MOSS-TTS-Nano-100M">tai tts -m MOSS-TTS-Nano-100M &quot;Hello there, nice to meet you.&quot; --play</button></div>
-  <footer><div class="links"><a href="https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Nano-100M">Hugging Face</a> · <a href="https://openmoss.github.io/MOSS-TTS-Nano-Demo/">Demo page</a></div>
+  <footer><div class="links"><a href="https://huggingface.co/OpenMOSS-Team/MOSS-TTS-Nano-100M">Hugging Face</a> · <a href="https://openmoss.ai/MOSS-TTS-Nano-Demo/">Demo page</a></div>
   <button class="copy" type="button" data-cmd="tai download MOSS-TTS-Nano-100M" aria-label="Copy the download command for MOSS-TTS-Nano-100M">tai download MOSS-TTS-Nano-100M</button></footer>
+</article><article class="card gen" id="omnivoice" data-q="omnivoice k2-fsa/omnivoice k2-fsa&#x27;s zero-shot tts for 600+ languages, with voice cloning and voice design.">
+  <header><h3>OmniVoice</h3></header>
+  <code class="id">k2-fsa/OmniVoice</code>
+  <p>k2-fsa&#x27;s zero-shot TTS for 600+ languages, with voice cloning and voice design.</p>
+  
+  
+  <p class="nomedia">No samples on the model card · see the demo page.</p>
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai tts -m OmniVoice &quot;Hello there, nice to meet you.&quot; --play" aria-label="Copy an example command for OmniVoice">tai tts -m OmniVoice &quot;Hello there, nice to meet you.&quot; --play</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/k2-fsa/OmniVoice">Hugging Face</a> · <a href="https://zhu-han.github.io/omnivoice/">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download OmniVoice" aria-label="Copy the download command for OmniVoice">tai download OmniVoice</button></footer>
 </article><article class="card gen" id="qwen3-customvoice-1-7b" data-q="qwen3-customvoice-1.7b qwen/qwen3-tts-12hz-1.7b-customvoice qwen3-tts with preset voices you steer by instruction (tone, speed, emotion); 10 languages.">
   <header><h3>Qwen3-CustomVoice-1.7B</h3><span class="lic">apache-2.0</span></header>
   <code class="id">Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice</code>
@@ -326,6 +407,16 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai tts -m Qwen3-CustomVoice-1.7B &quot;Hello there, nice to meet you.&quot; -i &quot;cheerful, a little faster&quot; --play" aria-label="Copy an example command for Qwen3-CustomVoice-1.7B">tai tts -m Qwen3-CustomVoice-1.7B &quot;Hello there, nice to meet you.&quot; -i &quot;cheerful, a little faster&quot; --play</button></div>
   <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice">Hugging Face</a> · <a href="https://qwen.ai/blog?id=qwen3tts-0115">Demo page</a></div>
   <button class="copy" type="button" data-cmd="tai download Qwen3-CustomVoice-1.7B" aria-label="Copy the download command for Qwen3-CustomVoice-1.7B">tai download Qwen3-CustomVoice-1.7B</button></footer>
+</article><article class="card gen" id="qwen3-voiceclone-1-7b" data-q="qwen3-voiceclone-1.7b qwen/qwen3-tts-12hz-1.7b-base qwen3-tts base model that clones a voice from about 3 seconds of audio; 10 languages.">
+  <header><h3>Qwen3-VoiceClone-1.7B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-TTS-12Hz-1.7B-Base</code>
+  <p>Qwen3-TTS base model that clones a voice from about 3 seconds of audio; 10 languages.</p>
+  
+  <dl class="metrics"><div><dt>Seed-TTS test-en WER (lower is better)</dt><dd>1.24</dd></div><div><dt>Seed-TTS test-zh WER (lower is better)</dt><dd>0.77</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base">Benchmarks: huggingface.co</a>
+  <p class="nomedia">No samples on the model card · see the demo page.</p>
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai tts -m Qwen3-VoiceClone-1.7B &quot;Hello there, nice to meet you.&quot; --clone me.wav --clone-text &quot;what I say in me.wav&quot; --play" aria-label="Copy an example command for Qwen3-VoiceClone-1.7B">tai tts -m Qwen3-VoiceClone-1.7B &quot;Hello there, nice to meet you.&quot; --clone me.wav --clone-text &quot;what I say in me.wav&quot; --play</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base">Hugging Face</a> · <a href="https://qwen.ai/blog?id=qwen3tts-0115">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-VoiceClone-1.7B" aria-label="Copy the download command for Qwen3-VoiceClone-1.7B">tai download Qwen3-VoiceClone-1.7B</button></footer>
 </article><article class="card gen" id="qwen3-voicedesign-1-7b" data-q="qwen3-voicedesign-1.7b qwen/qwen3-tts-12hz-1.7b-voicedesign qwen3-tts that creates a new voice from a written description, e.g. &quot;a calm older man with a slight rasp&quot;.">
   <header><h3>Qwen3-VoiceDesign-1.7B</h3><span class="lic">apache-2.0</span></header>
   <code class="id">Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign</code>
@@ -336,6 +427,16 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai tts -m Qwen3-VoiceDesign-1.7B &quot;Hello there, nice to meet you.&quot; -i &quot;female, british accent, low pitch&quot; --play" aria-label="Copy an example command for Qwen3-VoiceDesign-1.7B">tai tts -m Qwen3-VoiceDesign-1.7B &quot;Hello there, nice to meet you.&quot; -i &quot;female, british accent, low pitch&quot; --play</button></div>
   <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign">Hugging Face</a> · <a href="https://qwen.ai/blog?id=qwen3tts-0115">Demo page</a></div>
   <button class="copy" type="button" data-cmd="tai download Qwen3-VoiceDesign-1.7B" aria-label="Copy the download command for Qwen3-VoiceDesign-1.7B">tai download Qwen3-VoiceDesign-1.7B</button></footer>
+</article><article class="card gen" id="vibevoice-1-5b" data-q="vibevoice-1.5b microsoft/vibevoice-1.5b microsoft&#x27;s long-form tts for podcasts: up to about 90 minutes of conversation between several speakers.">
+  <header><h3>VibeVoice-1.5B</h3><span class="lic">mit</span></header>
+  <code class="id">microsoft/VibeVoice-1.5B</code>
+  <p>Microsoft&#x27;s long-form TTS for podcasts: up to about 90 minutes of conversation between several speakers.</p>
+  
+  
+  <p class="nomedia">No samples on the model card · see the demo page.</p>
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai tts -m VibeVoice-1.5B &quot;Hello there, nice to meet you.&quot; --play" aria-label="Copy an example command for VibeVoice-1.5B">tai tts -m VibeVoice-1.5B &quot;Hello there, nice to meet you.&quot; --play</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/microsoft/VibeVoice-1.5B">Hugging Face</a> · <a href="https://microsoft.github.io/VibeVoice">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download VibeVoice-1.5B" aria-label="Copy the download command for VibeVoice-1.5B">tai download VibeVoice-1.5B</button></footer>
 </article><article class="card gen" id="vibevoice-realtime-0-5b" data-q="vibevoice-realtime-0.5b microsoft/vibevoice-realtime-0.5b microsoft&#x27;s streaming tts: starts speaking in ~300 ms while text is still arriving, so a chat model can talk as it writes.">
   <header><h3>VibeVoice-Realtime-0.5B</h3><span class="lic">mit</span></header>
   <code class="id">microsoft/VibeVoice-Realtime-0.5B</code>
@@ -346,6 +447,16 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai tts -m VibeVoice-Realtime-0.5B &quot;Hello there, nice to meet you.&quot; --play" aria-label="Copy an example command for VibeVoice-Realtime-0.5B">tai tts -m VibeVoice-Realtime-0.5B &quot;Hello there, nice to meet you.&quot; --play</button></div>
   <footer><div class="links"><a href="https://huggingface.co/microsoft/VibeVoice-Realtime-0.5B">Hugging Face</a> · <a href="https://microsoft.github.io/VibeVoice">Demo page</a></div>
   <button class="copy" type="button" data-cmd="tai download VibeVoice-Realtime-0.5B" aria-label="Copy the download command for VibeVoice-Realtime-0.5B">tai download VibeVoice-Realtime-0.5B</button></footer>
+</article><article class="card gen" id="voxcpm2" data-q="voxcpm2 openbmb/voxcpm2 openbmb&#x27;s tokenizer-free 2b tts: 30 languages, 48 khz audio, voice design from a description and controllable cloning.">
+  <header><h3>VoxCPM2</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">openbmb/VoxCPM2</code>
+  <p>OpenBMB&#x27;s tokenizer-free 2B TTS: 30 languages, 48 kHz audio, voice design from a description and controllable cloning.</p>
+  
+  <dl class="metrics"><div><dt>Seed-TTS test-EN WER (lower is better)</dt><dd>1.84%</dd></div><div><dt>Seed-TTS test-EN SIM</dt><dd>75.3%</dd></div><div><dt>Seed-TTS test-ZH CER (lower is better)</dt><dd>0.97%</dd></div><div><dt>InstructTTSEval-EN APS</dt><dd>84.2</dd></div></dl><a class="msrc" href="https://github.com/OpenBMB/VoxCPM#-performance">Benchmarks: github.com</a>
+  <p class="nomedia">No samples on the model card · see the demo page.</p>
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai tts -m VoxCPM2 &quot;Hello there, nice to meet you.&quot; --play" aria-label="Copy an example command for VoxCPM2">tai tts -m VoxCPM2 &quot;Hello there, nice to meet you.&quot; --play</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/openbmb/VoxCPM2">Hugging Face</a> · <a href="https://openbmb.github.io/voxcpm2-demopage">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download VoxCPM2" aria-label="Copy the download command for VoxCPM2">tai download VoxCPM2</button></footer>
 </article><article class="card gen" id="supertonic-3" data-q="supertonic-3 supertone/supertonic-3 supertone&#x27;s fast on-device tts: 31 languages, expressive, runs in real time on a cpu.">
   <header><h3>supertonic-3</h3><span class="lic">openrail</span></header>
   <code class="id">Supertone/supertonic-3</code>
@@ -359,7 +470,7 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
 </article></div>
 </section>
 <section id="3d">
-  <div class="sechead"><h2>3D</h2><p>A textured 3D model from one picture. Use with <code>tai 3d</code>.</p><span class="type">Image-to-3D · 1</span></div>
+  <div class="sechead"><h2>3D</h2><p>A textured 3D model from one picture. Use with <code>tai 3d</code>.</p><span class="type">Image-to-3D · 2</span></div>
   <div class="grid"><article class="card gen" id="hunyuan3d-2-1" data-q="hunyuan3d-2.1 tencent/hunyuan3d-2.1 tencent&#x27;s image-to-3d model: turns one picture into a textured 3d mesh with physically based materials.">
   <header><h3>Hunyuan3D-2.1</h3><span class="lic">other</span></header>
   <code class="id">Tencent/Hunyuan3d-2.1</code>
@@ -370,11 +481,45 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai 3d -m Hunyuan3D-2.1 toy.png -o toy.glb" aria-label="Copy an example command for Hunyuan3D-2.1">tai 3d -m Hunyuan3D-2.1 toy.png -o toy.glb</button></div>
   <footer><div class="links"><a href="https://huggingface.co/tencent/Hunyuan3D-2.1">Hugging Face</a></div>
   <button class="copy" type="button" data-cmd="tai download Hunyuan3D-2.1" aria-label="Copy the download command for Hunyuan3D-2.1">tai download Hunyuan3D-2.1</button></footer>
+</article><article class="card gen" id="trellis-2-4b" data-q="trellis.2-4b microsoft/trellis.2-4b microsoft&#x27;s 4b image-to-3d model: turns one picture into a detailed 3d asset, including open surfaces and complex shapes.">
+  <header><h3>TRELLIS.2-4B</h3><span class="lic">mit</span></header>
+  <code class="id">microsoft/TRELLIS.2-4B</code>
+  <p>Microsoft&#x27;s 4B image-to-3D model: turns one picture into a detailed 3D asset, including open surfaces and complex shapes.</p>
+  
+  
+  <div class="media imgs"><figure><img src="media/trellis-2-4b-0.jpg" alt="TRELLIS.2 examples" loading="lazy"><figcaption>TRELLIS.2 examples</figcaption></figure></div>
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai 3d -m TRELLIS.2-4B toy.png -o toy.glb" aria-label="Copy an example command for TRELLIS.2-4B">tai 3d -m TRELLIS.2-4B toy.png -o toy.glb</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/microsoft/TRELLIS.2-4B">Hugging Face</a> · <a href="https://github.com/microsoft/TRELLIS.2">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download TRELLIS.2-4B" aria-label="Copy the download command for TRELLIS.2-4B">tai download TRELLIS.2-4B</button></footer>
+</article></div>
+</section>
+<section id="video">
+  <div class="sechead"><h2>Video</h2><p>Short clips with sound, from a prompt or a start image. Use with <code>tai video</code>.</p><span class="type">Text-to-Video · 1</span></div>
+  <div class="grid"><article class="card" id="minimax-h3-turbo" data-q="minimax-h3-turbo lightx2v/minimax-h3-turbo lightx2v&#x27;s 8-step distilled minimax-h3: short video clips with sound from a prompt or a start image.">
+  <header><h3>MiniMax-H3-Turbo</h3><span class="lic">other</span></header>
+  <code class="id">lightx2v/MiniMax-H3-Turbo</code>
+  <p>LightX2V&#x27;s 8-step distilled MiniMax-H3: short video clips with sound from a prompt or a start image.</p>
+  
+  
+  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai video -m MiniMax-H3-Turbo &quot;a paper boat drifting down a rainy street&quot; -o boat.mp4 --open" aria-label="Copy an example command for MiniMax-H3-Turbo">tai video -m MiniMax-H3-Turbo &quot;a paper boat drifting down a rainy street&quot; -o boat.mp4 --open</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/lightx2v/Minimax-h3-Turbo">Hugging Face</a> · <a href="https://github.com/ModelTC/Minimax-H3-Turbo">Demo page</a></div>
+  <button class="copy" type="button" data-cmd="tai download MiniMax-H3-Turbo" aria-label="Copy the download command for MiniMax-H3-Turbo">tai download MiniMax-H3-Turbo</button></footer>
 </article></div>
 </section>
 <section id="chat-with-vision">
-  <div class="sechead"><h2>Chat with vision</h2><p>Chat models that also read images. Use with <code>tai ask · tai chat · tai agent</code>.</p><span class="type">Image-Text-to-Text · 13</span></div>
-  <div class="grid"><article class="card" id="bigbang-v1-turbo" data-q="bigbang-v1-turbo endless-frontier/bigbang-v1-turbo tiiny&#x27;s turbo build of bigbang-v1 (endless frontier), a model trained on verifiable frontier tasks in maths, science and code.">
+  <div class="sechead"><h2>Chat with vision</h2><p>Chat models that also read images. Use with <code>tai ask · tai chat · tai agent</code>.</p><span class="type">Image-Text-to-Text · 19</span></div>
+  <div class="grid"><article class="card" id="arete-27b-turbo" data-q="arete-27b-turbo nousresearch/arete-27b-turbo tiiny&#x27;s turbo build of nous research&#x27;s arete-27b: qwen3.8-27b fine-tuned to answer politically sensitive topics with the facts instead of ccp framing, keeping its general and agentic skills.">
+  <header><h3>Arete-27B-Turbo</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">NousResearch/Arete-27B-Turbo</code>
+  <p>Tiiny&#x27;s Turbo build of Nous Research&#x27;s Arete-27B: Qwen3.8-27B fine-tuned to answer politically sensitive topics with the facts instead of CCP framing, keeping its general and agentic skills.</p>
+  
+  <dl class="metrics"><div><dt>Propaganda Eval fact mean (0–5)</dt><dd>2.98 ± 0.03<small>thinking off; Qwen3.8-27B: 2.32</small></dd></div><div><dt>Propaganda Eval, any propaganda</dt><dd>0.9%<small>lower is better; Qwen3.8-27B: 22%</small></dd></div><div><dt>Terminal-Bench-2.1</dt><dd>70%<small>Nous-run; Qwen3.8-27B: 67%</small></dd></div><div><dt>Hermes Bench</dt><dd>65.60%<small>Nous internal; Qwen3.8-27B: 65.77%</small></dd></div></dl><a class="msrc" href="https://huggingface.co/NousResearch/Arete-27B">Benchmarks: huggingface.co</a>
+  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai ask -m Arete-27B-Turbo -f photo.jpg &quot;what&#x27;s in this picture?&quot;" aria-label="Copy an example command for Arete-27B-Turbo">tai ask -m Arete-27B-Turbo -f photo.jpg &quot;what&#x27;s in this picture?&quot;</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/NousResearch/Arete-27B">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Arete-27B-Turbo" aria-label="Copy the download command for Arete-27B-Turbo">tai download Arete-27B-Turbo</button></footer>
+</article><article class="card" id="bigbang-v1-turbo" data-q="bigbang-v1-turbo endless-frontier/bigbang-v1-turbo tiiny&#x27;s turbo build of bigbang-v1 (endless frontier), a model trained on verifiable frontier tasks in maths, science and code.">
   <header><h3>BigBang-v1-Turbo</h3><span class="lic">apache-2.0</span></header>
   <code class="id">endless-frontier/BigBang-v1-Turbo</code>
   <p>Tiiny&#x27;s Turbo build of BigBang-v1 (Endless Frontier), a model trained on verifiable frontier tasks in maths, science and code.</p>
@@ -474,6 +619,46 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai ask -m Qwen3.6-27B-Turbo -f photo.jpg &quot;what&#x27;s in this picture?&quot;" aria-label="Copy an example command for Qwen3.6-27B-Turbo">tai ask -m Qwen3.6-27B-Turbo -f photo.jpg &quot;what&#x27;s in this picture?&quot;</button></div>
   <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3.6-27B">Original on Hugging Face</a></div>
   <button class="copy" type="button" data-cmd="tai download Qwen3.6-27B-Turbo" aria-label="Copy the download command for Qwen3.6-27B-Turbo">tai download Qwen3.6-27B-Turbo</button></footer>
+</article><article class="card" id="qwen3-6-35b-a3b" data-q="qwen3.6-35b-a3b qwen/qwen3.6-35b-a3b the first open-weight qwen 3.6: a 35b mixture-of-experts (3b active) with vision, tuned for stability, agentic coding and real-world use.">
+  <header><h3>Qwen3.6-35B-A3B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3.6-35B-A3B</code>
+  <p>The first open-weight Qwen 3.6: a 35B mixture-of-experts (3B active) with vision, tuned for stability, agentic coding and real-world use.</p>
+  
+  <dl class="metrics"><div><dt>SWE-bench Verified</dt><dd>73.4</dd></div><div><dt>Terminal-Bench 2.0</dt><dd>51.5</dd></div><div><dt>GPQA</dt><dd>86.0</dd></div><div><dt>MMMU</dt><dd>81.7</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3.6-35B-A3B">Benchmarks: huggingface.co</a>
+  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai ask -m Qwen3.6-35B-A3B -f photo.jpg &quot;what&#x27;s in this picture?&quot;" aria-label="Copy an example command for Qwen3.6-35B-A3B">tai ask -m Qwen3.6-35B-A3B -f photo.jpg &quot;what&#x27;s in this picture?&quot;</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3.6-35B-A3B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3.6-35B-A3B" aria-label="Copy the download command for Qwen3.6-35B-A3B">tai download Qwen3.6-35B-A3B</button></footer>
+</article><article class="card" id="qwen3-6-35b-a3b-turbo" data-q="qwen3.6-35b-a3b-turbo qwen/qwen3.6-35b-a3b-turbo tiiny&#x27;s turbo build of qwen3.6-35b-a3b: the same model, faster on the device.">
+  <header><h3>Qwen3.6-35B-A3B-Turbo</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3.6-35B-A3B-Turbo</code>
+  <p>Tiiny&#x27;s Turbo build of Qwen3.6-35B-A3B: the same model, faster on the device.</p>
+  
+  <dl class="metrics"><div><dt>SWE-bench Verified</dt><dd>73.4</dd></div><div><dt>Terminal-Bench 2.0</dt><dd>51.5</dd></div><div><dt>GPQA</dt><dd>86.0</dd></div><div><dt>MMMU</dt><dd>81.7</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3.6-35B-A3B">Benchmarks: huggingface.co</a>
+  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai ask -m Qwen3.6-35B-A3B-Turbo -f photo.jpg &quot;what&#x27;s in this picture?&quot;" aria-label="Copy an example command for Qwen3.6-35B-A3B-Turbo">tai ask -m Qwen3.6-35B-A3B-Turbo -f photo.jpg &quot;what&#x27;s in this picture?&quot;</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3.6-35B-A3B">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3.6-35B-A3B-Turbo" aria-label="Copy the download command for Qwen3.6-35B-A3B-Turbo">tai download Qwen3.6-35B-A3B-Turbo</button></footer>
+</article><article class="card" id="qwen3-8-27b" data-q="qwen3.8-27b qwen/qwen3.8-27b qwen 3.8 dense 27b with vision: strong at agentic coding, computer and browser use, and multimodal reasoning.">
+  <header><h3>Qwen3.8-27B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3.8-27B</code>
+  <p>Qwen 3.8 dense 27B with vision: strong at agentic coding, computer and browser use, and multimodal reasoning.</p>
+  
+  <dl class="metrics"><div><dt>SWE-bench Pro</dt><dd>61.7<small>Claude Code harness</small></dd></div><div><dt>Terminal Bench 2.1 (Terminus)</dt><dd>73.0</dd></div><div><dt>GPQA Diamond</dt><dd>89.2</dd></div><div><dt>OSWorld-Verified</dt><dd>84.3</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3.8-27B">Benchmarks: huggingface.co</a>
+  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai ask -m Qwen3.8-27B -f photo.jpg &quot;what&#x27;s in this picture?&quot;" aria-label="Copy an example command for Qwen3.8-27B">tai ask -m Qwen3.8-27B -f photo.jpg &quot;what&#x27;s in this picture?&quot;</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3.8-27B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3.8-27B" aria-label="Copy the download command for Qwen3.8-27B">tai download Qwen3.8-27B</button></footer>
+</article><article class="card" id="qwen3-8-27b-heretic-ara-turbo" data-q="qwen3.8-27b-heretic-ara-turbo trohrbaugh/qwen3.8-27b-heretic-ara-turbo tiiny&#x27;s turbo build of a decensored qwen3.8-27b made with heretic: it refused 0 of 100 test prompts where the original refused 99.">
+  <header><h3>Qwen3.8-27B-heretic-ara-Turbo</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">trohrbaugh/Qwen3.8-27B-heretic-ara-Turbo</code>
+  <p>Tiiny&#x27;s Turbo build of a decensored Qwen3.8-27B made with Heretic: it refused 0 of 100 test prompts where the original refused 99.</p>
+  
+  <dl class="metrics"><div><dt>Refusals</dt><dd>0/100<small>original: 99/100</small></dd></div><div><dt>KL divergence from original</dt><dd>0.0535<small>lower is closer</small></dd></div></dl><a class="msrc" href="https://huggingface.co/trohrbaugh/Qwen3.8-27B-heretic-ara">Benchmarks: huggingface.co</a>
+  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai ask -m Qwen3.8-27B-heretic-ara-Turbo -f photo.jpg &quot;what&#x27;s in this picture?&quot;" aria-label="Copy an example command for Qwen3.8-27B-heretic-ara-Turbo">tai ask -m Qwen3.8-27B-heretic-ara-Turbo -f photo.jpg &quot;what&#x27;s in this picture?&quot;</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/trohrbaugh/Qwen3.8-27B-heretic-ara">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3.8-27B-heretic-ara-Turbo" aria-label="Copy the download command for Qwen3.8-27B-heretic-ara-Turbo">tai download Qwen3.8-27B-heretic-ara-Turbo</button></footer>
 </article><article class="card" id="sage-a1-5-turbo" data-q="sage-a1.5-turbo internscience/sage-a1.5-turbo tiiny&#x27;s turbo build of internscience&#x27;s sage-a1.5, an agent model that delegates to subagents and checks its own progress on long tasks.">
   <header><h3>Sage-A1.5-Turbo</h3><span class="lic">apache-2.0</span></header>
   <code class="id">InternScience/Sage-A1.5-Turbo</code>
@@ -494,6 +679,16 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai ask -m gemma-4-26B-A4B-it -f photo.jpg &quot;what&#x27;s in this picture?&quot;" aria-label="Copy an example command for gemma-4-26B-A4B-it">tai ask -m gemma-4-26B-A4B-it -f photo.jpg &quot;what&#x27;s in this picture?&quot;</button></div>
   <footer><div class="links"><a href="https://huggingface.co/google/gemma-4-26B-A4B-it">Hugging Face</a></div>
   <button class="copy" type="button" data-cmd="tai download gemma-4-26B-A4B-it" aria-label="Copy the download command for gemma-4-26B-A4B-it">tai download gemma-4-26B-A4B-it</button></footer>
+</article><article class="card" id="gemma-4-26b-a4b-it-turbo" data-q="gemma-4-26b-a4b-it-turbo google/gemma-4-26b-a4b-it-turbo tiiny&#x27;s turbo build of gemma-4-26b-a4b-it: the same model, faster on the device.">
+  <header><h3>gemma-4-26B-A4B-it-Turbo</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">google/gemma-4-26B-A4B-it-Turbo</code>
+  <p>Tiiny&#x27;s Turbo build of gemma-4-26B-A4B-it: the same model, faster on the device.</p>
+  
+  <dl class="metrics"><div><dt>MMLU Pro</dt><dd>82.6%</dd></div><div><dt>GPQA Diamond</dt><dd>82.3%</dd></div><div><dt>LiveCodeBench v6</dt><dd>77.1%</dd></div><div><dt>MMMU Pro</dt><dd>73.8%</dd></div></dl><a class="msrc" href="https://huggingface.co/google/gemma-4-26B-A4B-it">Benchmarks: huggingface.co</a>
+  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai ask -m gemma-4-26B-A4B-it-Turbo -f photo.jpg &quot;what&#x27;s in this picture?&quot;" aria-label="Copy an example command for gemma-4-26B-A4B-it-Turbo">tai ask -m gemma-4-26B-A4B-it-Turbo -f photo.jpg &quot;what&#x27;s in this picture?&quot;</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/google/gemma-4-26B-A4B-it">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download gemma-4-26B-A4B-it-Turbo" aria-label="Copy the download command for gemma-4-26B-A4B-it-Turbo">tai download gemma-4-26B-A4B-it-Turbo</button></footer>
 </article><article class="card" id="gemma-4-31b-it" data-q="gemma-4-31b-it google/gemma-4-31b-it google deepmind&#x27;s dense gemma 4 31b, instruction-tuned; text and image input, 256k context.">
   <header><h3>gemma-4-31B-it</h3><span class="lic">apache-2.0</span></header>
   <code class="id">google/gemma-4-31B-it</code>
@@ -507,7 +702,7 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
 </article></div>
 </section>
 <section id="chat">
-  <div class="sechead"><h2>Chat</h2><p>Text-only chat, reasoning and coding models. Use with <code>tai ask · tai chat · tai agent</code>.</p><span class="type">Text Generation · 9</span></div>
+  <div class="sechead"><h2>Chat</h2><p>Text-only chat, reasoning and coding models. Use with <code>tai ask · tai chat · tai agent</code>.</p><span class="type">Text Generation · 13</span></div>
   <div class="grid"><article class="card" id="glm-4-7-flash" data-q="glm-4.7-flash zai-org/glm-4.7-flash zhipu&#x27;s 30b mixture-of-experts (3b active), the strongest of its class; good at agentic tasks and coding.">
   <header><h3>GLM-4.7-Flash</h3><span class="lic">mit</span></header>
   <code class="id">zai-org/GLM-4.7-Flash</code>
@@ -518,6 +713,16 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai ask -m GLM-4.7-Flash &quot;explain RAII in two sentences&quot;" aria-label="Copy an example command for GLM-4.7-Flash">tai ask -m GLM-4.7-Flash &quot;explain RAII in two sentences&quot;</button></div>
   <footer><div class="links"><a href="https://huggingface.co/zai-org/GLM-4.7-Flash">Hugging Face</a></div>
   <button class="copy" type="button" data-cmd="tai download GLM-4.7-Flash" aria-label="Copy the download command for GLM-4.7-Flash">tai download GLM-4.7-Flash</button></footer>
+</article><article class="card" id="nemotron-3-nano-30b-a3b" data-q="nemotron-3-nano-30b-a3b nvidia/nemotron-3-nano-30b-a3b nvidia&#x27;s 30b mixture-of-experts (3b active), trained from scratch: a reasoning model whose thinking can be switched off, with up to 1m tokens of context.">
+  <header><h3>Nemotron-3-Nano-30B-A3B</h3><span class="lic">other</span></header>
+  <code class="id">nvidia/Nemotron-3-Nano-30B-A3B</code>
+  <p>NVIDIA&#x27;s 30B mixture-of-experts (3B active), trained from scratch: a reasoning model whose thinking can be switched off, with up to 1M tokens of context.</p>
+  
+  <dl class="metrics"><div><dt>MMLU-Pro</dt><dd>78.3</dd></div><div><dt>AIME25 (no tools)</dt><dd>89.1</dd></div><div><dt>GPQA (no tools)</dt><dd>73.0</dd></div><div><dt>SWE-Bench (OpenHands)</dt><dd>38.8</dd></div></dl><a class="msrc" href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16">Benchmarks: huggingface.co</a>
+  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai ask -m Nemotron-3-Nano-30B-A3B &quot;explain RAII in two sentences&quot;" aria-label="Copy an example command for Nemotron-3-Nano-30B-A3B">tai ask -m Nemotron-3-Nano-30B-A3B &quot;explain RAII in two sentences&quot;</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16">Original on Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Nemotron-3-Nano-30B-A3B" aria-label="Copy the download command for Nemotron-3-Nano-30B-A3B">tai download Nemotron-3-Nano-30B-A3B</button></footer>
 </article><article class="card" id="qwen-image-2-1-pe-t2i" data-q="qwen-image-2.1-pe-t2i qwen/qwen-image-2.1-pe-t2i prompt enhancer for qwen-image-2.1: expands a short idea into the detailed prompt the image model works best with.">
   <header><h3>Qwen-Image-2.1-PE-T2I</h3><span class="lic">other</span></header>
   <code class="id">Qwen/Qwen-Image-2.1-PE-T2I</code>
@@ -588,6 +793,36 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai ask -m Qwen3-Coder-30B-A3B-Instruct-Turbo &quot;explain RAII in two sentences&quot;" aria-label="Copy an example command for Qwen3-Coder-30B-A3B-Instruct-Turbo">tai ask -m Qwen3-Coder-30B-A3B-Instruct-Turbo &quot;explain RAII in two sentences&quot;</button></div>
   <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct">Original on Hugging Face</a></div>
   <button class="copy" type="button" data-cmd="tai download Qwen3-Coder-30B-A3B-Instruct-Turbo" aria-label="Copy the download command for Qwen3-Coder-30B-A3B-Instruct-Turbo">tai download Qwen3-Coder-30B-A3B-Instruct-Turbo</button></footer>
+</article><article class="card" id="qwen3-coder-next" data-q="qwen3-coder-next qwen/qwen3-coder-next qwen&#x27;s coding-agent model: 80b mixture-of-experts with only 3b active, for agents and local development.">
+  <header><h3>Qwen3-Coder-Next</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-Coder-Next</code>
+  <p>Qwen&#x27;s coding-agent model: 80B mixture-of-experts with only 3B active, for agents and local development.</p>
+  
+  <dl class="metrics"><div><dt>SWE-bench Verified</dt><dd>70.6<small>SWE-Agent</small></dd></div><div><dt>SWE-bench Pro</dt><dd>44.3<small>SWE-Agent</small></dd></div><div><dt>Terminal-Bench 2.0</dt><dd>36.2<small>Terminus-2 json</small></dd></div><div><dt>Aider</dt><dd>66.2</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-Coder-Next">Benchmarks: huggingface.co</a>
+  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai ask -m Qwen3-Coder-Next &quot;explain RAII in two sentences&quot;" aria-label="Copy an example command for Qwen3-Coder-Next">tai ask -m Qwen3-Coder-Next &quot;explain RAII in two sentences&quot;</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-Coder-Next">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-Coder-Next" aria-label="Copy the download command for Qwen3-Coder-Next">tai download Qwen3-Coder-Next</button></footer>
+</article><article class="card" id="flint" data-q="flint recursivesi/flint recursive&#x27;s mixture-of-experts model for coding agents (39.8b, about 2.5b active): investigates codebases, fixes bugs, implements features and writes tests.">
+  <header><h3>flint</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">RecursiveSI/flint</code>
+  <p>Recursive&#x27;s mixture-of-experts model for coding agents (39.8B, about 2.5B active): investigates codebases, fixes bugs, implements features and writes tests.</p>
+  
+  <dl class="metrics"><div><dt>Terminal-Bench 2.1</dt><dd>54.9%<small>Terminus 2</small></dd></div><div><dt>SWE-bench Pro v2</dt><dd>89.7%<small>mini-swe-agent</small></dd></div><div><dt>SWE-bench Verified</dt><dd>74.2%<small>mini-swe-agent</small></dd></div></dl><a class="msrc" href="https://huggingface.co/RecursiveSI/flint">Benchmarks: huggingface.co</a>
+  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai ask -m flint &quot;explain RAII in two sentences&quot;" aria-label="Copy an example command for flint">tai ask -m flint &quot;explain RAII in two sentences&quot;</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/RecursiveSI/flint">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download flint" aria-label="Copy the download command for flint">tai download flint</button></footer>
+</article><article class="card" id="gpt-oss-120b" data-q="gpt-oss-120b openai/gpt-oss-120b openai&#x27;s larger open-weight model (117b, 5.1b active): strong reasoning and agentic tasks, with adjustable reasoning effort.">
+  <header><h3>gpt-oss-120b</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">openai/gpt-oss-120b</code>
+  <p>OpenAI&#x27;s larger open-weight model (117B, 5.1B active): strong reasoning and agentic tasks, with adjustable reasoning effort.</p>
+  
+  <dl class="metrics"><div><dt>MMLU</dt><dd>90.0<small>high reasoning</small></dd></div><div><dt>GPQA Diamond</dt><dd>80.1<small>high, no tools</small></dd></div><div><dt>AIME 2025</dt><dd>92.5<small>high, no tools</small></dd></div><div><dt>SWE-bench Verified</dt><dd>62.4<small>high</small></dd></div></dl><a class="msrc" href="https://arxiv.org/abs/2508.10925">Benchmarks: arxiv.org</a>
+  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai ask -m gpt-oss-120b &quot;explain RAII in two sentences&quot;" aria-label="Copy an example command for gpt-oss-120b">tai ask -m gpt-oss-120b &quot;explain RAII in two sentences&quot;</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/openai/gpt-oss-120b">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download gpt-oss-120b" aria-label="Copy the download command for gpt-oss-120b">tai download gpt-oss-120b</button></footer>
 </article><article class="card" id="gpt-oss-20b" data-q="gpt-oss-20b openai/gpt-oss-20b openai&#x27;s open-weight 21b mixture-of-experts (3.6b active) reasoning model with adjustable reasoning effort.">
   <header><h3>gpt-oss-20b</h3><span class="lic">apache-2.0</span></header>
   <code class="id">openai/gpt-oss-20b</code>
@@ -601,7 +836,7 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
 </article></div>
 </section>
 <section id="transcription">
-  <div class="sechead"><h2>Transcription</h2><p>Speech to text. Use with <code>tai asr</code>.</p><span class="type">ASR · 5</span></div>
+  <div class="sechead"><h2>Transcription</h2><p>Speech to text. Use with <code>tai asr</code>.</p><span class="type">ASR · 6</span></div>
   <div class="grid"><article class="card" id="fun-asr-mlt-nano" data-q="fun-asr-mlt-nano funaudiollm/fun-asr-mlt-nano tongyi lab&#x27;s 800m multilingual speech recognizer: 31 languages, trained on hundreds of thousands of hours of speech.">
   <header><h3>Fun-ASR-MLT-Nano</h3><span class="lic">apache-2.0</span></header>
   <code class="id">FunAudioLLM/Fun-ASR-MLT-Nano</code>
@@ -642,6 +877,16 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai asr -m Parakeet-TDT-0.6B-V3 recording.wav" aria-label="Copy an example command for Parakeet-TDT-0.6B-V3">tai asr -m Parakeet-TDT-0.6B-V3 recording.wav</button></div>
   <footer><div class="links"><a href="https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3">Hugging Face</a></div>
   <button class="copy" type="button" data-cmd="tai download Parakeet-TDT-0.6B-V3" aria-label="Copy the download command for Parakeet-TDT-0.6B-V3">tai download Parakeet-TDT-0.6B-V3</button></footer>
+</article><article class="card" id="qwen3-asr-1-7b" data-q="qwen3-asr-1.7b qwen/qwen3-asr-1.7b qwen&#x27;s speech recognizer for 52 languages and dialects, with language identification; the larger of the two qwen3-asr models.">
+  <header><h3>Qwen3-ASR-1.7B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-ASR-1.7B</code>
+  <p>Qwen&#x27;s speech recognizer for 52 languages and dialects, with language identification; the larger of the two Qwen3-ASR models.</p>
+  
+  <dl class="metrics"><div><dt>LibriSpeech clean WER</dt><dd>1.63<small>%, lower is better</small></dd></div><div><dt>LibriSpeech other WER</dt><dd>3.38<small>%, lower is better</small></dd></div><div><dt>FLEURS-en WER</dt><dd>3.35<small>%, lower is better</small></dd></div><div><dt>FLEURS-zh WER</dt><dd>2.41<small>%, lower is better</small></dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-ASR-1.7B">Benchmarks: huggingface.co</a>
+  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai asr -m Qwen3-ASR-1.7B recording.wav" aria-label="Copy an example command for Qwen3-ASR-1.7B">tai asr -m Qwen3-ASR-1.7B recording.wav</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-ASR-1.7B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-ASR-1.7B" aria-label="Copy the download command for Qwen3-ASR-1.7B">tai download Qwen3-ASR-1.7B</button></footer>
 </article><article class="card" id="whisper-large-v3-turbo" data-q="whisper-large-v3-turbo openai/whisper-large-v3-turbo openai&#x27;s whisper large-v3, pruned to 4 decoder layers: much faster, nearly the same accuracy, ~100 languages and translation to english.">
   <header><h3>Whisper-large-v3-turbo</h3><span class="lic">mit</span></header>
   <code class="id">openai/Whisper-large-v3-turbo</code>
@@ -719,7 +964,7 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
 </article></div>
 </section>
 <section id="embeddings">
-  <div class="sechead"><h2>Embeddings</h2><p>Vectors for search and RAG. Use with <code>tai embed</code>.</p><span class="type">Text Embedding · 7</span></div>
+  <div class="sechead"><h2>Embeddings</h2><p>Vectors for search and RAG. Use with <code>tai embed</code>.</p><span class="type">Text Embedding · 8</span></div>
   <div class="grid"><article class="card" id="nemotron-3-embed-1b" data-q="nemotron-3-embed-1b nvidia/nemotron-3-embed-1b-bf16 nvidia&#x27;s multilingual 1b text embedder for search and rag.">
   <header><h3>Nemotron-3-Embed-1B</h3><span class="lic">other</span></header>
   <code class="id">nvidia/Nemotron-3-Embed-1B-BF16</code>
@@ -740,6 +985,16 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai embed -m Nemotron-3-Embed-8B &quot;first text&quot; &quot;second text&quot;" aria-label="Copy an example command for Nemotron-3-Embed-8B">tai embed -m Nemotron-3-Embed-8B &quot;first text&quot; &quot;second text&quot;</button></div>
   <footer><div class="links"><a href="https://huggingface.co/nvidia/Nemotron-3-Embed-8B-BF16">Hugging Face</a></div>
   <button class="copy" type="button" data-cmd="tai download Nemotron-3-Embed-8B" aria-label="Copy the download command for Nemotron-3-Embed-8B">tai download Nemotron-3-Embed-8B</button></footer>
+</article><article class="card" id="qwen3-embedding-0-6b" data-q="qwen3-embedding-0.6b qwen/qwen3-embedding-0.6b the smallest qwen3 embedding model: multilingual text vectors for search and rag, 32k context.">
+  <header><h3>Qwen3-Embedding-0.6B</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Qwen/Qwen3-Embedding-0.6B</code>
+  <p>The smallest Qwen3 embedding model: multilingual text vectors for search and RAG, 32K context.</p>
+  
+  <dl class="metrics"><div><dt>MTEB Multilingual (mean)</dt><dd>64.33</dd></div><div><dt>MTEB English v2 (mean)</dt><dd>70.70</dd></div><div><dt>C-MTEB (mean)</dt><dd>66.33</dd></div></dl><a class="msrc" href="https://huggingface.co/Qwen/Qwen3-Embedding-0.6B">Benchmarks: huggingface.co</a>
+  
+  <div class="usage"><span>Try</span><button class="copy" type="button" data-cmd="tai embed -m Qwen3-Embedding-0.6B &quot;first text&quot; &quot;second text&quot;" aria-label="Copy an example command for Qwen3-Embedding-0.6B">tai embed -m Qwen3-Embedding-0.6B &quot;first text&quot; &quot;second text&quot;</button></div>
+  <footer><div class="links"><a href="https://huggingface.co/Qwen/Qwen3-Embedding-0.6B">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download Qwen3-Embedding-0.6B" aria-label="Copy the download command for Qwen3-Embedding-0.6B">tai download Qwen3-Embedding-0.6B</button></footer>
 </article><article class="card" id="qwen3-embedding-4b" data-q="qwen3-embedding-4b qwen/qwen3-embedding-4b qwen3 text embedder (4b): multilingual, long texts, strong on retrieval benchmarks.">
   <header><h3>Qwen3-Embedding-4B</h3><span class="lic">apache-2.0</span></header>
   <code class="id">Qwen/Qwen3-Embedding-4b</code>
@@ -857,7 +1112,7 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
 </article></div>
 </section>
 <section id="classification">
-  <div class="sechead"><h2>Classification</h2><p>Yes/no, choice and score answers about a text, as probabilities.</p><span class="type">Text Classification · 8</span></div>
+  <div class="sechead"><h2>Classification</h2><p>Yes/no, choice and score answers about a text, as probabilities.</p><span class="type">Text Classification · 10</span></div>
   <div class="grid"><article class="card" id="knowline-35b-a3b-gen1-5" data-q="knowline-35b-a3b-gen1.5 pelaai/knowline-35b-a3b-gen1.5 pelaai&#x27;s 35b mixture-of-experts yes/no and multiple-choice classifier: answers questions about a text as probabilities, without writing text.">
   <header><h3>KnowLine-35B-A3B-Gen1.5</h3><span class="lic">apache-2.0</span></header>
   <code class="id">PelaAI/KnowLine-35B-A3B-Gen1.5</code>
@@ -878,6 +1133,26 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   
   <footer><div class="links"><a href="https://huggingface.co/PelaAI/KnowLine-4B-Gen5.5">Hugging Face</a></div>
   <button class="copy" type="button" data-cmd="tai download KnowLine-4B-Gen5.5" aria-label="Copy the download command for KnowLine-4B-Gen5.5">tai download KnowLine-4B-Gen5.5</button></footer>
+</article><article class="card" id="clef" data-q="clef cloudflare/clef cloudflare&#x27;s 27b multimodal decision model, post-trained from qwen3.8-27b: given a state (text, json, images or video) and typed questions, it returns a probability for every allowed answer in one pass, with no free-form text.">
+  <header><h3>clef</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Cloudflare/clef</code>
+  <p>Cloudflare&#x27;s 27B multimodal decision model, post-trained from Qwen3.8-27B: given a state (text, JSON, images or video) and typed questions, it returns a probability for every allowed answer in one pass, with no free-form text.</p>
+  
+  <dl class="metrics"><div><dt>BFCL (case exact accuracy)</dt><dd>98.5</dd></div><div><dt>BANKING77 (macro-F1)</dt><dd>94.2</dd></div><div><dt>MMLU (accuracy)</dt><dd>90.3</dd></div><div><dt>GSM8K (accuracy)</dt><dd>80.8</dd></div></dl><a class="msrc" href="https://huggingface.co/Cloudflare/clef">Benchmarks: huggingface.co</a>
+  
+  
+  <footer><div class="links"><a href="https://huggingface.co/Cloudflare/clef">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download clef" aria-label="Copy the download command for clef">tai download clef</button></footer>
+</article><article class="card" id="clef-flash" data-q="clef-flash cloudflare/clef-flash cloudflare&#x27;s 9b clef decision model, the small sibling of clef with the same state-and-questions interface.">
+  <header><h3>clef-flash</h3><span class="lic">apache-2.0</span></header>
+  <code class="id">Cloudflare/clef-flash</code>
+  <p>Cloudflare&#x27;s 9B Clef decision model, the small sibling of Clef with the same state-and-questions interface.</p>
+  
+  <dl class="metrics"><div><dt>BFCL (case exact accuracy)</dt><dd>98.8</dd></div><div><dt>BANKING77 (macro-F1)</dt><dd>90.9</dd></div><div><dt>MMLU (accuracy)</dt><dd>91.8</dd></div><div><dt>GSM8K (accuracy)</dt><dd>67.3</dd></div></dl><a class="msrc" href="https://huggingface.co/Cloudflare/clef-flash">Benchmarks: huggingface.co</a>
+  
+  
+  <footer><div class="links"><a href="https://huggingface.co/Cloudflare/clef-flash">Hugging Face</a></div>
+  <button class="copy" type="button" data-cmd="tai download clef-flash" aria-label="Copy the download command for clef-flash">tai download clef-flash</button></footer>
 </article><article class="card" id="d3" data-q="d3 vllm-sr/d3 vllm-sr&#x27;s largest d3 decision model (27b class): tops the jev decision index text board.">
   <header><h3>d3</h3><span class="lic">apache-2.0</span></header>
   <code class="id">vllm-sr/d3</code>
@@ -940,8 +1215,13 @@ section { padding-block: 28px 8px; scroll-margin-top: 64px }
   <button class="copy" type="button" data-cmd="tai download d3-nano" aria-label="Copy the download command for d3-nano">tai download d3-nano</button></footer>
 </article></div>
 </section>
+<section id="swe-bench" class="compare">
+  <div class="sechead"><h2>SWE-bench</h2><p>Every model above that reports a SWE-bench score, best first; click a column title to sort by it. Makers run these with different agent harnesses (noted under a score), so treat small gaps as noise; Turbo builds repeat their original's numbers.</p><span class="type">18 models</span></div>
+  <div class="tablewrap"><table class="swe"><thead><tr><th scope="col"><button type="button" data-col="0">Model<span class="arrow" aria-hidden="true"></span></button></th><th scope="col" aria-sort="descending"><button type="button" data-col="1">SWE-bench Verified<span class="arrow" aria-hidden="true"></span></button></th><th scope="col"><button type="button" data-col="2">SWE-bench Pro<span class="arrow" aria-hidden="true"></span></button></th><th scope="col"><button type="button" data-col="3">SWE-Bench (OpenHands)<span class="arrow" aria-hidden="true"></span></button></th><th scope="col"><button type="button" data-col="4">SWE-bench Pro v2<span class="arrow" aria-hidden="true"></span></button></th><th scope="col"><span class="sr">Source</span></th></tr></thead>
+  <tbody><tr data-q="ornith-1.5-35b-a3b-turbo"><th scope="row"><a href="#ornith-1-5-35b-a3b-turbo">Ornith-1.5-35B-A3B-Turbo</a><span>Image-Text-to-Text</span></th><td data-v="79.0">79<small>OpenHands</small></td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B">source</a></td></tr><tr data-q="qwen3.6-27b"><th scope="row"><a href="#qwen3-6-27b">Qwen3.6-27B</a><span>Image-Text-to-Text</span></th><td data-v="77.2">77.2</td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/Qwen/Qwen3.6-27B">source</a></td></tr><tr data-q="qwen3.6-27b-turbo"><th scope="row"><a href="#qwen3-6-27b-turbo">Qwen3.6-27B-Turbo</a><span>Image-Text-to-Text</span></th><td data-v="77.2">77.2</td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/Qwen/Qwen3.6-27B">source</a></td></tr><tr data-q="ornith-1.0-35b"><th scope="row"><a href="#ornith-1-0-35b">Ornith-1.0-35B</a><span>Image-Text-to-Text</span></th><td data-v="75.6">75.6<small>OpenHands</small></td><td data-v="50.4">50.4</td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/ornith-ai/Ornith-1.0-35B">source</a></td></tr><tr data-q="flint"><th scope="row"><a href="#flint">flint</a><span>Text Generation</span></th><td data-v="74.2">74.2%<small>mini-swe-agent</small></td><td class="na">–</td><td class="na">–</td><td data-v="89.7">89.7%<small>mini-swe-agent</small></td><td class="src"><a href="https://huggingface.co/RecursiveSI/flint">source</a></td></tr><tr data-q="qwen3.6-35b-a3b"><th scope="row"><a href="#qwen3-6-35b-a3b">Qwen3.6-35B-A3B</a><span>Image-Text-to-Text</span></th><td data-v="73.4">73.4</td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/Qwen/Qwen3.6-35B-A3B">source</a></td></tr><tr data-q="qwen3.6-35b-a3b-turbo"><th scope="row"><a href="#qwen3-6-35b-a3b-turbo">Qwen3.6-35B-A3B-Turbo</a><span>Image-Text-to-Text</span></th><td data-v="73.4">73.4</td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/Qwen/Qwen3.6-35B-A3B">source</a></td></tr><tr data-q="qwen3-coder-next"><th scope="row"><a href="#qwen3-coder-next">Qwen3-Coder-Next</a><span>Text Generation</span></th><td data-v="70.6">70.6<small>SWE-Agent</small></td><td data-v="44.3">44.3<small>SWE-Agent</small></td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/Qwen/Qwen3-Coder-Next">source</a></td></tr><tr data-q="qwen3.5-35b-a3b"><th scope="row"><a href="#qwen3-5-35b-a3b">Qwen3.5-35B-A3B</a><span>Image-Text-to-Text</span></th><td data-v="69.2">69.2</td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/Qwen/Qwen3.5-35B-A3B">source</a></td></tr><tr data-q="gpt-oss-120b"><th scope="row"><a href="#gpt-oss-120b">gpt-oss-120b</a><span>Text Generation</span></th><td data-v="62.4">62.4<small>high</small></td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://arxiv.org/abs/2508.10925">source</a></td></tr><tr data-q="gpt-oss-20b"><th scope="row"><a href="#gpt-oss-20b">gpt-oss-20b</a><span>Text Generation</span></th><td data-v="60.7">60.7<small>high</small></td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://arxiv.org/abs/2508.10925">source</a></td></tr><tr data-q="glm-4.7-flash"><th scope="row"><a href="#glm-4-7-flash">GLM-4.7-Flash</a><span>Text Generation</span></th><td data-v="59.2">59.2</td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/zai-org/GLM-4.7-Flash">source</a></td></tr><tr data-q="qwen3-coder-30b"><th scope="row"><a href="#qwen3-coder-30b">Qwen3-Coder-30B</a><span>Text Generation</span></th><td data-v="51.6">51.6<small>OpenHands, 500 turns</small></td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct">source</a></td></tr><tr data-q="qwen3-coder-30b-a3b-instruct-turbo"><th scope="row"><a href="#qwen3-coder-30b-a3b-instruct-turbo">Qwen3-Coder-30B-A3B-Instruct-Turbo</a><span>Text Generation</span></th><td data-v="51.6">51.6<small>OpenHands, 500 turns</small></td><td class="na">–</td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct">source</a></td></tr><tr data-q="qwen3.8-27b"><th scope="row"><a href="#qwen3-8-27b">Qwen3.8-27B</a><span>Image-Text-to-Text</span></th><td class="na">–</td><td data-v="61.7">61.7<small>Claude Code harness</small></td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/Qwen/Qwen3.8-27B">source</a></td></tr><tr data-q="sage-a1.5-turbo"><th scope="row"><a href="#sage-a1-5-turbo">Sage-A1.5-Turbo</a><span>Image-Text-to-Text</span></th><td class="na">–</td><td data-v="61.2">61.2</td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/InternScience/Sage-A1.5">source</a></td></tr><tr data-q="bigbang-v1-turbo"><th scope="row"><a href="#bigbang-v1-turbo">BigBang-v1-Turbo</a><span>Image-Text-to-Text</span></th><td class="na">–</td><td data-v="54.2">54.2</td><td class="na">–</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/endless-frontier/BigBang-v1">source</a></td></tr><tr data-q="nemotron-3-nano-30b-a3b"><th scope="row"><a href="#nemotron-3-nano-30b-a3b">Nemotron-3-Nano-30B-A3B</a><span>Text Generation</span></th><td class="na">–</td><td class="na">–</td><td data-v="38.8">38.8</td><td class="na">–</td><td class="src"><a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16">source</a></td></tr></tbody></table></div>
+</section>
 <p class="empty" id="none" hidden>No model matches that filter.</p>
-<p class="foot">Store list from <code>tai download</code>, 2026-11-21. “Turbo” entries are Tiiny's faster builds of the model linked as the original. Samples are the model makers' own, from their cards, shortened. Source and update notes: <a href="https://github.com/epatel/tiiny-models">github.com/epatel/tiiny-models</a>.</p>
+<p class="foot">Store list from <code>tai download</code> and <code>tai models</code>, 2026-11-28. “Turbo” entries are Tiiny's faster builds of the model linked as the original. Samples are the model makers' own, from their cards, shortened. Source and update notes: <a href="https://github.com/epatel/tiiny-models">github.com/epatel/tiiny-models</a>.</p>
 </main>
 <script>
 const q = document.getElementById("q"), none = document.getElementById("none");
@@ -949,7 +1229,7 @@ q.addEventListener("input", () => {
   const t = q.value.trim().toLowerCase(); let shown = 0;
   document.querySelectorAll("section").forEach(s => {
     let n = 0;
-    s.querySelectorAll(".card").forEach(c => { const ok = !t || c.dataset.q.includes(t); c.hidden = !ok; n += ok; });
+    s.querySelectorAll(".card, tr[data-q]").forEach(c => { const ok = !t || c.dataset.q.includes(t); c.hidden = !ok; n += ok; });
     s.hidden = n === 0; shown += n;
   });
   none.hidden = shown > 0;
@@ -959,6 +1239,23 @@ document.addEventListener("click", e => {
   const done = () => { b.classList.add("done"); setTimeout(() => b.classList.remove("done"), 1400); };
   const pick = () => { const r = document.createRange(); r.selectNodeContents(b); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
   try { navigator.clipboard.writeText(b.dataset.cmd).then(done, pick); } catch { pick(); }
+});
+document.querySelectorAll("table.swe").forEach(table => {
+  // Click a column title to sort: scores start best-first, Model starts A–Z; click again to flip. Missing scores stay last.
+  const ths = [...table.tHead.rows[0].cells], body = table.tBodies[0];
+  table.tHead.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    const col = +b.dataset.col, th = b.parentElement, text = col === 0;
+    const dir = th.getAttribute("aria-sort") === (text ? "ascending" : "descending") ? (text ? "descending" : "ascending") : (text ? "ascending" : "descending");
+    ths.forEach(h => h.removeAttribute("aria-sort")); th.setAttribute("aria-sort", dir);
+    const sign = dir === "ascending" ? 1 : -1;
+    const key = r => text ? r.cells[0].querySelector("a").textContent.toLowerCase() : (r.cells[col].dataset.v ? +r.cells[col].dataset.v : null);
+    [...body.rows].sort((a, b) => {
+      const x = key(a), y = key(b);
+      if (x === null || y === null) return (x === null) - (y === null);
+      return text ? sign * x.localeCompare(y) : sign * (x - y) || a.cells[0].textContent.localeCompare(b.cells[0].textContent);
+    }).forEach(r => body.appendChild(r));
+  });
 });
 document.addEventListener("play", e => document.querySelectorAll("audio").forEach(a => a !== e.target && a.pause()), true);
 </script>

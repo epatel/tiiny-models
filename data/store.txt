@@ -1,9 +1,11 @@
-# Store models not on the device, from `tai download` (name|type|model id). Updated: 2026-11-21
+# All Tiiny store models, from `tai download` (not on the device) plus `tai models` (on it) (name|type|model id). Updated: 2026-11-28
 Fun-ASR-MLT-Nano|ASR|FunAudioLLM/Fun-ASR-MLT-Nano
 Fun-ASR-Nano|ASR|FunAudioLLM/Fun-ASR-Nano
 MOSS-Transcribe-Diarize|ASR|OpenMOSS-Team/MOSS-Transcribe-Diarize
 Parakeet-TDT-0.6B-V3|ASR|nvidia/Parakeet-TDT-0.6B-V3
+Qwen3-ASR-1.7B|ASR|Qwen/Qwen3-ASR-1.7B
 Whisper-large-v3-turbo|ASR|openai/Whisper-large-v3-turbo
+Arete-27B-Turbo|Image-Text-to-Text|NousResearch/Arete-27B-Turbo
 BigBang-v1-Turbo|Image-Text-to-Text|endless-frontier/BigBang-v1-Turbo
 Huihui-Ornith-1.5-35B-A3B-abliterated-Turbo|Image-Text-to-Text|huihui-ai/Huihui-Ornith-1.5-35B-A3B-abliterated-Turbo
 Ornith-1.0-35B|Image-Text-to-Text|deepreinforce-ai/Ornith-1.0-35B
@@ -14,10 +16,16 @@ Qwen3.5-9B|Image-Text-to-Text|Qwen/Qwen3.5-9B
 Qwen3.5-9B-Turbo|Image-Text-to-Text|Qwen/Qwen3.5-9B-Turbo
 Qwen3.6-27B|Image-Text-to-Text|Qwen/Qwen3.6-27B
 Qwen3.6-27B-Turbo|Image-Text-to-Text|Qwen/Qwen3.6-27B-Turbo
+Qwen3.6-35B-A3B|Image-Text-to-Text|Qwen/Qwen3.6-35B-A3B
+Qwen3.6-35B-A3B-Turbo|Image-Text-to-Text|Qwen/Qwen3.6-35B-A3B-Turbo
+Qwen3.8-27B|Image-Text-to-Text|Qwen/Qwen3.8-27B
+Qwen3.8-27B-heretic-ara-Turbo|Image-Text-to-Text|trohrbaugh/Qwen3.8-27B-heretic-ara-Turbo
 Sage-A1.5-Turbo|Image-Text-to-Text|InternScience/Sage-A1.5-Turbo
 gemma-4-26B-A4B-it|Image-Text-to-Text|google/gemma-4-26B-A4B-it
+gemma-4-26B-A4B-it-Turbo|Image-Text-to-Text|google/gemma-4-26B-A4B-it-Turbo
 gemma-4-31B-it|Image-Text-to-Text|google/gemma-4-31B-it
 Hunyuan3D-2.1|Image-to-3D|Tencent/Hunyuan3d-2.1
+TRELLIS.2-4B|Image-to-3D|microsoft/TRELLIS.2-4B
 GLM-OCR|Image-to-Text|zai-org/GLM-OCR
 MiniCPM-OCR-1.0|Image-to-Text|openbmb/MiniCPM-OCR-1.0
 PP-OCRv6-Medium|Image-to-Text|PaddlePaddle/PP-OCRv6-Medium
@@ -31,6 +39,8 @@ SongGeneration-v2-large|Music Generation|tencent/SongGeneration-v2-large
 YuE2-3B|Music Generation|m-a-p/YuE2-3B
 KnowLine-35B-A3B-Gen1.5|Text Classification|PelaAI/KnowLine-35B-A3B-Gen1.5
 KnowLine-4B-Gen5.5|Text Classification|PelaAI/KnowLine-4B-Gen5.5
+clef|Text Classification|Cloudflare/clef
+clef-flash|Text Classification|Cloudflare/clef-flash
 d3|Text Classification|vllm-sr/d3
 d3-edge|Text Classification|vllm-sr/d3-edge
 d3-flash|Text Classification|vllm-sr/d3-flash
@@ -39,12 +49,14 @@ d3-mini|Text Classification|vllm-sr/d3-mini
 d3-nano|Text Classification|vllm-sr/d3-nano
 Nemotron-3-Embed-1B|Text Embedding|nvidia/Nemotron-3-Embed-1B-BF16
 Nemotron-3-Embed-8B|Text Embedding|nvidia/Nemotron-3-Embed-8b-Bf16
+Qwen3-Embedding-0.6B|Text Embedding|Qwen/Qwen3-Embedding-0.6B
 Qwen3-Embedding-4B|Text Embedding|Qwen/Qwen3-Embedding-4b
 Qwen3-Embedding-8B|Text Embedding|Qwen/Qwen3-Embedding-8b
 Qwen3-VL-Embedding-2B|Text Embedding|Qwen/Qwen3-Vl-Embedding-2b
 Qwen3-VL-Embedding-8B|Text Embedding|Qwen/Qwen3-Vl-Embedding-8b
 R3-Embedding-0.6B|Text Embedding|tencent/R3-embedding-0.6b
 GLM-4.7-Flash|Text Generation|zai-org/GLM-4.7-Flash
+Nemotron-3-Nano-30B-A3B|Text Generation|nvidia/Nemotron-3-Nano-30B-A3B
 Qwen-Image-2.1-PE-T2I|Text Generation|Qwen/Qwen-Image-2.1-PE-T2I
 Qwen3-30B-A3B-Instruct|Text Generation|Qwen/Qwen3-30B-A3B-Instruct
 Qwen3-30B-A3B-Thinking|Text Generation|Qwen/Qwen3-30B-A3B-Thinking
@@ -52,6 +64,9 @@ Qwen3-4B-Instruct-2507|Text Generation|Qwen/Qwen3-4B-Instruct-2507
 Qwen3-8B|Text Generation|Qwen/Qwen3-8B
 Qwen3-Coder-30B|Text Generation|Qwen/Qwen3-Coder-30B-A3B-Instruct
 Qwen3-Coder-30B-A3B-Instruct-Turbo|Text Generation|Qwen/Qwen3-Coder-30B-A3B-Instruct-Turbo
+Qwen3-Coder-Next|Text Generation|Qwen/Qwen3-Coder-Next
+flint|Text Generation|RecursiveSI/flint
+gpt-oss-120b|Text Generation|openai/gpt-oss-120b
 gpt-oss-20b|Text Generation|openai/gpt-oss-20b
 Qwen3-Reranker-0.6B|Text Reranking|Qwen/Qwen3-Reranker-0.6B
 Qwen3-Reranker-4B|Text Reranking|Qwen/Qwen3-Reranker-4b
@@ -65,17 +80,27 @@ FLUX.2-klein-4B-Background-Remove|Text-to-Image|fal/FLUX.2-klein-4B-Background-R
 FLUX.2-klein-4B-Object-Remove|Text-to-Image|fal/FLUX.2-klein-4B-Object-Remove
 FLUX.2-klein-4B-Outpaint|Text-to-Image|fal/FLUX.2-klein-4B-Outpaint
 FLUX.2-klein-4B-Zoom|Text-to-Image|fal/FLUX.2-klein-4B-Zoom
+HiDream-O1-Image-Dev|Text-to-Image|HiDream-ai/HiDream-O1-Image-Dev
 Krea-2-Turbo|Text-to-Image|krea/Krea-2-Turbo
+MOSS-Image-Base|Text-to-Image|OpenMOSS-Team/MOSS-Image-Base
 Qwen-Image-2.1|Text-to-Image|Qwen/Qwen-Image-2.1
+Qwen-Image-2.1-Uncensored|Text-to-Image|abenzerps/Qwen-Image-2.1-Uncensored-Quantized
 Qwen-Image-2.1-viggle-turbo|Text-to-Image|Viggle/Qwen-Image-2.1-viggle-turbo
 SenseNova-U1.5-8B-MoT|Text-to-Image|SenseTime/SenseNova-U1.5-8B-MoT
+Z-Image-Turbo|Text-to-Image|Tongyi-MAI/Z-Image-Turbo
 Z-Image-Turbo-CharacterDesignSheet|Text-to-Image|YeiYeiArt/Z-Image-Turbo-CharacterDesignSheet
 Z-Image-Turbo-Children-Drawing|Text-to-Image|Tongyi-MAI/Z-Image-Turbo-Children-Drawing
 Z-Image-Turbo-Creating-Realistic|Text-to-Image|TaoBaiBai2025/Z-Image-Turbo-Creating-Realistic
 Fun-CosyVoice3-0.5B-2512|Text-to-Speech|FunAudioLLM/Fun-CosyVoice3-0.5B-2512
+Kokoro-82M|Text-to-Speech|hexgrad/Kokoro-82M
 MOSS-TTS-Local-Transformer-v1.5|Text-to-Speech|OpenMOSS-Team/MOSS-TTS-Local-Transformer-v1.5
 MOSS-TTS-Nano-100M|Text-to-Speech|OpenMOSS-Team/MOSS-TTS-Nano-100M
+OmniVoice|Text-to-Speech|k2-fsa/OmniVoice
 Qwen3-CustomVoice-1.7B|Text-to-Speech|Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice
+Qwen3-VoiceClone-1.7B|Text-to-Speech|Qwen/Qwen3-TTS-12Hz-1.7B-Base
 Qwen3-VoiceDesign-1.7B|Text-to-Speech|Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign
+VibeVoice-1.5B|Text-to-Speech|microsoft/VibeVoice-1.5B
 VibeVoice-Realtime-0.5B|Text-to-Speech|microsoft/VibeVoice-Realtime-0.5B
+VoxCPM2|Text-to-Speech|openbmb/VoxCPM2
 supertonic-3|Text-to-Speech|Supertone/supertonic-3
+MiniMax-H3-Turbo|Text-to-Video|lightx2v/MiniMax-H3-Turbo

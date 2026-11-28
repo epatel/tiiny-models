@@ -220,5 +220,22 @@
     ],
     "source": "https://arxiv.org/html/2606.03565",
     "note": "Full pipeline (R3-Embedding top-20 + R3-Reranker) on the paper's agent-skill benchmarks; the HF card has no numbers"
+  },
+  "Qwen3-Embedding-0.6B": {
+    "metrics": [
+      {
+        "label": "MTEB Multilingual (mean)",
+        "value": "64.33"
+      },
+      {
+        "label": "MTEB English v2 (mean)",
+        "value": "70.70"
+      },
+      {
+        "label": "C-MTEB (mean)",
+        "value": "66.33"
+      }
+    ],
+    "source": "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B"
   }
 }

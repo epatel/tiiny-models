@@ -274,7 +274,7 @@
  },
  "MOSS-TTS-Nano-100M": {
   "desc": "OpenMOSS's tiny 0.1B multilingual TTS for realtime speech; light enough for a CPU.",
-  "link": "https://openmoss.github.io/MOSS-TTS-Nano-Demo/"
+  "link": "https://openmoss.ai/MOSS-TTS-Nano-Demo/"
  },
  "Qwen3-CustomVoice-1.7B": {
   "desc": "Qwen3-TTS with preset voices you steer by instruction (tone, speed, emotion); 10 languages.",
@@ -296,5 +296,107 @@
    "Voice “Nora”",
    "Voice “Luna”"
   ]
+ },
+ "Arete-27B-Turbo": {
+  "desc": "Tiiny's Turbo build of Nous Research's Arete-27B: Qwen3.8-27B fine-tuned to answer politically sensitive topics with the facts instead of CCP framing, keeping its general and agentic skills."
+ },
+ "gemma-4-26B-A4B-it-Turbo": {
+  "desc": "Tiiny's Turbo build of gemma-4-26B-A4B-it: the same model, faster on the device."
+ },
+ "clef": {
+  "desc": "Cloudflare's 27B multimodal decision model, post-trained from Qwen3.8-27B: given a state (text, JSON, images or video) and typed questions, it returns a probability for every allowed answer in one pass, with no free-form text."
+ },
+ "clef-flash": {
+  "desc": "Cloudflare's 9B Clef decision model, the small sibling of Clef with the same state-and-questions interface."
+ },
+ "Nemotron-3-Nano-30B-A3B": {
+  "desc": "NVIDIA's 30B mixture-of-experts (3B active), trained from scratch: a reasoning model whose thinking can be switched off, with up to 1M tokens of context."
+ },
+ "flint": {
+  "desc": "Recursive's mixture-of-experts model for coding agents (39.8B, about 2.5B active): investigates codebases, fixes bugs, implements features and writes tests."
+ },
+ "MOSS-Image-Base": {
+  "desc": "OpenMOSS's base text-to-image model: prompts can be natural language, tag sequences or JSON layouts that place text and objects.",
+  "link": "https://openmoss.ai/MOSS-Image/",
+  "captions": [
+   "MOSS-Image-Base and MOSS-Image-SFT",
+   "Layout control with bounding boxes"
+  ]
+ },
+ "Qwen3-ASR-1.7B": {
+  "desc": "Qwen's speech recognizer for 52 languages and dialects, with language identification; the larger of the two Qwen3-ASR models."
+ },
+ "Qwen3.6-35B-A3B": {
+  "desc": "The first open-weight Qwen 3.6: a 35B mixture-of-experts (3B active) with vision, tuned for stability, agentic coding and real-world use."
+ },
+ "Qwen3.6-35B-A3B-Turbo": {
+  "desc": "Tiiny's Turbo build of Qwen3.6-35B-A3B: the same model, faster on the device."
+ },
+ "Qwen3.8-27B": {
+  "desc": "Qwen 3.8 dense 27B with vision: strong at agentic coding, computer and browser use, and multimodal reasoning."
+ },
+ "Qwen3.8-27B-heretic-ara-Turbo": {
+  "desc": "Tiiny's Turbo build of a decensored Qwen3.8-27B made with Heretic: it refused 0 of 100 test prompts where the original refused 99."
+ },
+ "TRELLIS.2-4B": {
+  "desc": "Microsoft's 4B image-to-3D model: turns one picture into a detailed 3D asset, including open surfaces and complex shapes.",
+  "link": "https://github.com/microsoft/TRELLIS.2",
+  "captions": [
+   "TRELLIS.2 examples"
+  ]
+ },
+ "Qwen3-Embedding-0.6B": {
+  "desc": "The smallest Qwen3 embedding model: multilingual text vectors for search and RAG, 32K context."
+ },
+ "Qwen3-Coder-Next": {
+  "desc": "Qwen's coding-agent model: 80B mixture-of-experts with only 3B active, for agents and local development."
+ },
+ "gpt-oss-120b": {
+  "desc": "OpenAI's larger open-weight model (117B, 5.1B active): strong reasoning and agentic tasks, with adjustable reasoning effort."
+ },
+ "HiDream-O1-Image-Dev": {
+  "desc": "HiDream's unified image model, 28-step Dev version: one transformer for text-to-image, editing and subject-driven images up to 2048×2048.",
+  "captions": [
+   "General generation",
+   "Text and layout"
+  ]
+ },
+ "Qwen-Image-2.1-Uncensored": {
+  "desc": "A quantized Qwen-Image-2.1-Turbo with no safety checker or content filter: 7B, 8-step text-to-image.",
+  "note": "From the quantizer's card (abenzerps), not Qwen's."
+ },
+ "Z-Image-Turbo": {
+  "desc": "Tongyi's distilled 6B Z-Image: high-quality pictures in 8 steps, with sub-second latency on a big GPU.",
+  "captions": [
+   "Realistic",
+   "Rendering"
+  ]
+ },
+ "Kokoro-82M": {
+  "desc": "A tiny 82M-parameter TTS that sounds like much larger models and runs fast; 8 languages and 54 voices.",
+  "captions": [
+   "Sample"
+  ]
+ },
+ "OmniVoice": {
+  "desc": "k2-fsa's zero-shot TTS for 600+ languages, with voice cloning and voice design.",
+  "link": "https://zhu-han.github.io/omnivoice/"
+ },
+ "Qwen3-VoiceClone-1.7B": {
+  "desc": "Qwen3-TTS base model that clones a voice from about 3 seconds of audio; 10 languages.",
+  "link": "https://qwen.ai/blog?id=qwen3tts-0115",
+  "usage": "tai tts -m Qwen3-VoiceClone-1.7B \"Hello there, nice to meet you.\" --clone me.wav --clone-text \"what I say in me.wav\" --play"
+ },
+ "VibeVoice-1.5B": {
+  "desc": "Microsoft's long-form TTS for podcasts: up to about 90 minutes of conversation between several speakers.",
+  "link": "https://microsoft.github.io/VibeVoice"
+ },
+ "VoxCPM2": {
+  "desc": "OpenBMB's tokenizer-free 2B TTS: 30 languages, 48 kHz audio, voice design from a description and controllable cloning.",
+  "link": "https://openbmb.github.io/voxcpm2-demopage"
+ },
+ "MiniMax-H3-Turbo": {
+  "desc": "LightX2V's 8-step distilled MiniMax-H3: short video clips with sound from a prompt or a start image.",
+  "link": "https://github.com/ModelTC/Minimax-H3-Turbo"
  }
 }

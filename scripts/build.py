@@ -14,6 +14,7 @@ GROUPS = [  # (store type, heading, what it's for, tai command)
     ("Music Generation", "Music", "Songs, loops and instrument samples.", "tai music"),
     ("Text-to-Speech", "Speech", "Text read aloud, voice cloning and voice design.", "tai tts"),
     ("Image-to-3D", "3D", "A textured 3D model from one picture.", "tai 3d"),
+    ("Text-to-Video", "Video", "Short clips with sound, from a prompt or a start image.", "tai video"),
     ("Image-Text-to-Text", "Chat with vision", "Chat models that also read images.", "tai ask · tai chat · tai agent"),
     ("Text Generation", "Chat", "Text-only chat, reasoning and coding models.", "tai ask · tai chat · tai agent"),
     ("ASR", "Transcription", "Speech to text.", "tai asr"),
@@ -28,6 +29,7 @@ USAGE = {  # example command per store type ({m} = model name); data/models.json
     "Music Generation": 'tai music -m {m} "synth-pop, female vocals" -l lyrics.txt -o song.mp3',
     "Text-to-Speech": 'tai tts -m {m} "Hello there, nice to meet you." --play',
     "Image-to-3D": "tai 3d -m {m} toy.png -o toy.glb",
+    "Text-to-Video": 'tai video -m {m} "a paper boat drifting down a rainy street" -o boat.mp4 --open',
     "Image-Text-to-Text": 'tai ask -m {m} -f photo.jpg "what\'s in this picture?"',
     "Text Generation": 'tai ask -m {m} "explain RAII in two sentences"',
     "ASR": "tai asr -m {m} recording.wav",
@@ -114,6 +116,52 @@ def card(name, typ, sid):
 </article>"""
 
 
+SWE = re.compile(r"swe-?bench", re.I)
+
+
+def num(v):
+    m = re.search(r"\d+(\.\d+)?", v or "")
+    return float(m.group()) if m else -1
+
+
+def swe_html(rows):
+    """Comparison table of every store model with a SWE-bench number; one column per distinct label."""
+    found = {}  # name -> {label: metric}
+    for name, typ, _ in rows:
+        for x in (METRICS.get(name) or {}).get("metrics") or []:
+            if x.get("value") and SWE.search(x.get("label", "")):
+                found.setdefault(name, {})[x["label"]] = x
+    if not found:
+        return "", 0
+    count = {}
+    for d in found.values():
+        for label in d:
+            count[label] = count.get(label, 0) + 1
+    cols = sorted(count, key=lambda c: (-count[c], c))
+    names = sorted(found, key=lambda n: [-num((found[n].get(c) or {}).get("value")) for c in cols])
+    types = {r[0]: r[1] for r in rows}
+    sortable = lambda label, i, cur="": (f'<th scope="col"{cur}><button type="button" data-col="{i}">{esc(label)}'
+                                         '<span class="arrow" aria-hidden="true"></span></button></th>')
+    head = "".join(sortable(c, i + 1, ' aria-sort="descending"' if i == 0 else "") for i, c in enumerate(cols))
+    body = []
+    for n in names:
+        cells = []
+        for c in cols:
+            x = found[n].get(c)
+            cells.append(f'<td data-v="{num(x["value"])}">{esc(x["value"])}' + (f'<small>{esc(x["note"])}</small>' if x.get("note") else "")
+                         + "</td>" if x else '<td class="na">–</td>')
+        src = (METRICS[n].get("source") or "")
+        body.append(f'<tr data-q="{esc(n.lower())}"><th scope="row"><a href="#{slug(n)}">{esc(n)}</a>'
+                    f'<span>{esc(types[n])}</span></th>{"".join(cells)}'
+                    f'<td class="src">{f"<a href={chr(34)}{esc(src)}{chr(34)}>source</a>" if src else ""}</td></tr>')
+    html_ = f"""<section id="swe-bench" class="compare">
+  <div class="sechead"><h2>SWE-bench</h2><p>Every model above that reports a SWE-bench score, best first; click a column title to sort by it. Makers run these with different agent harnesses (noted under a score), so treat small gaps as noise; Turbo builds repeat their original's numbers.</p><span class="type">{len(names)} models</span></div>
+  <div class="tablewrap"><table class="swe"><thead><tr>{sortable("Model", 0)}{head}<th scope="col"><span class="sr">Source</span></th></tr></thead>
+  <tbody>{"".join(body)}</tbody></table></div>
+</section>"""
+    return html_, len(names)
+
+
 def main():
     rows = store()
     missing = [r[0] for r in rows if r[0] not in MODELS]
@@ -131,6 +179,10 @@ def main():
   <div class="sechead"><h2>{esc(head)}</h2><p>{esc(what)}{use}</p><span class="type">{esc(typ)} · {len(group)}</span></div>
   <div class="grid">{''.join(card(*r) for r in group)}</div>
 </section>""")
+    swe, n_swe = swe_html(rows)
+    if swe:
+        nav.append(f'<a href="#swe-bench">SWE-bench <span>{n_swe}</span></a>')
+        sections.append(swe)
     known = {g[0] for g in GROUPS}
     for r in rows:
         if r[1] not in known:

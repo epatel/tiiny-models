@@ -413,5 +413,221 @@
       }
     ],
     "source": "https://arxiv.org/abs/2508.10925"
+  },
+  "Arete-27B-Turbo": {
+    "metrics": [
+      {
+        "label": "Propaganda Eval fact mean (0–5)",
+        "value": "2.98 ± 0.03",
+        "note": "thinking off; Qwen3.8-27B: 2.32"
+      },
+      {
+        "label": "Propaganda Eval, any propaganda",
+        "value": "0.9%",
+        "note": "lower is better; Qwen3.8-27B: 22%"
+      },
+      {
+        "label": "Terminal-Bench-2.1",
+        "value": "70%",
+        "note": "Nous-run; Qwen3.8-27B: 67%"
+      },
+      {
+        "label": "Hermes Bench",
+        "value": "65.60%",
+        "note": "Nous internal; Qwen3.8-27B: 65.77%"
+      }
+    ],
+    "source": "https://huggingface.co/NousResearch/Arete-27B"
+  },
+  "gemma-4-26B-A4B-it-Turbo": {
+    "metrics": [
+      {
+        "label": "MMLU Pro",
+        "value": "82.6%"
+      },
+      {
+        "label": "GPQA Diamond",
+        "value": "82.3%"
+      },
+      {
+        "label": "LiveCodeBench v6",
+        "value": "77.1%"
+      },
+      {
+        "label": "MMMU Pro",
+        "value": "73.8%"
+      }
+    ],
+    "source": "https://huggingface.co/google/gemma-4-26B-A4B-it"
+  },
+  "Nemotron-3-Nano-30B-A3B": {
+    "metrics": [
+      {
+        "label": "MMLU-Pro",
+        "value": "78.3"
+      },
+      {
+        "label": "AIME25 (no tools)",
+        "value": "89.1"
+      },
+      {
+        "label": "GPQA (no tools)",
+        "value": "73.0"
+      },
+      {
+        "label": "SWE-Bench (OpenHands)",
+        "value": "38.8"
+      }
+    ],
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16"
+  },
+  "flint": {
+    "metrics": [
+      {
+        "label": "Terminal-Bench 2.1",
+        "value": "54.9%",
+        "note": "Terminus 2"
+      },
+      {
+        "label": "SWE-bench Pro v2",
+        "value": "89.7%",
+        "note": "mini-swe-agent"
+      },
+      {
+        "label": "SWE-bench Verified",
+        "value": "74.2%",
+        "note": "mini-swe-agent"
+      }
+    ],
+    "source": "https://huggingface.co/RecursiveSI/flint"
+  },
+  "Qwen3.6-35B-A3B": {
+    "metrics": [
+      {
+        "label": "SWE-bench Verified",
+        "value": "73.4"
+      },
+      {
+        "label": "Terminal-Bench 2.0",
+        "value": "51.5"
+      },
+      {
+        "label": "GPQA",
+        "value": "86.0"
+      },
+      {
+        "label": "MMMU",
+        "value": "81.7"
+      }
+    ],
+    "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B"
+  },
+  "Qwen3.6-35B-A3B-Turbo": {
+    "metrics": [
+      {
+        "label": "SWE-bench Verified",
+        "value": "73.4"
+      },
+      {
+        "label": "Terminal-Bench 2.0",
+        "value": "51.5"
+      },
+      {
+        "label": "GPQA",
+        "value": "86.0"
+      },
+      {
+        "label": "MMMU",
+        "value": "81.7"
+      }
+    ],
+    "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B"
+  },
+  "Qwen3.8-27B": {
+    "metrics": [
+      {
+        "label": "SWE-bench Pro",
+        "value": "61.7",
+        "note": "Claude Code harness"
+      },
+      {
+        "label": "Terminal Bench 2.1 (Terminus)",
+        "value": "73.0"
+      },
+      {
+        "label": "GPQA Diamond",
+        "value": "89.2"
+      },
+      {
+        "label": "OSWorld-Verified",
+        "value": "84.3"
+      }
+    ],
+    "source": "https://huggingface.co/Qwen/Qwen3.8-27B"
+  },
+  "Qwen3.8-27B-heretic-ara-Turbo": {
+    "metrics": [
+      {
+        "label": "Refusals",
+        "value": "0/100",
+        "note": "original: 99/100"
+      },
+      {
+        "label": "KL divergence from original",
+        "value": "0.0535",
+        "note": "lower is closer"
+      }
+    ],
+    "source": "https://huggingface.co/trohrbaugh/Qwen3.8-27B-heretic-ara"
+  },
+  "Qwen3-Coder-Next": {
+    "metrics": [
+      {
+        "label": "SWE-bench Verified",
+        "value": "70.6",
+        "note": "SWE-Agent"
+      },
+      {
+        "label": "SWE-bench Pro",
+        "value": "44.3",
+        "note": "SWE-Agent"
+      },
+      {
+        "label": "Terminal-Bench 2.0",
+        "value": "36.2",
+        "note": "Terminus-2 json"
+      },
+      {
+        "label": "Aider",
+        "value": "66.2"
+      }
+    ],
+    "source": "https://huggingface.co/Qwen/Qwen3-Coder-Next",
+    "note": "Read from the bar chart on the card."
+  },
+  "gpt-oss-120b": {
+    "metrics": [
+      {
+        "label": "MMLU",
+        "value": "90.0",
+        "note": "high reasoning"
+      },
+      {
+        "label": "GPQA Diamond",
+        "value": "80.1",
+        "note": "high, no tools"
+      },
+      {
+        "label": "AIME 2025",
+        "value": "92.5",
+        "note": "high, no tools"
+      },
+      {
+        "label": "SWE-bench Verified",
+        "value": "62.4",
+        "note": "high"
+      }
+    ],
+    "source": "https://arxiv.org/abs/2508.10925"
   }
 }

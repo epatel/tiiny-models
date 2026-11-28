@@ -22,5 +22,10 @@
  "SenseTime/SenseNova-U1.5-8B-MoT": "sensenova/SenseNova-U1.5-8B-MoT",
  "Tongyi-MAI/Z-Image-Turbo-Children-Drawing": "ostris/z_image_turbo_childrens_drawings",
  "TaoBaiBai2025/Z-Image-Turbo-Creating-Realistic": "long12256/Z-image-turbo_Creating-Realistic",
- "YeiYeiArt/Z-Image-Turbo-CharacterDesignSheet": null
+ "YeiYeiArt/Z-Image-Turbo-CharacterDesignSheet": null,
+ "NousResearch/Arete-27B-Turbo": "NousResearch/Arete-27B",
+ "google/gemma-4-26B-A4B-it-Turbo": "google/gemma-4-26B-A4B-it",
+ "nvidia/Nemotron-3-Nano-30B-A3B": "nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16",
+ "Qwen/Qwen3.6-35B-A3B-Turbo": "Qwen/Qwen3.6-35B-A3B",
+ "trohrbaugh/Qwen3.8-27B-heretic-ara-Turbo": "trohrbaugh/Qwen3.8-27B-heretic-ara"
 }
