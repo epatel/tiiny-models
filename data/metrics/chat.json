@@ -11,7 +11,8 @@
       },
       {
         "label": "Humanity's Last Exam",
-        "value": "50.3"
+        "value": "50.3",
+        "note": "tool use not stated; likely with tools"
       }
     ],
     "source": "https://huggingface.co/endless-frontier/BigBang-v1"
@@ -54,6 +55,10 @@
       {
         "label": "GPQA Diamond",
         "value": "89.2"
+      },
+      {
+        "label": "HLE (no tools)",
+        "value": "25.6"
       }
     ],
     "source": "https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B"
@@ -83,6 +88,18 @@
       {
         "label": "MMMU",
         "value": "81.4"
+      },
+      {
+        "label": "MMLU-Redux",
+        "value": "93.3"
+      },
+      {
+        "label": "SuperGPQA",
+        "value": "63.4"
+      },
+      {
+        "label": "HLE w/ CoT",
+        "value": "22.4"
       }
     ],
     "source": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B"
@@ -104,6 +121,14 @@
       {
         "label": "MMMU",
         "value": "78.4"
+      },
+      {
+        "label": "MMLU-Redux",
+        "value": "91.1"
+      },
+      {
+        "label": "SuperGPQA",
+        "value": "58.2"
       }
     ],
     "source": "https://huggingface.co/Qwen/Qwen3.5-9B"
@@ -125,6 +150,14 @@
       {
         "label": "MMMU",
         "value": "78.4"
+      },
+      {
+        "label": "MMLU-Redux",
+        "value": "91.1"
+      },
+      {
+        "label": "SuperGPQA",
+        "value": "58.2"
       }
     ],
     "source": "https://huggingface.co/Qwen/Qwen3.5-9B"
@@ -146,6 +179,22 @@
       {
         "label": "MMMU",
         "value": "82.9"
+      },
+      {
+        "label": "MMLU-Pro",
+        "value": "86.2"
+      },
+      {
+        "label": "MMLU-Redux",
+        "value": "93.5"
+      },
+      {
+        "label": "SuperGPQA",
+        "value": "66.0"
+      },
+      {
+        "label": "HLE",
+        "value": "24.0"
       }
     ],
     "source": "https://huggingface.co/Qwen/Qwen3.6-27B"
@@ -167,6 +216,22 @@
       {
         "label": "MMMU",
         "value": "82.9"
+      },
+      {
+        "label": "MMLU-Pro",
+        "value": "86.2"
+      },
+      {
+        "label": "MMLU-Redux",
+        "value": "93.5"
+      },
+      {
+        "label": "SuperGPQA",
+        "value": "66.0"
+      },
+      {
+        "label": "HLE",
+        "value": "24.0"
       }
     ],
     "source": "https://huggingface.co/Qwen/Qwen3.6-27B"
@@ -183,9 +248,8 @@
         "note": "without agentic orchestration"
       },
       {
-        "label": "HLE",
-        "value": "55.1",
-        "note": "with tools"
+        "label": "HLE w/ tools",
+        "value": "55.1"
       },
       {
         "label": "IFBench",
@@ -211,6 +275,10 @@
       {
         "label": "MMMU Pro",
         "value": "73.8%"
+      },
+      {
+        "label": "HLE no tools",
+        "value": "8.7%"
       }
     ],
     "source": "https://huggingface.co/google/gemma-4-26B-A4B-it"
@@ -232,6 +300,10 @@
       {
         "label": "MMMU Pro",
         "value": "76.9%"
+      },
+      {
+        "label": "HLE no tools",
+        "value": "19.5%"
       }
     ],
     "source": "https://huggingface.co/google/gemma-4-31B-it"
@@ -253,6 +325,10 @@
       {
         "label": "τ²-Bench",
         "value": "79.5"
+      },
+      {
+        "label": "HLE",
+        "value": "14.4"
       }
     ],
     "source": "https://huggingface.co/zai-org/GLM-4.7-Flash"
@@ -274,6 +350,14 @@
       {
         "label": "LiveCodeBench v6",
         "value": "43.2"
+      },
+      {
+        "label": "MMLU-Redux",
+        "value": "89.3"
+      },
+      {
+        "label": "SuperGPQA",
+        "value": "53.4"
       }
     ],
     "source": "https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507"
@@ -295,6 +379,14 @@
       {
         "label": "LiveCodeBench v6",
         "value": "66.0"
+      },
+      {
+        "label": "MMLU-Redux",
+        "value": "91.4"
+      },
+      {
+        "label": "SuperGPQA",
+        "value": "56.8"
       }
     ],
     "source": "https://huggingface.co/Qwen/Qwen3-30B-A3B-Thinking-2507"
@@ -316,6 +408,14 @@
       {
         "label": "IFEval",
         "value": "83.4"
+      },
+      {
+        "label": "MMLU-Redux",
+        "value": "84.2"
+      },
+      {
+        "label": "SuperGPQA",
+        "value": "42.8"
       }
     ],
     "source": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507"
@@ -410,6 +510,11 @@
         "label": "SWE-bench Verified",
         "value": "60.7",
         "note": "high"
+      },
+      {
+        "label": "HLE (no tools)",
+        "value": "10.9",
+        "note": "high"
       }
     ],
     "source": "https://arxiv.org/abs/2508.10925"
@@ -456,6 +561,10 @@
       {
         "label": "MMMU Pro",
         "value": "73.8%"
+      },
+      {
+        "label": "HLE no tools",
+        "value": "8.7%"
       }
     ],
     "source": "https://huggingface.co/google/gemma-4-26B-A4B-it"
@@ -477,6 +586,10 @@
       {
         "label": "SWE-Bench (OpenHands)",
         "value": "38.8"
+      },
+      {
+        "label": "HLE (no tools)",
+        "value": "10.6"
       }
     ],
     "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16"
@@ -518,6 +631,22 @@
       {
         "label": "MMMU",
         "value": "81.7"
+      },
+      {
+        "label": "MMLU-Pro",
+        "value": "85.2"
+      },
+      {
+        "label": "MMLU-Redux",
+        "value": "93.3"
+      },
+      {
+        "label": "SuperGPQA",
+        "value": "64.7"
+      },
+      {
+        "label": "HLE",
+        "value": "21.4"
       }
     ],
     "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B"
@@ -539,6 +668,22 @@
       {
         "label": "MMMU",
         "value": "81.7"
+      },
+      {
+        "label": "MMLU-Pro",
+        "value": "85.2"
+      },
+      {
+        "label": "MMLU-Redux",
+        "value": "93.3"
+      },
+      {
+        "label": "SuperGPQA",
+        "value": "64.7"
+      },
+      {
+        "label": "HLE",
+        "value": "21.4"
       }
     ],
     "source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B"
@@ -561,6 +706,10 @@
       {
         "label": "OSWorld-Verified",
         "value": "84.3"
+      },
+      {
+        "label": "HLE",
+        "value": "30.8"
       }
     ],
     "source": "https://huggingface.co/Qwen/Qwen3.8-27B"
@@ -625,6 +774,11 @@
       {
         "label": "SWE-bench Verified",
         "value": "62.4",
+        "note": "high"
+      },
+      {
+        "label": "HLE (no tools)",
+        "value": "14.9",
         "note": "high"
       }
     ],

@@ -116,7 +116,21 @@ def card(name, typ, sid):
 </article>"""
 
 
-SWE = re.compile(r"swe-?bench", re.I)
+COMPARE = [  # comparison tables after the sections: (id, heading, blurb, columns)
+    # columns: a regex (one column per distinct matching label) or [(column title, label regex), ...]
+    ("swe-bench", "SWE-bench",
+     "Every model above that reports a SWE-bench score, best first; click a column title to sort by it. "
+     "Makers run these with different agent harnesses (noted under a score), so treat small gaps as noise; "
+     "Turbo builds repeat their original's numbers.",
+     r"(?i)swe-?bench"),
+    ("knowledge", "Knowledge and reasoning",
+     "Models that report the common knowledge and reasoning tests, without tools: MMLU-Pro, MMLU-Redux and MMLU "
+     "(broad subject knowledge), GPQA and SuperGPQA (graduate-level science), and HLE, Humanity's Last Exam (expert questions). "
+     "The maker's own label is shown under a score when it differs from the column title. Click a column title to sort.",
+     [("MMLU-Pro", r"MMLU[- ]Pro"), ("MMLU-Redux", r"MMLU-Redux"), ("MMLU", r"MMLU"),
+      ("GPQA", r"GPQA( Diamond)?( \(no tools\))?"), ("SuperGPQA", r"SuperGPQA"),
+      ("HLE", r"(HLE|Humanity's Last Exam)( \(no tools\)| no tools| w/ CoT)?")]),
+]
 
 
 def num(v):
@@ -124,39 +138,56 @@ def num(v):
     return float(m.group()) if m else -1
 
 
-def swe_html(rows):
-    """Comparison table of every store model with a SWE-bench number; one column per distinct label."""
-    found = {}  # name -> {label: metric}
+def compare_html(rows, sid, head, blurb, spec):
+    """A sortable table of the store models with a metric matching `spec` (see COMPARE)."""
+    found = {}  # name -> {column: metric}
     for name, typ, _ in rows:
         for x in (METRICS.get(name) or {}).get("metrics") or []:
-            if x.get("value") and SWE.search(x.get("label", "")):
-                found.setdefault(name, {})[x["label"]] = x
+            label = x.get("label", "")
+            if not x.get("value"):
+                continue
+            if isinstance(spec, str):
+                col = label if re.search(spec, label) else None
+            elif re.search(r"with tools|tools? not stated|likely with tools", x.get("note", "")):
+                col = None  # named-column tables compare runs without tools only
+            else:
+                col = next((c for c, rx in spec if re.fullmatch(rx, label)), None)
+            if col:
+                found.setdefault(name, {}).setdefault(col, x)
     if not found:
         return "", 0
-    count = {}
-    for d in found.values():
-        for label in d:
-            count[label] = count.get(label, 0) + 1
-    cols = sorted(count, key=lambda c: (-count[c], c))
+    if isinstance(spec, str):
+        count = {}
+        for d in found.values():
+            for c in d:
+                count[c] = count.get(c, 0) + 1
+        cols = sorted(count, key=lambda c: (-count[c], c))
+    else:
+        cols = [c for c, _ in spec if any(c in d for d in found.values())]
     names = sorted(found, key=lambda n: [-num((found[n].get(c) or {}).get("value")) for c in cols])
     types = {r[0]: r[1] for r in rows}
     sortable = lambda label, i, cur="": (f'<th scope="col"{cur}><button type="button" data-col="{i}">{esc(label)}'
                                          '<span class="arrow" aria-hidden="true"></span></button></th>')
-    head = "".join(sortable(c, i + 1, ' aria-sort="descending"' if i == 0 else "") for i, c in enumerate(cols))
+    heads = "".join(sortable(c, i + 1, ' aria-sort="descending"' if i == 0 else "") for i, c in enumerate(cols))
     body = []
     for n in names:
         cells = []
         for c in cols:
             x = found[n].get(c)
-            cells.append(f'<td data-v="{num(x["value"])}">{esc(x["value"])}' + (f'<small>{esc(x["note"])}</small>' if x.get("note") else "")
-                         + "</td>" if x else '<td class="na">–</td>')
-        src = (METRICS[n].get("source") or "")
+            if not x:
+                cells.append('<td class="na">–</td>')
+                continue
+            notes = [x["label"]] if x["label"] != c and not isinstance(spec, str) else []
+            notes += [x["note"]] if x.get("note") else []
+            cells.append(f'<td data-v="{num(x["value"])}">{esc(x["value"])}'
+                         + (f'<small>{esc(" · ".join(notes))}</small>' if notes else "") + "</td>")
+        src = METRICS[n].get("source") or ""
+        link = f'<a href="{esc(src)}">source</a>' if src else ""
         body.append(f'<tr data-q="{esc(n.lower())}"><th scope="row"><a href="#{slug(n)}">{esc(n)}</a>'
-                    f'<span>{esc(types[n])}</span></th>{"".join(cells)}'
-                    f'<td class="src">{f"<a href={chr(34)}{esc(src)}{chr(34)}>source</a>" if src else ""}</td></tr>')
-    html_ = f"""<section id="swe-bench" class="compare">
-  <div class="sechead"><h2>SWE-bench</h2><p>Every model above that reports a SWE-bench score, best first; click a column title to sort by it. Makers run these with different agent harnesses (noted under a score), so treat small gaps as noise; Turbo builds repeat their original's numbers.</p><span class="type">{len(names)} models</span></div>
-  <div class="tablewrap"><table class="swe"><thead><tr>{sortable("Model", 0)}{head}<th scope="col"><span class="sr">Source</span></th></tr></thead>
+                    f'<span>{esc(types[n])}</span></th>{"".join(cells)}<td class="src">{link}</td></tr>')
+    html_ = f"""<section id="{sid}" class="compare">
+  <div class="sechead"><h2>{esc(head)}</h2><p>{esc(blurb)}</p><span class="type">{len(names)} models</span></div>
+  <div class="tablewrap"><table class="cmp"><thead><tr>{sortable("Model", 0)}{heads}<th scope="col"><span class="sr">Source</span></th></tr></thead>
   <tbody>{"".join(body)}</tbody></table></div>
 </section>"""
     return html_, len(names)
@@ -179,10 +210,11 @@ def main():
   <div class="sechead"><h2>{esc(head)}</h2><p>{esc(what)}{use}</p><span class="type">{esc(typ)} · {len(group)}</span></div>
   <div class="grid">{''.join(card(*r) for r in group)}</div>
 </section>""")
-    swe, n_swe = swe_html(rows)
-    if swe:
-        nav.append(f'<a href="#swe-bench">SWE-bench <span>{n_swe}</span></a>')
-        sections.append(swe)
+    for sid, head, blurb, spec in COMPARE:
+        table, n = compare_html(rows, sid, head, blurb, spec)
+        if table:
+            nav.append(f'<a href="#{sid}">{esc(head)} <span>{n}</span></a>')
+            sections.append(table)
     known = {g[0] for g in GROUPS}
     for r in rows:
         if r[1] not in known:
